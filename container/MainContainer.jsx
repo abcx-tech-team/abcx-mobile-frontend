@@ -6,6 +6,7 @@ import DealRoom from '../screens/main/DealRoom';
 import { ScreenNames } from '../utils';
 import BottomTab from '../components/BottomTab';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import AuthContainer from './AuthContainer';
 
 const DashboardActive = require('../assets/icons/pie_active.png');
 const DashboardInActive = require('../assets/icons/pie.png');
@@ -16,7 +17,7 @@ const ExploreInActive = require('../assets/icons/search.png');
 
 const Tab = createBottomTabNavigator();
 
-const MainContainer = () => {
+const MainContainer = ({ navigation }) => {
   return (
     <View style={styles.mainAppContainer}>
       <Tab.Navigator
@@ -91,6 +92,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 3,
     zIndex: 100,
+    borderTopWidth: 0,
   },
   mainAppContainer: {
     flex: 1,

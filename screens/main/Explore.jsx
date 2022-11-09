@@ -1,34 +1,37 @@
-import { ScrollView, StyleSheet, View } from 'react-native';
-import React from 'react';
+import { FlatList, StyleSheet, View, Platform } from 'react-native';
+import React, { useState } from 'react';
 import SearchBar from '../../components/SearchBar';
-import BriefProfileCard from '../../components/BriefProfileCard';
+import BriefProfileCard from '../../components/BlindProfileCard';
+import AuthContainer from '../../container/AuthContainer';
+import { useBlindProfiles } from '../../hooks/blindProfile.hooks';
+import { serialize } from '../../utils';
 
 const Explore = ({ navigation }) => {
+  const [query, setQuery] = useState({ page: 1, limit: 10 });
+  const { data } = useBlindProfiles(serialize(query));
   return (
-    <View style={styles.container}>
-      <SearchBar />
-      <View style={styles.dashboard}>
-        <ScrollView
-          style={styles.scrollView}
-          contentContainerStyle={{ paddingHorizontal: 24 }}
-          horizontal={false}
-        >
-          {[
-            'qt50mxvih9tdpps',
-            'qt50ygqhe8q5rs',
-            'qt50p9a03hazsbe',
-            'qt50iqvdtyjac7o',
-            'qt5020mvf0v4415',
-          ].map((item) => (
-            <BriefProfileCard
-              key={item}
-              briefProfileId={item}
-              navigation={navigation}
-            />
-          ))}
-        </ScrollView>
+    <AuthContainer navigation={navigation}>
+      <View style={styles.container}>
+        <SearchBar />
+        <View style={styles.dashboard}>
+          <FlatList
+            data={[
+              'qt50mxvih9tdpps',
+              'qt50ygqhe8q5rs',
+              'qt50p9a03hazsbe',
+              'qt50iqvdtyjac7o',
+              'qt5020mvf0v4415',
+            ]}
+            renderItem={({ item }) => (
+              <BriefProfileCard briefProfileId={item} navigation={navigation} />
+            )}
+            keyExtractor={(item) => item}
+            style={styles.scrollView}
+            contentContainerStyle={{ paddingHorizontal: 24 }}
+          />
+        </View>
       </View>
-    </View>
+    </AuthContainer>
   );
 };
 
@@ -46,7 +49,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   dashboard: {
-    paddingBottom: 256,
+    paddingBottom: Platform.OS === 'ios' ? 250 : 230,
   },
   scrollView: {},
 });

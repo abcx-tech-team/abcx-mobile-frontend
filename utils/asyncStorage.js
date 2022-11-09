@@ -1,3 +1,5 @@
+import Toast from 'react-native-toast-message';
+
 /**
  * Set in asyncStorage
  * @param {String} key
@@ -10,7 +12,10 @@ export async function setToken(key, value) {
   try {
     await AsyncStorage.setItem(key, JSON.stringify(value));
   } catch (error) {
-    console.log('Something went wrong', error);
+    Toast.show({
+      type: 'error',
+      text1: 'Something went wrong',
+    });
   }
 }
 
@@ -25,7 +30,10 @@ export async function getToken(key) {
     let data = JSON.parse(userData);
     return data;
   } catch (error) {
-    console.log('Something went wrong', error);
+    Toast.show({
+      type: 'error',
+      text1: 'Something went wrong',
+    });
   }
 }
 
@@ -36,11 +44,12 @@ export async function getToken(key) {
 
 export async function removeStorage(key) {
   try {
-    let userData = await AsyncStorage.removeItem(key);
-    let data = JSON.parse(userData);
-    return data;
+    await AsyncStorage.removeItem(key);
   } catch (error) {
-    console.log('Something went wrong', error);
+    Toast.show({
+      type: 'error',
+      text1: 'Something went wrong',
+    });
   }
 }
 
@@ -53,6 +62,9 @@ export async function clearStorage(key) {
   try {
     await AsyncStorage.clear();
   } catch (error) {
-    console.log('Something went wrong', error);
+    Toast.show({
+      type: 'error',
+      text1: 'Something went wrong',
+    });
   }
 }

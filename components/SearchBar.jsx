@@ -9,6 +9,9 @@ import {
   View,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
+import Country from './filter/Country';
+import FundType from './filter/FundType';
+import FundRound from './filter/FundRound';
 
 const MagnifyingGlass = require('../assets/icons/search.png');
 const Filter = require('../assets/icons/filter.png');
@@ -19,9 +22,7 @@ const Filters = ['Country', 'Funding Type', 'Last Round'];
 const SearchBar = () => {
   const [showFilter, setShowFilter] = useState(false);
   const [filterType, setFilterType] = useState('Country');
-  useEffect(() => {
-    console.log(showFilter);
-  }, [showFilter]);
+
   return (
     <>
       <View style={styles.container}>
@@ -66,7 +67,13 @@ const SearchBar = () => {
                 ))}
               </View>
               <View style={styles.right}>
-                <Text>{filterType}</Text>
+                {filterType === 'Country' ? (
+                  <Country />
+                ) : filterType === 'Funding Type' ? (
+                  <FundType />
+                ) : (
+                  <FundRound />
+                )}
               </View>
             </View>
           </View>
@@ -146,7 +153,7 @@ const styles = StyleSheet.create({
   },
   right: {
     width: '60%',
-    paddingLeft: 24,
+    paddingLeft: 16,
   },
   filterItem: {
     paddingTop: 16,

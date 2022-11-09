@@ -1,22 +1,34 @@
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import UserHeader from '../../components/UserHeader';
 import WelcomeCard from '../../components/WelcomeCard';
 import BuyingActivities from '../../components/BuyingActivities';
 import SellingActivities from '../../components/SellingActivities';
+import {
+  useBuyerList,
+  useLoggedInUser,
+  useSellerList,
+} from '../../hooks/user.hooks';
+import AuthContainer from '../../container/AuthContainer';
 
 const Dashboard = ({ navigation }) => {
+  const { data: userData } = useLoggedInUser();
+  const { data: buyerList } = useBuyerList();
+  const { data: sellerList } = useSellerList();
+
   return (
-    <View style={styles.container}>
-      <UserHeader />
-      <ScrollView>
-        <View style={styles.dashboard}>
-          <WelcomeCard navigation={navigation} />
-          <BuyingActivities navigation={navigation} />
-          <SellingActivities navigation={navigation} />
-        </View>
-      </ScrollView>
-    </View>
+    <AuthContainer navigation={navigation}>
+      <View style={styles.container}>
+        <UserHeader />
+        <ScrollView>
+          <View style={styles.dashboard}>
+            <WelcomeCard navigation={navigation} data={userData} />
+            <BuyingActivities navigation={navigation} />
+            <SellingActivities navigation={navigation} />
+          </View>
+        </ScrollView>
+      </View>
+    </AuthContainer>
   );
 };
 

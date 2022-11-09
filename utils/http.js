@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { clearStorage } from './asyncStorage';
 import { USER_TOKEN_ID_KEY } from './index';
 
-const API_URL = process.env.REACT_APP_BASE_URL;
+const API_URL = 'https://dev.abcxchange.com/api/v1';
 /**
  * Generate HTTP headers
  * @param {Object} headers
@@ -48,9 +48,9 @@ const getBody = (body, hasFiles = false) => {
  * @param {Number} httpStatusCode
  * @param {Object | Error} response
  */
-const handleError = async (httpStatusCode, response = {}) => {
+const handleError = async (httpStatusCode, response = {}, isLogin) => {
   if (httpStatusCode === 401 || httpStatusCode === 403) {
-    if (window.location.pathname !== '/login') {
+    if (!isLogin) {
       await clearStorage();
       throw 'Please login to continue';
     }
@@ -97,7 +97,7 @@ const httpGet = async (url, option = { headers: {} }) => {
   });
 
   const response = await result.json();
-  handleError(result.status, response);
+  await handleError(result.status, response);
   return response;
 };
 
@@ -110,7 +110,7 @@ const httpGet = async (url, option = { headers: {} }) => {
 const httpPost = async (
   url,
   body = {},
-  option = { headers: {}, hasFiles: false }
+  option = { headers: {}, hasFiles: false, isLogin: false }
 ) => {
   const headers = await getHeader(option.headers, option.hasFiles);
   const result = await fetch(generateURL(url, option), {
@@ -125,7 +125,7 @@ const httpPost = async (
   let response;
   if (result?.status !== 429) response = await result.json();
 
-  handleError(result.status, response);
+  await handleError(result.status, response, option.isLogin);
   return response;
 };
 
@@ -148,7 +148,7 @@ const httpPut = async (
   });
 
   const response = await result.json();
-  handleError(result.status, response);
+  await handleError(result.status, response);
   return response;
 };
 
@@ -171,7 +171,7 @@ const httpPatch = async (
   });
 
   const response = await result.json();
-  handleError(result.status, response);
+  await handleError(result.status, response);
   return response;
 };
 
@@ -194,7 +194,7 @@ const httpDelete = async (
   });
 
   const response = await result.json();
-  handleError(result.status, response);
+  await handleError(result.status, response);
   return response;
 };
 

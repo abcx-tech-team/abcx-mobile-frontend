@@ -9,14 +9,18 @@ import {
 } from 'react-native';
 import React from 'react';
 import PrimaryButton from './PrimaryButton';
-import { ScreenNames } from '../utils';
+import { ScreenNames, USER_TOKEN_ID_KEY } from '../utils';
 import CustomTextInput from './TextInput';
 import { useForm, FormProvider } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useLogin } from '../hooks/auth.hooks';
+import useIsLogin from '../hooks/useIsLogin.hook';
+import Toast from 'react-native-toast-message';
+import { setToken } from '../utils/asyncStorage';
 
 const schema = yup.object().shape({
-  email: yup
+  username: yup
     .string()
     .trim()
     .required('Email is required')
@@ -25,21 +29,33 @@ const schema = yup.object().shape({
 });
 
 const defaultValues = {
-  email: '',
+  username: '',
   password: '',
 };
 
 const LoginView = ({ navigation }) => {
-  const {
-    handleSubmit,
-    formState: { errors },
-    control,
-  } = useForm({ defaultValues, resolver: yupResolver(schema) });
-  const onSubmit = (formData) => {
-    console.log(formData);
-    // TODO: Store the token or id in asyncStorage for authLayout
-    // Shape: {store:{token,id}}
-    navigation.navigate(ScreenNames.main);
+  const isLogin = useIsLogin();
+  const { mutateAsync: login } = useLogin();
+
+  const { handleSubmit, control } = useForm({
+    defaultValues,
+    resolver: yupResolver(schema),
+  });
+  const onSubmit = async (formData) => {
+    try {
+      const res = await login({ data: formData, isLogin });
+      setToken(USER_TOKEN_ID_KEY, { state: { token: res.access } });
+      Toast.show({
+        type: 'success',
+        text1: 'Logged in successfully',
+      });
+      navigation.navigate(ScreenNames.main);
+    } catch (err) {
+      Toast.show({
+        type: 'error',
+        text1: err?.detail,
+      });
+    }
   };
   return (
     <KeyboardAvoidingView
@@ -54,7 +70,7 @@ const LoginView = ({ navigation }) => {
                 placeholder='abc@gmail.com'
                 label='Email Address'
                 mode='outlined'
-                name='email'
+                name='username'
               />
               <CustomTextInput
                 placeholder='********'

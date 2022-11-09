@@ -11,11 +11,14 @@ import { ScreenNames } from '../utils';
 
 const Office = require('../assets/dashboard.png');
 
-const WelcomeCard = ({ navigation }) => {
+const WelcomeCard = ({ navigation, data }) => {
   return (
     <View style={styles.welcomeCard}>
       <View style={styles.textContainer}>
-        <Text style={styles.heading}>Welcome{'\n'}Company Name !</Text>
+        <Text style={styles.heading}>
+          Welcome{'\n'}
+          {data?.first_name} {data?.last_name} !
+        </Text>
         <Text style={styles.subHeading}>
           You will be able to list your companies for selling, and explore
           opportunities.

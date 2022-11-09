@@ -1,6 +1,6 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
-import BriefProfileButton from './BriefProfileButton';
+import BriefProfileButton from './BlindProfileButton';
 import { ScreenNames } from '../utils';
 
 const BookMark = require('../assets/icons/bookmark.png');
@@ -75,7 +75,7 @@ const BriefProfileCard = ({ briefProfileId, navigation }) => {
         <BriefProfileButton
           title='View More'
           onClick={() => {
-            navigation.navigate(ScreenNames.briefProfile, {
+            navigation.navigate(ScreenNames.blindProfile, {
               briefProfileId: briefProfileId,
             });
           }}

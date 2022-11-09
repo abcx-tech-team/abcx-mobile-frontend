@@ -8,3 +8,5 @@ export const ScreenNames = {
   resetPassword: 'Reset Password',
   briefProfile: 'Brief Profile',
 };
+
+export const USER_TOKEN_ID_KEY = 'user_token_id';

@@ -8,12 +8,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './screens/auth/Login';
 import ResetPassword from './screens/auth/ResetPassword';
 import BriefProfile from './screens/main/BriefProfile';
+import Toast from 'react-native-toast-message';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <View style={styles.container}>
+      <Toast />
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName={ScreenNames.introduction}

@@ -1,0 +1,58 @@
+/**
+ * Set in asyncStorage
+ * @param {String} key
+ * @param {Object} value
+ */
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+export async function setToken(key, value) {
+  try {
+    await AsyncStorage.setItem(key, JSON.stringify(value));
+  } catch (error) {
+    console.log('Something went wrong', error);
+  }
+}
+
+/**
+ * Get from asyncStorage
+ * @param {String} key
+ */
+
+export async function getToken(key) {
+  try {
+    let userData = await AsyncStorage.getItem(key);
+    let data = JSON.parse(userData);
+    return data;
+  } catch (error) {
+    console.log('Something went wrong', error);
+  }
+}
+
+/**
+ * Get from asyncStorage
+ * @param {String} key
+ */
+
+export async function removeStorage(key) {
+  try {
+    let userData = await AsyncStorage.removeItem(key);
+    let data = JSON.parse(userData);
+    return data;
+  } catch (error) {
+    console.log('Something went wrong', error);
+  }
+}
+
+/**
+ * Get from asyncStorage
+ * @param {String} key
+ */
+
+export async function clearStorage(key) {
+  try {
+    await AsyncStorage.clear();
+  } catch (error) {
+    console.log('Something went wrong', error);
+  }
+}

@@ -37,6 +37,8 @@ const LoginView = ({ navigation }) => {
   } = useForm({ defaultValues, resolver: yupResolver(schema) });
   const onSubmit = (formData) => {
     console.log(formData);
+    // TODO: Store the token or id in asyncStorage for authLayout
+    // Shape: {store:{token,id}}
     navigation.navigate(ScreenNames.main);
   };
   return (

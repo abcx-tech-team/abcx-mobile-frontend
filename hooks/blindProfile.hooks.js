@@ -21,7 +21,7 @@ export const useBlindProfiles = (query, enabled = true) =>
   useQuery(
     ['blindProfiles', query],
     async () => {
-      const res = await blindProfiles(enabled);
+      const res = await blindProfiles(query);
       return res;
     },
     {

@@ -12,6 +12,8 @@ import CustomTextInput from './TextInput';
 import { useForm, FormProvider } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useResetPassword } from '../hooks/auth.hooks';
+import Toast from 'react-native-toast-message';
 
 const schema = yup.object().shape({
   email: yup
@@ -26,13 +28,21 @@ const defaultValues = {
 };
 
 const ResetPasswordView = ({ navigation }) => {
-  const { handleSubmit, control } = useForm({
+  const { mutateAsync: resetPassword, isLoading } = useResetPassword();
+
+  const { handleSubmit, control, reset } = useForm({
     resolver: yupResolver(schema),
     defaultValues,
   });
 
-  const onSubmit = (formData) => {
-    console.log(formData);
+  const onSubmit = async (formData) => {
+    try {
+      const res = await resetPassword(formData);
+      Toast.show({ type: 'success', text1: res.detail });
+      reset({ email: '' });
+    } catch (err) {
+      Toast.show({ type: 'error', text1: err.detail });
+    }
   };
 
   return (
@@ -56,6 +66,7 @@ const ResetPasswordView = ({ navigation }) => {
           <PrimaryButton
             title='Send Reset Link'
             onClick={handleSubmit(onSubmit)}
+            isLoading={isLoading}
           />
           <View style={styles.textContainer}>
             <Text

@@ -1,32 +1,53 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
-import BriefProfileButton from './BlindProfileButton';
+import BlindProfileButton from './BlindProfileButton';
 import { ScreenNames } from '../utils';
+import { useSaveBlindProfile } from '../hooks/blindProfile.hooks';
+import Toast from 'react-native-toast-message';
 
 const BookMark = require('../assets/icons/bookmark.png');
 const BookMarkActive = require('../assets/icons/bookmark_active.png');
 
 const dummyData = {
-  fundingRound: 'Series A',
-  sector: 'Real Estate',
-  location: 'London, Uk',
-  totalFundingRound: '$10M - $25M',
-  nextFundingRound: '$1M - $5M',
-  employeeRange: '501 - 1K',
-  businessSector: 'B2B',
   image: require('../assets/terminal.png'),
 };
 
-const BriefProfileCard = ({ briefProfileId, navigation }) => {
-  const [bookMarked, setBookMarked] = useState(false);
+const BriefProfileCard = ({ briefProfile, navigation }) => {
+  const { mutateAsync: saveBlindProfile } = useSaveBlindProfile();
+  const [bookMarked, setBookmarked] = useState(briefProfile.savedProfile);
+
+  const handleBookMarkClick = async (company_id, isSaved) => {
+    try {
+      await saveBlindProfile({ company_id, isSaved });
+      setBookmarked(isSaved);
+      Toast.show({
+        icon: 'error',
+        text1: isSaved
+          ? 'Blind profile added to bookmark successfully'
+          : 'Blind profile removed from bookmark successfully',
+      });
+    } catch (err) {
+      Toast.show({
+        icon: 'error',
+        text1: 'Something went wrong!',
+      });
+    }
+  };
+
   return (
     <View style={styles.briefProfileCard}>
       <View style={styles.topBar}>
         <View>
-          <Text style={styles.fundingRound}>{dummyData.fundingRound}</Text>
+          <Text style={styles.fundingRound}>
+            {briefProfile.companyDetails?.lastFundRound?.type || ''}
+          </Text>
         </View>
         <View>
-          <Pressable onPress={() => setBookMarked((prev) => !prev)}>
+          <Pressable
+            onPress={() =>
+              handleBookMarkClick(briefProfile.companyUUID, !bookMarked)
+            }
+          >
             <Image
               source={bookMarked ? BookMarkActive : BookMark}
               style={styles.bookMark}
@@ -38,11 +59,15 @@ const BriefProfileCard = ({ briefProfileId, navigation }) => {
         <View>
           <View style={styles.aboutInfo}>
             <Text style={styles.label}>Sector</Text>
-            <Text style={styles.value}>{dummyData.sector}</Text>
+            <Text style={styles.value}>
+              {briefProfile.metaDetails?.sector?.sectorName}
+            </Text>
           </View>
           <View style={styles.aboutInfo}>
             <Text style={styles.label}>Location</Text>
-            <Text style={styles.value}>{dummyData.location}</Text>
+            <Text style={styles.value}>
+              {briefProfile.metaDetails?.location?.country}
+            </Text>
           </View>
         </View>
         <View>
@@ -53,30 +78,38 @@ const BriefProfileCard = ({ briefProfileId, navigation }) => {
         <View style={styles.fundingRow}>
           <View style={styles.fundingInfo}>
             <Text style={styles.label}>Total Funding Round</Text>
-            <Text style={styles.value}>{dummyData.totalFundingRound}</Text>
+            <Text style={styles.value}>
+              {briefProfile.companyDetails?.totalFunding}
+            </Text>
           </View>
           <View style={styles.fundingInfo}>
             <Text style={styles.label}>Next Funding Round</Text>
-            <Text style={styles.value}>{dummyData.nextFundingRound}</Text>
+            <Text style={styles.value}>
+              {briefProfile.companyDetails?.nextFundRound.type}
+            </Text>
           </View>
         </View>
         <View style={styles.fundingRow}>
           <View style={styles.fundingInfo}>
             <Text style={styles.label}>Employee Range</Text>
-            <Text style={styles.value}>{dummyData.employeeRange}</Text>
+            <Text style={styles.value}>
+              {briefProfile.metaDetails?.employeeRange}
+            </Text>
           </View>
           <View style={styles.fundingInfo}>
             <Text style={styles.label}>Sector</Text>
-            <Text style={styles.value}>{dummyData.businessSector}</Text>
+            <Text style={styles.value}>
+              {briefProfile.metaDetails?.marketType}
+            </Text>
           </View>
         </View>
       </View>
       <View style={styles.cta}>
-        <BriefProfileButton
+        <BlindProfileButton
           title='View More'
           onClick={() => {
             navigation.navigate(ScreenNames.blindProfile, {
-              briefProfileId: briefProfileId,
+              briefProfileId: briefProfile.companyUUID,
             });
           }}
         />

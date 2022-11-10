@@ -79,7 +79,6 @@ const generateURL = (url, options = {}) => {
   if (options.prefix) {
     prefix = options.prefix;
   }
-
   return API_URL + prefix + url;
 };
 

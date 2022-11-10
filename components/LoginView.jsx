@@ -35,9 +35,9 @@ const defaultValues = {
 
 const LoginView = ({ navigation }) => {
   const isLogin = useIsLogin();
-  const { mutateAsync: login } = useLogin();
+  const { mutateAsync: login, isLoading } = useLogin();
 
-  const { handleSubmit, control } = useForm({
+  const { handleSubmit, control, reset } = useForm({
     defaultValues,
     resolver: yupResolver(schema),
   });
@@ -50,6 +50,10 @@ const LoginView = ({ navigation }) => {
         text1: 'Logged in successfully',
       });
       navigation.navigate(ScreenNames.main);
+      reset({
+        username: '',
+        password: '',
+      });
     } catch (err) {
       Toast.show({
         type: 'error',
@@ -86,7 +90,11 @@ const LoginView = ({ navigation }) => {
                 Forgot password?
               </Text>
             </View>
-            <PrimaryButton title='Login' onClick={handleSubmit(onSubmit)} />
+            <PrimaryButton
+              title='Login'
+              onClick={handleSubmit(onSubmit)}
+              isLoading={isLoading}
+            />
           </FormProvider>
           <View style={styles.textContainer}>
             <Text style={styles.text}>Don’t have an account?</Text>

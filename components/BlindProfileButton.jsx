@@ -1,7 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 
-const BriefProfileButton = ({ title, onClick }) => {
+const BlindProfileButton = ({ title, onClick }) => {
   return (
     <View style={styles.buttonContainer}>
       <Pressable onPress={onClick} style={styles.button}>
@@ -11,7 +11,7 @@ const BriefProfileButton = ({ title, onClick }) => {
   );
 };
 
-export default BriefProfileButton;
+export default BlindProfileButton;
 
 const styles = StyleSheet.create({
   buttonContainer: {

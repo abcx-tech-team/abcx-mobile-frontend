@@ -18,7 +18,7 @@ export const useSearchKeywords = (enabled) =>
 
 export const useSearchCountry = (enabled) =>
   useQuery(
-    ['search-keywords'],
+    ['search-country'],
     async () => {
       const res = await searchCountry();
       return res;
@@ -28,7 +28,7 @@ export const useSearchCountry = (enabled) =>
 
 export const useSearchFundRound = (enabled) =>
   useQuery(
-    ['search-keywords'],
+    ['search-fund-round'],
     async () => {
       const res = await searchFundRound();
       return res;
@@ -38,7 +38,7 @@ export const useSearchFundRound = (enabled) =>
 
 export const useSearchFundType = (enabled) =>
   useQuery(
-    ['search-keywords'],
+    ['search-fund-type'],
     async () => {
       const res = await searchFundType();
       return res;

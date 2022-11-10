@@ -29,12 +29,20 @@ export default function App() {
               name={ScreenNames.introduction}
               component={Introduction}
             />
-            <Stack.Screen name={ScreenNames.login} component={Login} />
+            <Stack.Screen
+              name={ScreenNames.login}
+              component={Login}
+              options={{ gestureEnabled: false }}
+            />
             <Stack.Screen
               name={ScreenNames.resetPassword}
               component={ResetPassword}
             />
-            <Stack.Screen name={ScreenNames.main} component={MainContainer} />
+            <Stack.Screen
+              name={ScreenNames.main}
+              component={MainContainer}
+              options={{ gestureEnabled: false }}
+            />
             <Stack.Screen
               name={ScreenNames.blindProfile}
               component={BlindProfile}

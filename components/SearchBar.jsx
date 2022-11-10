@@ -12,6 +12,9 @@ import React, { useEffect, useState } from 'react';
 import Country from './filter/Country';
 import FundType from './filter/FundType';
 import FundRound from './filter/FundRound';
+import PrimaryButton from './PrimaryButton';
+import BlindProfileButton from './BlindProfileButton';
+import { serialize } from '../utils';
 
 const MagnifyingGlass = require('../assets/icons/search.png');
 const Filter = require('../assets/icons/filter.png');
@@ -19,9 +22,20 @@ const Cross = require('../assets/icons/cross.png');
 
 const Filters = ['Country', 'Funding Type', 'Last Round'];
 
-const SearchBar = () => {
+const SearchBar = ({ query, setQuery, setBlindProfiles }) => {
   const [showFilter, setShowFilter] = useState(false);
   const [filterType, setFilterType] = useState('Country');
+
+  const handleApplyFilter = (key, value) => {
+    setQuery((prev) => ({ ...prev, [key]: value, pageNo: 1 }));
+    setBlindProfiles({ hasMore: true, data: [] });
+  };
+
+  const handleClearFilters = () => {
+    setQuery({ pageNo: 1, pageSize: 10, ctrm: '', tprm: '', ftrm: '' });
+    setBlindProfiles({ hasMore: true, data: [] });
+    setShowFilter(false);
+  };
 
   return (
     <>
@@ -68,12 +82,36 @@ const SearchBar = () => {
               </View>
               <View style={styles.right}>
                 {filterType === 'Country' ? (
-                  <Country />
+                  <Country
+                    handleApplyFilter={handleApplyFilter}
+                    query={query}
+                  />
                 ) : filterType === 'Funding Type' ? (
-                  <FundType />
+                  <FundType
+                    handleApplyFilter={handleApplyFilter}
+                    query={query}
+                  />
                 ) : (
-                  <FundRound />
+                  <FundRound
+                    handleApplyFilter={handleApplyFilter}
+                    query={query}
+                  />
                 )}
+              </View>
+            </View>
+            <View style={styles.actionButtons}>
+              <View style={styles.leftButton}>
+                <BlindProfileButton
+                  onClick={handleClearFilters}
+                  title='Clear Filters'
+                />
+              </View>
+              <View style={styles.rightButton}>
+                <PrimaryButton
+                  onClick={() => setShowFilter(false)}
+                  title='Apply Filters'
+                  noLoader
+                />
               </View>
             </View>
           </View>
@@ -149,7 +187,7 @@ const styles = StyleSheet.create({
   },
   left: {
     width: '40%',
-    backgroundColor: '#FBFBFB',
+    backgroundColor: '#fbfbfb',
   },
   right: {
     width: '60%',
@@ -168,5 +206,19 @@ const styles = StyleSheet.create({
   gradientBackground: {
     height: 1,
     backgroundColor: 'gray',
+  },
+  actionButtons: {
+    backgroundColor: '#fff',
+    width: '100%',
+    flexDirection: 'row',
+    marginBottom: 40,
+    justifyContent: 'space-evenly',
+    paddingTop: 24,
+  },
+  leftButton: {
+    width: '45%',
+  },
+  rightButton: {
+    width: '45%',
   },
 });

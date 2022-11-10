@@ -1,6 +1,7 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import PrimaryButton from './PrimaryButton';
+import { ScreenNames } from '../utils';
 
 const ImageURL = require('../assets/activities.png');
 

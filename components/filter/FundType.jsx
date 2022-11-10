@@ -1,16 +1,20 @@
 import { FlatList } from 'react-native';
-import React from 'react';
+import React, { memo } from 'react';
 import { useSearchFundType } from '../../hooks/masters.hooks';
 import { RadioButton } from 'react-native-paper';
+import MemoizedRadioButton from '../MemoizedRadioButton';
 
-const FundType = () => {
+const FundType = ({ query, handleApplyFilter }) => {
   const { data } = useSearchFundType();
   return (
-    <RadioButton.Group>
+    <RadioButton.Group
+      onValueChange={(e) => handleApplyFilter('tprm', e)}
+      value={query.tprm}
+    >
       <FlatList
         data={data || []}
         renderItem={({ item }) => (
-          <RadioButton.Item value={item.value} label={item.label} />
+          <MemoizedRadioButton value={item.value} label={item.label} />
         )}
         keyExtractor={(item) => item.value}
       ></FlatList>

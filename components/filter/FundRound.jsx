@@ -2,15 +2,19 @@ import { FlatList } from 'react-native';
 import React from 'react';
 import { useSearchFundRound } from '../../hooks/masters.hooks';
 import { RadioButton } from 'react-native-paper';
+import MemoizedRadioButton from '../MemoizedRadioButton';
 
-const FundRound = () => {
+const FundRound = ({ query, handleApplyFilter }) => {
   const { data } = useSearchFundRound();
   return (
-    <RadioButton.Group>
+    <RadioButton.Group
+      onValueChange={(e) => handleApplyFilter('ftrm', e)}
+      value={query.ftrm}
+    >
       <FlatList
         data={data || []}
         renderItem={({ item }) => (
-          <RadioButton.Item
+          <MemoizedRadioButton
             value={item.funding_round}
             label={item.funding_round}
           />

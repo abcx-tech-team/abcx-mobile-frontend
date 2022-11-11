@@ -19,10 +19,13 @@ const Dashboard = ({ navigation }) => {
   return (
     <AuthContainer navigation={navigation}>
       <View style={styles.container}>
-        <UserHeader />
-        <ScrollView>
+        <UserHeader firstName={userData?.first_name} />
+        <ScrollView bounces={false}>
           <View style={styles.dashboard}>
-            <WelcomeCard navigation={navigation} data={userData} />
+            <WelcomeCard
+              navigation={navigation}
+              companyName={userData?.member_id || ''}
+            />
             <BuyingActivities navigation={navigation} />
             <SellingActivities navigation={navigation} />
           </View>

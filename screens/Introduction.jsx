@@ -1,16 +1,37 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import LogoHeader from '../components/LogoHeader';
 import IntroBottomTab from '../components/IntroBottomTab';
+import { getToken } from '../utils/asyncStorage';
+import { ScreenNames, USER_TOKEN_ID_KEY } from '../utils';
+import Loading from '../components/Loading';
 
 const Introduction = ({ navigation }) => {
+  const [loading, setLoading] = useState(true);
+  const getLoginInfo = useCallback(async () => {
+    const loginInfo = await getToken(USER_TOKEN_ID_KEY);
+    if (loginInfo) {
+      navigation.navigate(ScreenNames.main);
+    }
+    setLoading(false);
+  });
+
+  useEffect(() => {
+    getLoginInfo();
+  }, []);
   return (
     <View style={styles.screen}>
-      <LogoHeader />
-      <View style={styles.textContainer}>
-        <Text style={styles.text}>Borderless{'\n'}capital connection</Text>
-      </View>
-      <IntroBottomTab navigation={navigation} style={styles.bottomTab} />
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <LogoHeader />
+          <View style={styles.textContainer}>
+            <Text style={styles.text}>Borderless{'\n'}capital connection</Text>
+          </View>
+          <IntroBottomTab navigation={navigation} style={styles.bottomTab} />
+        </>
+      )}
     </View>
   );
 };

@@ -5,11 +5,11 @@ import Badge from './Badge';
 const Avatar = require('../assets/avatar_abcx.png');
 const Bell = require('../assets/icons/bell.png');
 
-const UserHeader = () => {
+const UserHeader = ({ firstName }) => {
   return (
     <View style={styles.header}>
       <View style={styles.headerTextContainer}>
-        <Text style={styles.headerText}>Hi Rajat 👋</Text>
+        <Text style={styles.headerText}>Hi {firstName || ''} 👋</Text>
       </View>
       <View style={styles.icons}>
         <View style={styles.bellContainer}>

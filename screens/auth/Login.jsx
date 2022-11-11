@@ -5,9 +5,12 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import LogoHeader from '../../components/LogoHeader';
 import LoginView from '../../components/LoginView';
+import Loading from '../../components/Loading';
+import { getToken } from '../../utils/asyncStorage';
+import { ScreenNames, USER_TOKEN_ID_KEY } from '../../utils';
 
 const Login = ({ navigation }) => {
   return (

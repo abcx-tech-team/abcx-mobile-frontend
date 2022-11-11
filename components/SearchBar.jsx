@@ -8,13 +8,12 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Country from './filter/Country';
 import FundType from './filter/FundType';
 import FundRound from './filter/FundRound';
 import PrimaryButton from './PrimaryButton';
 import BlindProfileButton from './BlindProfileButton';
-import { serialize } from '../utils';
 
 const MagnifyingGlass = require('../assets/icons/search.png');
 const Filter = require('../assets/icons/filter.png');
@@ -210,7 +209,7 @@ const styles = StyleSheet.create({
   actionButtons: {
     backgroundColor: '#fff',
     width: '100%',
-    flexDirection: 'row',
+    flexDirection: 'column',
     marginBottom: 40,
     justifyContent: 'space-evenly',
     paddingTop: 24,

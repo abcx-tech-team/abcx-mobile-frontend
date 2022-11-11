@@ -26,6 +26,7 @@ export const useBlindProfiles = (query, enabled = true) =>
     },
     {
       enabled,
+      cacheTime: 0,
     }
   );
 

@@ -17,7 +17,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useLogin } from '../hooks/auth.hooks';
 import useIsLogin from '../hooks/useIsLogin.hook';
 import Toast from 'react-native-toast-message';
-import { setToken } from '../utils/asyncStorage';
+import { getToken, setToken } from '../utils/asyncStorage';
 
 const schema = yup.object().shape({
   username: yup
@@ -61,6 +61,7 @@ const LoginView = ({ navigation }) => {
       });
     }
   };
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'position' : 'null'}

@@ -1,4 +1,11 @@
-import { FlatList, StyleSheet, View, Platform, Text } from 'react-native';
+import {
+  FlatList,
+  StyleSheet,
+  View,
+  Platform,
+  Text,
+  ActivityIndicator,
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import SearchBar from '../../components/SearchBar';
 import BriefProfileCard from '../../components/BlindProfileCard';
@@ -6,9 +13,16 @@ import AuthContainer from '../../container/AuthContainer';
 import { useBlindProfiles } from '../../hooks/blindProfile.hooks';
 import { serialize } from '../../utils';
 
-const EmptyComponent = () => (
-  <Text style={styles.emptyText}>No data to show 😓</Text>
-);
+const FooterComponent = ({ isLoading, data }) =>
+  isLoading ? (
+    <View style={[styles.loader]}>
+      <ActivityIndicator size='large' color='rgba(0,0,0,0.6)' />
+    </View>
+  ) : data.length ? (
+    <Text style={styles.emptyText}>No more blind profiles to show 😓</Text>
+  ) : (
+    <Text style={styles.emptyText}>No data to show 😓</Text>
+  );
 
 const Explore = ({ navigation }) => {
   const [query, setQuery] = useState({
@@ -23,7 +37,7 @@ const Explore = ({ navigation }) => {
     data: [],
   });
 
-  const { data: blindProfileData, isFetching } = useBlindProfiles(
+  const { data: blindProfileData, isLoading } = useBlindProfiles(
     serialize(query)
   );
 
@@ -61,6 +75,7 @@ const Explore = ({ navigation }) => {
         />
         <View style={styles.dashboard}>
           <FlatList
+            bounces={false}
             data={blindProfiles.data}
             renderItem={({ item }) => (
               <BriefProfileCard briefProfile={item} navigation={navigation} />
@@ -68,9 +83,19 @@ const Explore = ({ navigation }) => {
             keyExtractor={(item) => item.companyUUID}
             style={styles.scrollView}
             contentContainerStyle={{ paddingHorizontal: 24 }}
-            onEndReachedThreshold={0.2}
+            onEndReachedThreshold={0.01}
             onEndReached={fetchMoreData}
-            ListEmptyComponent={<EmptyComponent />}
+            ListFooterComponent={
+              <FooterComponent
+                isLoading={isLoading}
+                data={blindProfiles.data}
+              />
+            }
+            ListFooterComponentStyle={{
+              height: 36,
+              width: '100%',
+              marginBottom: 16,
+            }}
           />
         </View>
       </View>
@@ -82,7 +107,7 @@ export default Explore;
 
 const styles = StyleSheet.create({
   emptyText: {
-    fontSize: 24,
+    fontSize: 18,
     fontWeight: '600',
     letterSpacing: 1.5,
     textAlign: 'center',
@@ -100,5 +125,4 @@ const styles = StyleSheet.create({
   dashboard: {
     paddingBottom: Platform.OS === 'ios' ? 250 : 230,
   },
-  scrollView: {},
 });

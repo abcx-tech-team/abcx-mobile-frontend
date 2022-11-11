@@ -19,7 +19,7 @@ const Dashboard = ({ navigation }) => {
   return (
     <AuthContainer navigation={navigation}>
       <View style={styles.container}>
-        <UserHeader firstName={userData?.first_name} />
+        <UserHeader />
         <ScrollView bounces={false}>
           <View style={styles.dashboard}>
             <WelcomeCard

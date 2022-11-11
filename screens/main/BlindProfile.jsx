@@ -1,6 +1,7 @@
 import {
   Button,
   Image,
+  Platform,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -162,7 +163,7 @@ const BriefProfile = ({ route, navigation }) => {
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <View style={styles.tags}>
             {tags.map((item) => (
-              <View style={styles.tag}>
+              <View style={styles.tag} key={item.tagName}>
                 <Image source={Apple} style={styles.tagImage} />
                 <Text style={styles.tagText}>{item.tagName}</Text>
               </View>
@@ -191,19 +192,19 @@ const styles = StyleSheet.create({
   companyMetaData: {
     paddingHorizontal: 24,
     flexDirection: 'column',
-    height: '23%',
+    height: Platform.OS === 'ios' ? '23%' : '20%',
     justifyContent: 'space-evenly',
   },
   aboutCompany: {
     paddingHorizontal: 24,
-    paddingVertical: 24,
+    paddingTop: 24,
     backgroundColor: '#fff',
-    height: '58%',
+    height: Platform.OS === 'ios' ? '58%' : '60%',
     marginTop: 8,
   },
   CTA: {
     paddingHorizontal: 24,
-    height: '19%',
+    height: Platform.OS === 'ios' ? '19%' : '20%',
     backgroundColor: '#fff',
     borderTopColor: 'rgba(239, 239, 239, 1)',
     borderTopWidth: 1,
@@ -241,17 +242,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#FBFBFB',
     paddingTop: 16,
     borderRadius: 8,
-    marginTop: 16,
-    marginBottom: 24,
+    marginTop: Platform.OS === 'ios' ? 16 : 8,
+    marginBottom: Platform.OS === 'ios' ? 24 : 16,
   },
   label: {
-    fontSize: 14,
+    fontSize: Platform.OS === 'ios' ? 14 : 12,
     color: '#C7C7C7',
     fontWeight: '600',
     marginBottom: 8,
   },
   value: {
-    fontSize: 18,
+    fontSize: Platform.OS === 'ios' ? 18 : 15,
     color: '#000',
     fontWeight: '600',
   },
@@ -287,7 +288,7 @@ const styles = StyleSheet.create({
     width: 15,
   },
   tagText: {
-    fontSize: 16,
+    fontSize: Platform.OS === 'ios' ? 16 : 12,
     fontWeight: 'bold',
     color: '#637381',
     marginLeft: 8,

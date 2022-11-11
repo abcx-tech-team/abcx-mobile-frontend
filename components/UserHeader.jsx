@@ -1,15 +1,19 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import Badge from './Badge';
+import { useLoggedInUser } from '../hooks/user.hooks';
 
 const Avatar = require('../assets/avatar_abcx.png');
 const Bell = require('../assets/icons/bell.png');
 
 const UserHeader = ({ firstName }) => {
+  const { data: userData } = useLoggedInUser();
   return (
     <View style={styles.header}>
       <View style={styles.headerTextContainer}>
-        <Text style={styles.headerText}>Hi {firstName || ''} 👋</Text>
+        <Text style={styles.headerText}>
+          Hi {userData?.first_name || ''} 👋
+        </Text>
       </View>
       <View style={styles.icons}>
         <View style={styles.bellContainer}>

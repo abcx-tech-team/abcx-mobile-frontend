@@ -107,7 +107,7 @@ export default Explore;
 
 const styles = StyleSheet.create({
   emptyText: {
-    fontSize: 18,
+    fontSize: Platform.OS === 'ios' ? 18 : 16,
     fontWeight: '600',
     letterSpacing: 1.5,
     textAlign: 'center',

@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import React from 'react';
 
-const PrimaryButton = ({
+const SecondaryButton = ({
   title,
   onClick,
   isLoading = false,
@@ -33,7 +33,7 @@ const PrimaryButton = ({
   );
 };
 
-export default PrimaryButton;
+export default SecondaryButton;
 
 const styles = StyleSheet.create({
   buttonContainer: {
@@ -41,16 +41,14 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '100%',
-    backgroundColor: '#6F0652',
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-    paddingVertical: 16,
+    paddingVertical: 12,
   },
   text: {
-    color: '#fff',
-    fontSize: 16,
+    color: '#0018ff',
     fontWeight: '600',
   },
   loaderContainer: {

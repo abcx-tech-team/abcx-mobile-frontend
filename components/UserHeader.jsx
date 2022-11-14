@@ -6,7 +6,7 @@ import { useLoggedInUser } from '../hooks/user.hooks';
 const Avatar = require('../assets/avatar_abcx.png');
 const Bell = require('../assets/icons/bell.png');
 
-const UserHeader = ({ firstName }) => {
+const UserHeader = () => {
   const { data: userData } = useLoggedInUser();
   return (
     <View style={styles.header}>

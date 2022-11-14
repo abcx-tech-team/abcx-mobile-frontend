@@ -33,6 +33,8 @@ const defaultValues = {
   password: '',
 };
 
+const userAlreadyPreferred = false;
+
 const LoginView = ({ navigation }) => {
   const isLogin = useIsLogin();
   const { mutateAsync: login, isLoading } = useLogin();
@@ -49,7 +51,11 @@ const LoginView = ({ navigation }) => {
         type: 'success',
         text1: 'Logged in successfully',
       });
-      navigation.navigate(ScreenNames.main);
+      if (userAlreadyPreferred) {
+        navigation.navigate(ScreenNames.main);
+      } else {
+        navigation.navigate(ScreenNames.preferenceIntroduction);
+      }
       reset({
         username: '',
         password: '',

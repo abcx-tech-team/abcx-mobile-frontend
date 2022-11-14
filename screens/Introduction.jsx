@@ -4,16 +4,22 @@ import LogoHeader from '../components/LogoHeader';
 import IntroBottomTab from '../components/IntroBottomTab';
 import { getToken } from '../utils/asyncStorage';
 import { ScreenNames, USER_TOKEN_ID_KEY } from '../utils';
-import Loading from '../components/Loading';
+
+const userAlreadyPreferred = false;
 
 const Introduction = ({ navigation }) => {
-  const [loading, setLoading] = useState(true);
+  const [showScreen, setShowScreen] = useState(false);
   const getLoginInfo = useCallback(async () => {
     const loginInfo = await getToken(USER_TOKEN_ID_KEY);
     if (loginInfo) {
-      navigation.navigate(ScreenNames.main);
+      if (userAlreadyPreferred) {
+        navigation.navigate(ScreenNames.main);
+      } else {
+        navigation.navigate(ScreenNames.preferenceIntroduction);
+      }
+    } else {
+      setShowScreen(true);
     }
-    setLoading(false);
   });
 
   useEffect(() => {
@@ -21,9 +27,7 @@ const Introduction = ({ navigation }) => {
   }, []);
   return (
     <View style={styles.screen}>
-      {loading ? (
-        <Loading />
-      ) : (
+      {showScreen ? (
         <>
           <LogoHeader />
           <View style={styles.textContainer}>
@@ -31,7 +35,7 @@ const Introduction = ({ navigation }) => {
           </View>
           <IntroBottomTab navigation={navigation} style={styles.bottomTab} />
         </>
-      )}
+      ) : null}
     </View>
   );
 };

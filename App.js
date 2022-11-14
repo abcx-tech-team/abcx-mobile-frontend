@@ -4,12 +4,14 @@ import { StatusBar } from 'expo-status-bar';
 import { ScreenNames } from './utils';
 import MainContainer from './container/MainContainer';
 import Introduction from './screens/Introduction';
+import PreferenceIntroduction from './screens/preference/Introduction';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './screens/auth/Login';
 import ResetPassword from './screens/auth/ResetPassword';
 import BlindProfile from './screens/main/BlindProfile';
 import Toast from 'react-native-toast-message';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import PreferenceForms from './screens/preference/PreferenceForms';
 
 const Stack = createNativeStackNavigator();
 
@@ -46,6 +48,16 @@ export default function App() {
             <Stack.Screen
               name={ScreenNames.blindProfile}
               component={BlindProfile}
+            />
+            <Stack.Screen
+              name={ScreenNames.preferenceIntroduction}
+              component={PreferenceIntroduction}
+              options={{ gestureEnabled: false }}
+            />
+            <Stack.Screen
+              name={ScreenNames.preferenceForms}
+              component={PreferenceForms}
+              options={{ gestureEnabled: false }}
             />
           </Stack.Navigator>
         </NavigationContainer>

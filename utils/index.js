@@ -7,6 +7,8 @@ export const ScreenNames = {
   login: 'Login',
   resetPassword: 'Reset Password',
   blindProfile: 'Blind Profile',
+  preferenceIntroduction: 'Preference Introduction',
+  preferenceForms: 'Preference Forms',
 };
 
 export const USER_TOKEN_ID_KEY = 'user_token_id';

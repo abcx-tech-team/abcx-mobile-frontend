@@ -23,6 +23,7 @@ const PreferenceButtons = ({
         <SecondaryButton
           title={secondaryCTA}
           onClick={() => navigation.navigate(ScreenNames.main)}
+          noLoader
         />
       </View>
     </View>

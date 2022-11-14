@@ -94,6 +94,12 @@ const PreferenceForms = ({ navigation }) => {
       console.log('Network Call and go to main container');
     }
   };
+  const handleBack = () => {
+    if (activeStep === 1) {
+      return;
+    }
+    setActiveStep((prev) => prev - 1);
+  };
 
   return (
     <PreferenceLayout
@@ -102,6 +108,8 @@ const PreferenceForms = ({ navigation }) => {
       total={3}
       navigation={navigation}
       primaryCTAFunction={handleNext}
+      primaryCTA='Continue'
+      BackArrowClick={handleBack}
     >
       <Text style={styles.heading}>What do you prefer</Text>
       {getPreferences(activeStep)}

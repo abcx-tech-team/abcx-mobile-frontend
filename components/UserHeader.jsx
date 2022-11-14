@@ -2,8 +2,9 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import Badge from './Badge';
 import { useLoggedInUser } from '../hooks/user.hooks';
+import { Avatar } from 'react-native-paper';
 
-const Avatar = require('../assets/avatar_abcx.png');
+const AvatarImg = require('../assets/avatar_abcx.png');
 const Bell = require('../assets/icons/bell.png');
 
 const UserHeader = () => {
@@ -21,7 +22,7 @@ const UserHeader = () => {
           <Badge status='success' number={3} style={styles.badgeStyle} />
         </View>
         <View style={styles.avatarContainer}>
-          <Image source={Avatar} style={styles.avatar} />
+          <Avatar.Image source={AvatarImg} size={30} />
           <Badge status='success' />
         </View>
       </View>
@@ -55,10 +56,6 @@ const styles = StyleSheet.create({
   bell: {
     height: 20,
     width: 20,
-  },
-  avatar: {
-    width: 32,
-    height: 32,
   },
   headerTextContainer: {
     height: 36,

@@ -12,6 +12,7 @@ const Introduction = ({ navigation }) => {
       primaryCTA="Let's go"
       navigation={navigation}
       primaryCTAFunction={handlePrimaryCTA}
+      BackArrowClick={() => navigation.navigate(ScreenNames.main)}
     >
       <Text style={styles.heading}>Hey Gaurav 👋</Text>
       <Text style={styles.subHeading}>

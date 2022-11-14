@@ -14,14 +14,12 @@ const PreferenceLayout = ({
   secondaryCTA,
   navigation,
   primaryCTAFunction,
+  BackArrowClick,
 }) => {
   return (
     <View style={styles.container}>
       <View style={styles.topBar}>
-        <Pressable
-          onPress={() => navigation.navigate(ScreenNames.main)}
-          style={styles.back}
-        >
+        <Pressable onPress={BackArrowClick} style={styles.back}>
           <Image source={Back} />
         </Pressable>
         {showNumber ? (

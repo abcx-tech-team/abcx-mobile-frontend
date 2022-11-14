@@ -31,6 +31,7 @@ const Explore = ({ navigation }) => {
     ctrm: '',
     tprm: '',
     ftrm: '',
+    strm: '',
   });
   const [blindProfiles, setBlindProfiles] = useState({
     hasMore: true,
@@ -68,11 +69,13 @@ const Explore = ({ navigation }) => {
   return (
     <AuthContainer navigation={navigation}>
       <View style={styles.container}>
-        <SearchBar
-          query={query}
-          setQuery={setQuery}
-          setBlindProfiles={setBlindProfiles}
-        />
+        <View style={styles.searchBar}>
+          <SearchBar
+            query={query}
+            setQuery={setQuery}
+            setBlindProfiles={setBlindProfiles}
+          />
+        </View>
         <View style={styles.dashboard}>
           <FlatList
             bounces={false}
@@ -124,5 +127,8 @@ const styles = StyleSheet.create({
   },
   dashboard: {
     paddingBottom: Platform.OS === 'ios' ? 250 : 230,
+  },
+  searchBar: {
+    zIndex: 50,
   },
 });

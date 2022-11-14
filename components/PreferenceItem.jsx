@@ -1,4 +1,5 @@
-import { Pressable, StyleSheet, Text } from 'react-native';
+import { Image, Pressable, StyleSheet, Text } from 'react-native';
+const Tick = require('../assets/icons/tick.png');
 
 const PreferenceItem = ({ name, onClick, selected }) => {
   return (
@@ -6,6 +7,7 @@ const PreferenceItem = ({ name, onClick, selected }) => {
       style={[styles.preferenceItem, selected ? styles.activePreference : '']}
       onPress={onClick}
     >
+      {selected ? <Image source={Tick} style={styles.tick} /> : null}
       <Text
         style={[
           styles.preferenceText,
@@ -27,6 +29,9 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     marginBottom: 24,
     borderRadius: 8,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    position: 'relative',
   },
   preferenceText: {
     fontSize: 18,
@@ -34,9 +39,16 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   activePreference: {
-    backgroundColor: '#6F0652',
+    borderColor: '#6F0652',
   },
   activePreferenceText: {
-    color: '#fff',
+    color: '#6F0652',
+  },
+  tick: {
+    height: 15,
+    width: 15,
+    position: 'absolute',
+    top: '80%',
+    left: '5%',
   },
 });

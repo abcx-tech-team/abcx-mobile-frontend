@@ -45,11 +45,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-    paddingVertical: 12,
+    paddingVertical: 16,
   },
   text: {
-    color: '#0018ff',
+    fontSize: 16,
     fontWeight: '600',
+    color: '#0018FF',
   },
   loaderContainer: {
     height: 20,

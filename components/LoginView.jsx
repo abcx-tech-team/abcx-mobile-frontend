@@ -17,7 +17,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useLogin } from '../hooks/auth.hooks';
 import useIsLogin from '../hooks/useIsLogin.hook';
 import Toast from 'react-native-toast-message';
-import { getToken, setToken } from '../utils/asyncStorage';
+import { setToken } from '../utils/asyncStorage';
+import CustomPasswordInput from './PasswordInput';
 
 const schema = yup.object().shape({
   username: yup
@@ -29,8 +30,8 @@ const schema = yup.object().shape({
 });
 
 const defaultValues = {
-  username: '',
-  password: '',
+  username: 'buyer@abcxchange.com',
+  password: 'Qazwsx@1234',
 };
 
 const userAlreadyPreferred = false;
@@ -83,7 +84,7 @@ const LoginView = ({ navigation }) => {
                 mode='outlined'
                 name='username'
               />
-              <CustomTextInput
+              <CustomPasswordInput
                 placeholder='********'
                 label='Password'
                 mode='outlined'

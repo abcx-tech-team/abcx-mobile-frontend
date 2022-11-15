@@ -1,9 +1,12 @@
 import { HelperText, TextInput } from 'react-native-paper';
 import { Controller, useFormContext } from 'react-hook-form';
 import { StyleSheet, View } from 'react-native';
+import { useState } from 'react';
+import { Feather } from '@expo/vector-icons';
 
-const CustomTextInput = ({ placeholder, label, name, ...rest }) => {
+const CustomPasswordInput = ({ placeholder, label, name, ...rest }) => {
   const { control } = useFormContext();
+  const [show, setShow] = useState(false);
   return (
     <Controller
       control={control}
@@ -29,7 +32,18 @@ const CustomTextInput = ({ placeholder, label, name, ...rest }) => {
               },
               roundness: 12,
             }}
-            style={{ height: 40, fontSize: 14 }}
+            style={styles.textInput}
+            secureTextEntry={!show}
+            right={
+              <TextInput.Icon
+                icon={show ? 'eye-off' : 'eye'}
+                onPress={() => {
+                  setShow((prev) => !prev);
+                }}
+                forceTextInputFocus={false}
+                style={styles.icon}
+              />
+            }
             {...rest}
           />
           <HelperText style={styles.error} type='error' visible={!!error}>
@@ -47,6 +61,15 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 8,
   },
+  textInput: {
+    height: 40,
+    fontSize: 14,
+  },
+  icon: {
+    height: 40,
+    width: 40,
+    marginTop: 14,
+  },
 });
 
-export default CustomTextInput;
+export default CustomPasswordInput;

@@ -5,7 +5,7 @@ import IntroBottomTab from '../components/IntroBottomTab';
 import { getToken } from '../utils/asyncStorage';
 import { ScreenNames, USER_TOKEN_ID_KEY } from '../utils';
 
-const userAlreadyPreferred = false;
+const userAlreadyPreferred = true;
 
 const Introduction = ({ navigation }) => {
   const [showScreen, setShowScreen] = useState(false);

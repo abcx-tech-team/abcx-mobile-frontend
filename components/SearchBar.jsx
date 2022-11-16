@@ -55,7 +55,6 @@ const SearchBar = ({ setQuery, setBlindProfiles, query }) => {
     setBlindProfiles({ hasMore: true, data: [] });
     setShowFilter(false);
   };
-  console.log(selectedItems);
 
   return (
     <>
@@ -160,7 +159,7 @@ const styles = StyleSheet.create({
     width: 15,
   },
   filter: {
-    height: 12,
+    height: 18,
     width: 18,
   },
   searchInput: {

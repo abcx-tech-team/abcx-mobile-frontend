@@ -34,7 +34,7 @@ const defaultValues = {
   password: 'Qazwsx@1234',
 };
 
-const userAlreadyPreferred = false;
+const userAlreadyPreferred = true;
 
 const LoginView = ({ navigation }) => {
   const isLogin = useIsLogin();

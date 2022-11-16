@@ -25,3 +25,27 @@ export const serialize = (object) => {
 
   return str.join('&');
 };
+
+export const pieFilling = (percentageDone) => {
+  switch (percentageDone) {
+    case 25:
+      return { borderRightColor: '#6F0652' };
+    case 50:
+      return { borderRightColor: '#6F0652', borderBottomColor: '#6F0652' };
+    case 75:
+      return {
+        borderRightColor: '#6F0652',
+        borderBottomColor: '#6F0652',
+        borderLeftColor: '#6F0652',
+      };
+    case 100:
+      return {
+        borderRightColor: '#6F0652',
+        borderBottomColor: '#6F0652',
+        borderLeftColor: '#6F0652',
+        borderTopColor: '#6F0652',
+      };
+    default:
+      return {};
+  }
+};

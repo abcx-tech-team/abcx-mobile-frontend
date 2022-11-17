@@ -7,7 +7,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
 import PrimaryButton from './PrimaryButton';
 import { ScreenNames, USER_TOKEN_ID_KEY } from '../utils';
 import CustomTextInput from './TextInput';
@@ -19,6 +19,7 @@ import useIsLogin from '../hooks/useIsLogin.hook';
 import Toast from 'react-native-toast-message';
 import { setToken } from '../utils/asyncStorage';
 import CustomPasswordInput from './PasswordInput';
+import { AuthContext } from '../context/authContext';
 
 const schema = yup.object().shape({
   username: yup
@@ -39,6 +40,7 @@ const userAlreadyPreferred = true;
 const LoginView = ({ navigation }) => {
   const isLogin = useIsLogin();
   const { mutateAsync: login, isLoading } = useLogin();
+  const { setState } = useContext(AuthContext);
 
   const { handleSubmit, control, reset } = useForm({
     defaultValues,
@@ -48,6 +50,7 @@ const LoginView = ({ navigation }) => {
     try {
       const res = await login({ data: formData, isLogin });
       setToken(USER_TOKEN_ID_KEY, { state: { token: res.access } });
+      setState(res.access);
       Toast.show({
         type: 'success',
         text1: 'Logged in successfully',

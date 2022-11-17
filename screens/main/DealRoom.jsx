@@ -4,8 +4,11 @@ import PrimaryButton from '../../components/PrimaryButton';
 import { removeStorage } from '../../utils/asyncStorage';
 import { ScreenNames, USER_TOKEN_ID_KEY } from '../../utils';
 import AuthContainer from '../../container/AuthContainer';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/authContext';
 
 const DealRoom = ({ navigation }) => {
+  const { setState } = useContext(AuthContext);
   return (
     <AuthContainer navigation={navigation}>
       <View style={styles.container}>
@@ -16,7 +19,7 @@ const DealRoom = ({ navigation }) => {
             title='LogOut'
             onClick={() => {
               removeStorage(USER_TOKEN_ID_KEY);
-              navigation.navigate(ScreenNames.login);
+              setState('');
             }}
           />
         </View>

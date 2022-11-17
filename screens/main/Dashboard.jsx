@@ -6,6 +6,7 @@ import DashboardActivities from '../../components/DashboardActivities';
 import DashboardInviteCard from '../../components/DashboardInviteCard';
 import DashboardBookCall from '../../components/DashboardBookCall';
 import DashboardNumbers from '../../components/DashboardNumbers';
+import DashboardAccordionContainer from '../../components/DashboardAccordionContainer';
 
 const Dashboard = ({ navigation }) => {
   return (
@@ -17,6 +18,7 @@ const Dashboard = ({ navigation }) => {
             <DashboardActivities />
             <DashboardInviteCard />
             <DashboardNumbers />
+            <DashboardAccordionContainer />
             <DashboardBookCall />
           </ScrollView>
         </View>

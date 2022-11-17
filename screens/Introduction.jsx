@@ -1,17 +1,20 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import LogoHeader from '../components/LogoHeader';
 import IntroBottomTab from '../components/IntroBottomTab';
 import { getToken } from '../utils/asyncStorage';
 import { ScreenNames, USER_TOKEN_ID_KEY } from '../utils';
+import { AuthContext } from '../context/authContext';
 
 const userAlreadyPreferred = true;
 
 const Introduction = ({ navigation }) => {
   const [showScreen, setShowScreen] = useState(false);
+  const { setState } = useContext(AuthContext);
   const getLoginInfo = useCallback(async () => {
     const loginInfo = await getToken(USER_TOKEN_ID_KEY);
     if (loginInfo) {
+      setState(loginInfo.state.token);
       if (userAlreadyPreferred) {
         navigation.navigate(ScreenNames.main);
       } else {

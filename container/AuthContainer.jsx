@@ -1,19 +1,15 @@
-import { useCallback, useEffect } from 'react';
-import { ScreenNames, USER_TOKEN_ID_KEY } from '../utils';
-import { getToken } from '../utils/asyncStorage';
+import { useContext, useEffect } from 'react';
+import { AuthContext } from '../context/authContext';
+import { ScreenNames } from '../utils';
 
 const AuthContainer = ({ children, navigation }) => {
-  // TODO: use context to make it rerender om state change now not happening that
-  const checkLogin = useCallback(async () => {
-    const data = await getToken(USER_TOKEN_ID_KEY);
-    if (!data) {
-      navigation.navigate(ScreenNames.login);
-    }
-  }, []);
+  const { token } = useContext(AuthContext);
 
   useEffect(() => {
-    checkLogin();
-  }, []);
+    if (!token) {
+      navigation.navigate(ScreenNames.login);
+    }
+  }, [token]);
   return children;
 };
 

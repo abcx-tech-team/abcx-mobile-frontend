@@ -2,7 +2,6 @@ import { HelperText, TextInput } from 'react-native-paper';
 import { Controller, useFormContext } from 'react-hook-form';
 import { StyleSheet, View } from 'react-native';
 import { useState } from 'react';
-import { Feather } from '@expo/vector-icons';
 
 const CustomPasswordInput = ({ placeholder, label, name, ...rest }) => {
   const { control } = useFormContext();

@@ -11,6 +11,19 @@ export const ScreenNames = {
   preferenceForms: 'Preference Forms',
 };
 
+export const currencyMapper = (name) => {
+  switch (name) {
+    case 'euro':
+      return '€';
+    case 'dollar':
+      return '$';
+    case 'gbp':
+      return '£';
+    default:
+      return '$';
+  }
+};
+
 export const USER_TOKEN_ID_KEY = 'user_token_id';
 
 export const serialize = (object) => {

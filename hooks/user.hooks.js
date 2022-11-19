@@ -1,5 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { buyerList, loggedInUser, sellerList } from '../requests/user.requests';
+import {
+  buyerList,
+  loggedInUser,
+  sellerList,
+  creditBalance,
+} from '../requests/user.requests';
 
 export const useLoggedInUser = (enabled = true) =>
   useQuery(
@@ -30,6 +35,18 @@ export const useSellerList = (enabled = true) =>
     ['sellerList'],
     async () => {
       const res = await sellerList();
+      return res;
+    },
+    {
+      enabled,
+    }
+  );
+
+export const useCreditBalance = (enabled = true) =>
+  useQuery(
+    ['credit-balance'],
+    async () => {
+      const res = await creditBalance();
       return res;
     },
     {

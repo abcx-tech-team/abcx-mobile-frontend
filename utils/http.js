@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { clearStorage } from './asyncStorage';
+import { clearStorage, removeStorage } from './asyncStorage';
 import { USER_TOKEN_ID_KEY } from './index';
 
 const API_URL = 'https://dev.abcxchange.com/api/v1';
@@ -51,7 +51,7 @@ const getBody = (body, hasFiles = false) => {
 const handleError = async (httpStatusCode, response = {}, isLogin) => {
   if (httpStatusCode === 401 || httpStatusCode === 403) {
     if (!isLogin) {
-      await clearStorage();
+      removeStorage(USER_TOKEN_ID_KEY);
       throw 'Please login to continue';
     }
   }

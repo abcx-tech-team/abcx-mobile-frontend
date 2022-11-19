@@ -38,9 +38,11 @@ const Explore = ({ navigation }) => {
     data: [],
   });
 
-  const { data: blindProfileData, isLoading } = useBlindProfiles(
-    serialize(query)
-  );
+  const {
+    data: blindProfileData,
+    isLoading,
+    error,
+  } = useBlindProfiles(serialize(query));
 
   const fetchMoreData = () => {
     if (blindProfiles.hasMore) {

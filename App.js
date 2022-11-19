@@ -13,7 +13,8 @@ import Toast from 'react-native-toast-message';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import PreferenceForms from './screens/preference/PreferenceForms';
 import { AuthContext } from './context/authContext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { clearStorage } from './utils/asyncStorage';
 
 const Stack = createNativeStackNavigator();
 

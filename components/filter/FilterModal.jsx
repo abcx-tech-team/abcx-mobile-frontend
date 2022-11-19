@@ -63,7 +63,11 @@ const FilterModal = ({
           />
         </View>
         <View style={styles.leftButton}>
-          <SecondaryButton onClick={handleClearFilters} title='Clear Filters' />
+          <SecondaryButton
+            onClick={handleClearFilters}
+            title='Clear Filters'
+            noLoader
+          />
         </View>
       </View>
     </Modal>

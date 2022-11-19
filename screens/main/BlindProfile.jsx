@@ -8,11 +8,12 @@ import {
   Text,
   View,
 } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { ScreenNames } from '../../utils';
 import { useBriefProfileById } from '../../hooks/blindProfile.hooks';
 import { SvgUri } from 'react-native-svg';
 import PrimaryButton from '../../components/PrimaryButton';
+import RequestBlindProfileModal from '../../components/RequestBlindProfileModal';
 
 const Back = require('../../assets/icons/back.png');
 const House = require('../../assets/icons/house.png');
@@ -38,6 +39,7 @@ const tags = [
 ];
 
 const BriefProfile = ({ route, navigation }) => {
+  const [showModal, setShowModal] = useState(false);
   const { briefProfileId } = route.params;
   const { data: briefProfileData } = useBriefProfileById(
     briefProfileId,
@@ -45,139 +47,147 @@ const BriefProfile = ({ route, navigation }) => {
   );
 
   return (
-    <View style={styles.container}>
-      <Pressable
-        onPress={() => navigation.navigate(ScreenNames.explore)}
-        style={styles.back}
-      >
-        <Image source={Back} />
-      </Pressable>
-      <View style={styles.companyMetaData}>
-        <View>
-          <Text style={styles.companyDetails}>
-            {briefProfileData?.results[0].subtitle || ''}
-          </Text>
-        </View>
-        <View>
-          <View style={styles.companyMeta}>
-            <View style={styles.imageContainer}>
-              <Image source={House} style={styles.image} />
-            </View>
-            <View style={styles.data}>
-              <Text style={styles.dataText}>
-                Founded: {briefProfileData?.results[0].metaDetails.founded}
-              </Text>
-            </View>
+    <>
+      <View style={styles.container}>
+        <Pressable
+          onPress={() => navigation.navigate(ScreenNames.explore)}
+          style={styles.back}
+        >
+          <Image source={Back} />
+        </Pressable>
+        <View style={styles.companyMetaData}>
+          <View>
+            <Text style={styles.companyDetails}>
+              {briefProfileData?.results[0].subtitle || ''}
+            </Text>
           </View>
-          <View style={styles.companyMeta}>
-            <View style={styles.imageContainer}>
-              <Image source={Location} style={styles.image} />
-            </View>
-            <View style={styles.data}>
-              <Text style={styles.dataText}>
-                Location:{' '}
-                {briefProfileData?.results[0].metaDetails.location?.city
-                  ? `${briefProfileData?.results[0].metaDetails.location?.city}, `
-                  : ''}
-                {briefProfileData?.results[0].metaDetails.location?.country ||
-                  ''}
-              </Text>
-            </View>
-          </View>
-        </View>
-      </View>
-      <View style={styles.aboutCompany}>
-        <View style={styles.companyInfo}>
-          <View style={styles.companyInfoRow}>
-            <View style={styles.companyInfoCard}>
-              <Text style={styles.label}>Sector</Text>
-              <Text style={styles.value}>
-                {briefProfileData?.results[0].metaDetails?.sector?.sectorName ||
-                  ''}
-              </Text>
-            </View>
-            <View style={styles.companyInfoCard}>
-              <Text style={styles.label}>Market Type</Text>
-              <Text style={styles.value}>
-                {briefProfileData?.results[0].metaDetails?.marketType || ''}
-              </Text>
-            </View>
-          </View>
-          <View style={styles.companyInfoRow}>
-            <View style={styles.companyInfoCard}>
-              <Text style={styles.label}>No of Employee</Text>
-              <Text style={styles.value}>
-                {briefProfileData?.results[0].metaDetails?.employeeRange || ''}
-              </Text>
-            </View>
-            <View style={styles.companyInfoCard}>
-              <Text style={styles.label}>Revenue</Text>
-              <Text style={styles.value}>
-                {briefProfileData?.results[0].metaDetails?.currentRevenue || ''}
-              </Text>
-            </View>
-          </View>
-        </View>
-        <View style={styles.companyFunding}>
-          <View style={styles.fundingRow}>
-            <View style={styles.fundingInfo}>
-              <Text style={styles.label}>Total Funding Round</Text>
-              <Text style={styles.value}>
-                {briefProfileData?.results[0].companyDetails?.totalFunding ||
-                  ''}
-              </Text>
-            </View>
-            <View style={styles.fundingInfo}>
-              <Text style={styles.label}>Next Funding Round</Text>
-              <Text style={styles.value}>
-                {briefProfileData?.results[0].companyDetails
-                  ?.nextFundingTarget || ''}
-              </Text>
-            </View>
-          </View>
-          <View style={styles.fundingRow}>
-            <View style={styles.fundingInfo}>
-              <Text style={styles.label}>Last Funding</Text>
-              <Text style={styles.value}>
-                {briefProfileData?.results[0].companyDetails?.lastFundRound
-                  ?.year
-                  ? `${briefProfileData?.results[0].companyDetails?.lastFundRound.year} - `
-                  : null}{' '}
-                {briefProfileData?.results[0].companyDetails?.lastFundRound
-                  ?.type || ''}
-              </Text>
-            </View>
-            <View style={styles.fundingInfo}>
-              <Text style={styles.label}>Next Funding</Text>
-              <Text style={styles.value}>
-                {briefProfileData?.results[0].companyDetails?.nextFundRound
-                  ?.year
-                  ? `${briefProfileData?.results[0].companyDetails?.nextFundRound?.year} - `
-                  : null}{' '}
-                {briefProfileData?.results[0].companyDetails?.nextFundRound
-                  ?.type || ''}
-              </Text>
-            </View>
-          </View>
-        </View>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <View style={styles.tags}>
-            {tags.map((item) => (
-              <View style={styles.tag} key={item.tagName}>
-                <Image source={Apple} style={styles.tagImage} />
-                <Text style={styles.tagText}>{item.tagName}</Text>
+          <View>
+            <View style={styles.companyMeta}>
+              <View style={styles.imageContainer}>
+                <Image source={House} style={styles.image} />
               </View>
-            ))}
+              <View style={styles.data}>
+                <Text style={styles.dataText}>
+                  Founded: {briefProfileData?.results[0].metaDetails.founded}
+                </Text>
+              </View>
+            </View>
+            <View style={styles.companyMeta}>
+              <View style={styles.imageContainer}>
+                <Image source={Location} style={styles.image} />
+              </View>
+              <View style={styles.data}>
+                <Text style={styles.dataText}>
+                  Location:{' '}
+                  {briefProfileData?.results[0].metaDetails.location?.city
+                    ? `${briefProfileData?.results[0].metaDetails.location?.city}, `
+                    : ''}
+                  {briefProfileData?.results[0].metaDetails.location?.country ||
+                    ''}
+                </Text>
+              </View>
+            </View>
           </View>
-        </ScrollView>
+        </View>
+        <View style={styles.aboutCompany}>
+          <View style={styles.companyInfo}>
+            <View style={styles.companyInfoRow}>
+              <View style={styles.companyInfoCard}>
+                <Text style={styles.label}>Sector</Text>
+                <Text style={styles.value}>
+                  {briefProfileData?.results[0].metaDetails?.sector
+                    ?.sectorName || ''}
+                </Text>
+              </View>
+              <View style={styles.companyInfoCard}>
+                <Text style={styles.label}>Market Type</Text>
+                <Text style={styles.value}>
+                  {briefProfileData?.results[0].metaDetails?.marketType || ''}
+                </Text>
+              </View>
+            </View>
+            <View style={styles.companyInfoRow}>
+              <View style={styles.companyInfoCard}>
+                <Text style={styles.label}>No of Employee</Text>
+                <Text style={styles.value}>
+                  {briefProfileData?.results[0].metaDetails?.employeeRange ||
+                    ''}
+                </Text>
+              </View>
+              <View style={styles.companyInfoCard}>
+                <Text style={styles.label}>Revenue</Text>
+                <Text style={styles.value}>
+                  {briefProfileData?.results[0].metaDetails?.currentRevenue ||
+                    ''}
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View style={styles.companyFunding}>
+            <View style={styles.fundingRow}>
+              <View style={styles.fundingInfo}>
+                <Text style={styles.label}>Total Funding Round</Text>
+                <Text style={styles.value}>
+                  {briefProfileData?.results[0].companyDetails?.totalFunding ||
+                    ''}
+                </Text>
+              </View>
+              <View style={styles.fundingInfo}>
+                <Text style={styles.label}>Next Funding Round</Text>
+                <Text style={styles.value}>
+                  {briefProfileData?.results[0].companyDetails
+                    ?.nextFundingTarget || ''}
+                </Text>
+              </View>
+            </View>
+            <View style={styles.fundingRow}>
+              <View style={styles.fundingInfo}>
+                <Text style={styles.label}>Last Funding</Text>
+                <Text style={styles.value}>
+                  {briefProfileData?.results[0].companyDetails?.lastFundRound
+                    ?.year
+                    ? `${briefProfileData?.results[0].companyDetails?.lastFundRound.year} - `
+                    : null}{' '}
+                  {briefProfileData?.results[0].companyDetails?.lastFundRound
+                    ?.type || ''}
+                </Text>
+              </View>
+              <View style={styles.fundingInfo}>
+                <Text style={styles.label}>Next Funding</Text>
+                <Text style={styles.value}>
+                  {briefProfileData?.results[0].companyDetails?.nextFundRound
+                    ?.year
+                    ? `${briefProfileData?.results[0].companyDetails?.nextFundRound?.year} - `
+                    : null}{' '}
+                  {briefProfileData?.results[0].companyDetails?.nextFundRound
+                    ?.type || ''}
+                </Text>
+              </View>
+            </View>
+          </View>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            <View style={styles.tags}>
+              {tags.map((item) => (
+                <View style={styles.tag} key={item.tagName}>
+                  <Image source={Apple} style={styles.tagImage} />
+                  <Text style={styles.tagText}>{item.tagName}</Text>
+                </View>
+              ))}
+            </View>
+          </ScrollView>
+        </View>
+        <View style={styles.CTA}>
+          <PrimaryButton
+            title='Request Brief Profile'
+            onClick={() => {
+              setShowModal(true);
+              console.log(briefProfileData.results[0].companyUUID);
+            }}
+          />
+        </View>
       </View>
-      <View style={styles.CTA}>
-        <PrimaryButton
-          title='Request Brief Profile'
-          onClick={() => console.log(briefProfileData.results[0].companyUUID)}
-        />
-      </View>
-    </View>
+      <RequestBlindProfileModal visible={showModal} setVisible={setShowModal} />
+    </>
   );
 };
 

@@ -1,28 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native';
-import UserHeader from '../../components/UserHeader';
-import PrimaryButton from '../../components/PrimaryButton';
-import { removeStorage } from '../../utils/asyncStorage';
-import { ScreenNames, USER_TOKEN_ID_KEY } from '../../utils';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import DealCard from '../../components/DealCard';
 import AuthContainer from '../../container/AuthContainer';
-import { useContext } from 'react';
-import { AuthContext } from '../../context/authContext';
 
 const DealRoom = ({ navigation }) => {
-  const { setState } = useContext(AuthContext);
   return (
     <AuthContainer navigation={navigation}>
       <View style={styles.container}>
-        <UserHeader />
-        <View style={styles.dealRoom}>
-          <Text style={styles.text}>DealRoom</Text>
-          <PrimaryButton
-            title='LogOut'
-            onClick={() => {
-              removeStorage(USER_TOKEN_ID_KEY);
-              setState('');
-            }}
-          />
-        </View>
+        <Text style={styles.screenName}>Deal Room</Text>
+        <View style={styles.tabsContainer}></View>
+        <ScrollView>
+          <DealCard />
+        </ScrollView>
       </View>
     </AuthContainer>
   );
@@ -33,14 +21,16 @@ export default DealRoom;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
+    paddingHorizontal: 16,
+    paddingTop: 64,
   },
-  dealRoom: {
-    paddingHorizontal: 24,
+  tabsContainer: {
+    marginVertical: 24,
   },
-  text: {
-    fontSize: 35,
-    textAlign: 'center',
-    fontWeight: '600',
-    marginVertical: 20,
+  screenName: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#34495E',
   },
 });

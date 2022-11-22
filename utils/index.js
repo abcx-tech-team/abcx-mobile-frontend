@@ -9,6 +9,28 @@ export const ScreenNames = {
   blindProfile: 'Blind Profile',
   preferenceIntroduction: 'Preference Introduction',
   preferenceForms: 'Preference Forms',
+  dealDetails: 'Deal Details',
+  timeline: 'Deal Timeline',
+  nextSteps: 'Deal Next Steps',
+};
+
+export const colors = {
+  green: '#5AB46A',
+  greenBackground: '#9ac87f',
+  primary: '#6F0652',
+  textFull: '#000000',
+  text80: 'rgba(0, 0, 0, 0.8)',
+  text60: 'rgba(0, 0, 0, 0.6)',
+  text40: 'rgba(0, 0, 0, 0.4)',
+  text20: 'rgba(0, 0, 0, 0.2)',
+  dashboardBackgroundPink: '#b47ea5',
+  yellow: '#E89612',
+  yellowBackground: 'rgba(248, 176, 50, 0.2)',
+  blue: '#0018FF',
+  blueBackground: '#F9F9FF',
+  primaryBackground: 'rgba(171, 0, 133, 0.16)',
+  grayBackground: '#FBFBFB',
+  white: '#fff',
 };
 
 export const currencyMapper = (name) => {
@@ -42,21 +64,24 @@ export const serialize = (object) => {
 export const pieFilling = (percentageDone) => {
   switch (percentageDone) {
     case 25:
-      return { borderRightColor: '#6F0652' };
+      return { borderRightColor: colors.primary };
     case 50:
-      return { borderRightColor: '#6F0652', borderBottomColor: '#6F0652' };
+      return {
+        borderRightColor: colors.primary,
+        borderBottomColor: colors.primary,
+      };
     case 75:
       return {
-        borderRightColor: '#6F0652',
-        borderBottomColor: '#6F0652',
-        borderLeftColor: '#6F0652',
+        borderRightColor: colors.primary,
+        borderBottomColor: colors.primary,
+        borderLeftColor: colors.primary,
       };
     case 100:
       return {
-        borderRightColor: '#6F0652',
-        borderBottomColor: '#6F0652',
-        borderLeftColor: '#6F0652',
-        borderTopColor: '#6F0652',
+        borderRightColor: colors.primary,
+        borderBottomColor: colors.primary,
+        borderLeftColor: colors.primary,
+        borderTopColor: colors.primary,
       };
     default:
       return {};

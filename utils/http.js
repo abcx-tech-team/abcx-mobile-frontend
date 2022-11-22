@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { clearStorage, removeStorage } from './asyncStorage';
-import { USER_TOKEN_ID_KEY } from './index';
+import { removeStorage } from './asyncStorage';
+import { ScreenNames, USER_TOKEN_ID_KEY } from './index';
+import * as RootNavigation from './RootNavigation';
 
 const API_URL = 'https://dev.abcxchange.com/api/v1';
 /**
@@ -52,6 +53,7 @@ const handleError = async (httpStatusCode, response = {}, isLogin) => {
   if (httpStatusCode === 401 || httpStatusCode === 403) {
     if (!isLogin) {
       removeStorage(USER_TOKEN_ID_KEY);
+      RootNavigation.navigate(ScreenNames.login);
       throw 'Please login to continue';
     }
   }

@@ -21,15 +21,15 @@ const BriefProfileCard = ({ briefProfile, navigation }) => {
       await saveBlindProfile({ company_id, isSaved });
       setBookmarked(isSaved);
       Toast.show({
-        icon: 'error',
+        type: 'error',
         text1: isSaved
           ? 'Blind profile added to bookmark successfully'
           : 'Blind profile removed from bookmark successfully',
       });
     } catch (err) {
       Toast.show({
-        icon: 'error',
-        text1: 'Something went wrong!',
+        type: 'error',
+        text1: err,
       });
     }
   };

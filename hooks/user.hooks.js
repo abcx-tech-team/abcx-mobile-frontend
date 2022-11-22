@@ -23,7 +23,8 @@ export const useBuyerList = (enabled = true) =>
     ['buyerList'],
     async () => {
       const res = await buyerList();
-      return res;
+      const updatedRes = res.map((item) => ({ ...item, tag: 'Investing' }));
+      return updatedRes;
     },
     {
       enabled,
@@ -35,7 +36,11 @@ export const useSellerList = (enabled = true) =>
     ['sellerList'],
     async () => {
       const res = await sellerList();
-      return res;
+      const updatedRes = res.map((item) => ({
+        ...item,
+        tag: 'Capital Raising',
+      }));
+      return updatedRes;
     },
     {
       enabled,

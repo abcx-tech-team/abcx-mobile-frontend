@@ -5,6 +5,7 @@ import {
   Platform,
   Text,
   ActivityIndicator,
+  ScrollView,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import SearchBar from '../../components/SearchBar';
@@ -12,6 +13,45 @@ import BriefProfileCard from '../../components/BlindProfileCard';
 import AuthContainer from '../../container/AuthContainer';
 import { useBlindProfiles } from '../../hooks/blindProfile.hooks';
 import { serialize } from '../../utils';
+import SearchTag from '../../components/SearchTag';
+
+const tabs = [
+  {
+    name: 'All',
+    image: require('../../assets/icons/world.png'),
+    activeImage: require('../../assets/icons/world_active.png'),
+  },
+  {
+    name: 'Recommended',
+    image: require('../../assets/icons/star.png'),
+    activeImage: require('../../assets/icons/star_active.png'),
+  },
+  {
+    name: 'Trending',
+    image: require('../../assets/icons/arrow.png'),
+    activeImage: require('../../assets/icons/arrow_active.png'),
+  },
+  {
+    name: 'New',
+    image: require('../../assets/icons/arrow.png'),
+    activeImage: require('../../assets/icons/arrow_active.png'),
+  },
+  {
+    name: 'Revenue Earning',
+    image: require('../../assets/icons/arrow.png'),
+    activeImage: require('../../assets/icons/arrow_active.png'),
+  },
+  {
+    name: 'Futuristic',
+    image: require('../../assets/icons/arrow.png'),
+    activeImage: require('../../assets/icons/arrow_active.png'),
+  },
+  {
+    name: 'Your Watchlist',
+    image: require('../../assets/icons/arrow.png'),
+    activeImage: require('../../assets/icons/arrow_active.png'),
+  },
+];
 
 const FooterComponent = ({ isLoading, data }) =>
   isLoading ? (
@@ -25,6 +65,8 @@ const FooterComponent = ({ isLoading, data }) =>
   );
 
 const Explore = ({ navigation }) => {
+  const [activeTab, setActiveTab] = useState('All');
+
   const [query, setQuery] = useState({
     pageNo: 1,
     pageSize: 10,
@@ -33,16 +75,15 @@ const Explore = ({ navigation }) => {
     ftrm: '',
     strm: '',
   });
+
   const [blindProfiles, setBlindProfiles] = useState({
     hasMore: true,
     data: [],
   });
 
-  const {
-    data: blindProfileData,
-    isLoading,
-    error,
-  } = useBlindProfiles(serialize(query));
+  const { data: blindProfileData, isLoading } = useBlindProfiles(
+    serialize(query)
+  );
 
   const fetchMoreData = () => {
     if (blindProfiles.hasMore) {
@@ -67,6 +108,7 @@ const Explore = ({ navigation }) => {
       }
     }
   }, [blindProfileData]);
+  console.log(activeTab);
 
   return (
     <AuthContainer navigation={navigation}>
@@ -77,6 +119,24 @@ const Explore = ({ navigation }) => {
             setQuery={setQuery}
             setBlindProfiles={setBlindProfiles}
           />
+        </View>
+        <View>
+          <ScrollView
+            style={styles.scroll}
+            contentContainerStyle={styles.tabsContainer}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+          >
+            {tabs.map((item, index) => (
+              <SearchTag
+                {...item}
+                key={item.name}
+                tabStyle={index !== tabs.length - 1 ? styles.tabStyle : null}
+                onPress={() => setActiveTab(item.name)}
+                activeTab={activeTab}
+              />
+            ))}
+          </ScrollView>
         </View>
         <View style={styles.dashboard}>
           <FlatList
@@ -128,9 +188,22 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   dashboard: {
-    paddingBottom: Platform.OS === 'ios' ? 250 : 230,
+    paddingBottom: Platform.OS === 'ios' ? 310 : 290,
   },
   searchBar: {
     zIndex: 50,
+  },
+  tabsContainer: {
+    marginBottom: 24,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    paddingHorizontal: 24,
+  },
+  scroll: {
+    flexGrow: 0,
+  },
+  tabStyle: {
+    marginRight: 8,
   },
 });

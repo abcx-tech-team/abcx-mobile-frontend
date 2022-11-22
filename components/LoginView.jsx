@@ -96,7 +96,7 @@ const LoginView = ({ navigation }) => {
 
               <Text
                 style={[styles.link, styles.forgotPassword]}
-                onPress={() => navigation.navigate(ScreenNames.resetPassword)}
+                onPress={() => navigation.navigate(ScreenNames.main)}
               >
                 Forgot password?
               </Text>

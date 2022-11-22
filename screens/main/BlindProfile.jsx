@@ -90,31 +90,31 @@ const BriefProfile = ({ route, navigation }) => {
           </View>
         </View>
         <View style={styles.aboutCompany}>
-          <View style={styles.companyInfo}>
+          <View>
             <View style={styles.companyInfoRow}>
               <View style={styles.companyInfoCard}>
                 <Text style={styles.label}>Sector</Text>
-                <Text style={styles.value}>
+                <Text style={[styles.value, { fontSize: 18 }]}>
                   {briefProfileData?.results[0].metaDetails?.sector
                     ?.sectorName || ''}
                 </Text>
               </View>
-              <View style={styles.companyInfoCard}>
+            </View>
+            <View style={styles.companyInfoRow}>
+              <View style={[styles.companyInfoCard, { paddingRight: 8 }]}>
                 <Text style={styles.label}>Market Type</Text>
                 <Text style={styles.value}>
                   {briefProfileData?.results[0].metaDetails?.marketType || ''}
                 </Text>
               </View>
-            </View>
-            <View style={styles.companyInfoRow}>
-              <View style={styles.companyInfoCard}>
+              <View style={[styles.companyInfoCard, { paddingHorizontal: 8 }]}>
                 <Text style={styles.label}>No of Employee</Text>
                 <Text style={styles.value}>
                   {briefProfileData?.results[0].metaDetails?.employeeRange ||
                     ''}
                 </Text>
               </View>
-              <View style={styles.companyInfoCard}>
+              <View style={[styles.companyInfoCard, { paddingLeft: 8 }]}>
                 <Text style={styles.label}>Revenue</Text>
                 <Text style={styles.value}>
                   {briefProfileData?.results[0].metaDetails?.currentRevenue ||
@@ -167,8 +167,14 @@ const BriefProfile = ({ route, navigation }) => {
           </View>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <View style={styles.tags}>
-              {tags.map((item) => (
-                <View style={styles.tag} key={item.tagName}>
+              {tags.map((item, index) => (
+                <View
+                  style={[
+                    styles.tag,
+                    index === tags.length - 1 ? styles.noMarginRight : null,
+                  ]}
+                  key={item.tagName}
+                >
                   <Image source={Apple} style={styles.tagImage} />
                   <Text style={styles.tagText}>{item.tagName}</Text>
                 </View>
@@ -207,9 +213,8 @@ const styles = StyleSheet.create({
   },
   aboutCompany: {
     paddingHorizontal: 24,
-    paddingTop: 24,
+    paddingVertical: 24,
     backgroundColor: '#fff',
-    height: Platform.OS === 'ios' ? '58%' : '60%',
     marginTop: 8,
   },
   CTA: {
@@ -256,13 +261,13 @@ const styles = StyleSheet.create({
     marginBottom: Platform.OS === 'ios' ? 24 : 16,
   },
   label: {
-    fontSize: Platform.OS === 'ios' ? 14 : 12,
+    fontSize: Platform.OS === 'ios' ? 12 : 10,
     color: '#C7C7C7',
     fontWeight: '600',
     marginBottom: 8,
   },
   value: {
-    fontSize: Platform.OS === 'ios' ? 18 : 15,
+    fontSize: Platform.OS === 'ios' ? 15 : 12,
     color: '#000',
     fontWeight: '600',
   },
@@ -282,8 +287,9 @@ const styles = StyleSheet.create({
   companyInfoCard: {
     backgroundColor: '#fbfbfb',
     borderRadius: 8,
-    width: '45%',
     padding: 16,
+    flexGrow: 1,
+    flexShrink: 0,
   },
   tag: {
     backgroundColor: '#fbfbfb',
@@ -293,12 +299,15 @@ const styles = StyleSheet.create({
     marginRight: 16,
     alignItems: 'center',
   },
+  noMarginRight: {
+    marginRight: 0,
+  },
   tagImage: {
     height: 15,
     width: 15,
   },
   tagText: {
-    fontSize: Platform.OS === 'ios' ? 16 : 12,
+    fontSize: Platform.OS === 'ios' ? 14 : 12,
     fontWeight: 'bold',
     color: '#637381',
     marginLeft: 8,

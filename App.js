@@ -13,8 +13,11 @@ import Toast from 'react-native-toast-message';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import PreferenceForms from './screens/preference/PreferenceForms';
 import { AuthContext } from './context/authContext';
-import { useEffect, useState } from 'react';
-import { clearStorage } from './utils/asyncStorage';
+import { useState } from 'react';
+import { navigationRef } from './utils/RootNavigation';
+import DealDetails from './screens/DealRoom/DealDetails';
+import Timeline from './screens/DealRoom/Timeline';
+import NextSteps from './screens/DealRoom/NextSteps';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,7 +31,7 @@ export default function App() {
         value={{ token: authState, setState: setAuthState }}
       >
         <View style={styles.container}>
-          <NavigationContainer>
+          <NavigationContainer ref={navigationRef}>
             <Stack.Navigator
               initialRouteName={ScreenNames.introduction}
               screenOptions={{
@@ -65,6 +68,21 @@ export default function App() {
               <Stack.Screen
                 name={ScreenNames.preferenceForms}
                 component={PreferenceForms}
+                options={{ gestureEnabled: false }}
+              />
+              <Stack.Screen
+                name={ScreenNames.dealDetails}
+                component={DealDetails}
+                options={{ gestureEnabled: false }}
+              />
+              <Stack.Screen
+                name={ScreenNames.timeline}
+                component={Timeline}
+                options={{ gestureEnabled: false }}
+              />
+              <Stack.Screen
+                name={ScreenNames.nextSteps}
+                component={NextSteps}
                 options={{ gestureEnabled: false }}
               />
             </Stack.Navigator>

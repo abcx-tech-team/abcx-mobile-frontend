@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import UserHeader from '../../components/UserHeader';
 import AuthContainer from '../../container/AuthContainer';
 import DashboardActivities from '../../components/DashboardActivities';

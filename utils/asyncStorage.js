@@ -58,10 +58,11 @@ export async function removeStorage(key) {
  * @param {String} key
  */
 
-export async function clearStorage(key) {
+export async function clearStorage() {
   try {
     await AsyncStorage.clear();
   } catch (error) {
+    console.log(error);
     Toast.show({
       type: 'error',
       text1: 'Something went wrong',

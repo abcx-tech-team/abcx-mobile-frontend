@@ -4,6 +4,7 @@ import {
   blindProfiles,
   saveBlindProfile,
 } from '../requests/blindProfile.requests';
+import Toast from 'react-native-toast-message';
 
 export const useBriefProfileById = (briefProfileId, enabled) =>
   useQuery(
@@ -27,6 +28,12 @@ export const useBlindProfiles = (query, enabled = true) =>
     {
       enabled,
       cacheTime: 0,
+      onError: (err) => {
+        Toast.show({
+          type: 'error',
+          text1: err,
+        });
+      },
     }
   );
 

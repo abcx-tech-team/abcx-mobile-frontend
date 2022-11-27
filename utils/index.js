@@ -23,14 +23,17 @@ export const colors = {
   text60: 'rgba(0, 0, 0, 0.6)',
   text40: 'rgba(0, 0, 0, 0.4)',
   text20: 'rgba(0, 0, 0, 0.2)',
-  dashboardBackgroundPink: '#b47ea5',
+  dashboardBackgroundPink: 'rgba(224, 106, 110, 0.1)',
   yellow: '#E89612',
   yellowBackground: 'rgba(248, 176, 50, 0.2)',
   blue: '#0018FF',
-  blueBackground: '#F9F9FF',
+  lightBlueBackground: 'rgba(215, 218, 250, 0.4)',
+  lightBlue: '#D7DAFA',
   primaryBackground: 'rgba(171, 0, 133, 0.16)',
   grayBackground: '#FBFBFB',
   white: '#fff',
+  lightRed: 'rgba(224, 106, 110, 0.6)',
+  lightRedBackground: 'rgba(224, 106, 110, 0.2)',
 };
 
 export const currencyMapper = (name) => {
@@ -86,4 +89,31 @@ export const pieFilling = (percentageDone) => {
     default:
       return {};
   }
+};
+
+export const paddingSizes = {
+  pHalf: 4,
+  p1: 8,
+  p2: 16,
+  p3: 24,
+  p4: 32,
+  p5: 40,
+};
+
+export const iconStyles = {
+  smallIcon: {
+    height: 16,
+    width: 16,
+    resizeMode: 'contain',
+  },
+  mediumIcon: {
+    height: 20,
+    width: 20,
+    resizeMode: 'contain',
+  },
+  largeIcon: {
+    height: 24,
+    width: 24,
+    resizeMode: 'contain',
+  },
 };

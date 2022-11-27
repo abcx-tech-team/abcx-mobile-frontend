@@ -1,12 +1,10 @@
 import { StyleSheet, View } from 'react-native';
-import React from 'react';
 import Dashboard from '../screens/main/Dashboard';
 import Explore from '../screens/main/Explore';
 import DealRoom from '../screens/main/DealRoom';
 import { ScreenNames } from '../utils';
 import BottomTab from '../components/BottomTab';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import AuthContainer from './AuthContainer';
 
 const DashboardActive = require('../assets/icons/pie_active.png');
 const DashboardInActive = require('../assets/icons/pie.png');
@@ -17,14 +15,16 @@ const ExploreInActive = require('../assets/icons/search.png');
 
 const Tab = createBottomTabNavigator();
 
-const MainContainer = ({ navigation }) => {
+const MainContainer = () => {
   return (
     <View style={styles.mainAppContainer}>
       <Tab.Navigator
         initialRouteName={ScreenNames.dashboard}
         screenOptions={() => ({
           tabBarActiveTintColor: '#6F0652',
-          tabBarStyle: { ...styles.tabBarContainer },
+          tabBarStyle: {
+            ...styles.tabBarContainer,
+          },
           headerShown: false,
           tabBarShowLabel: false,
         })}

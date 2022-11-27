@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Pressable, Image } from 'react-native';
 import React from 'react';
+import { colors } from '../utils';
 
 const Calender = require('../assets/icons/calender.png');
 
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
   call: {
     flexDirection: 'row',
     marginHorizontal: -24,
-    backgroundColor: '#EFEFEF',
+    backgroundColor: colors.lightRedBackground,
     marginTop: 24,
     paddingVertical: 16,
     justifyContent: 'space-between',

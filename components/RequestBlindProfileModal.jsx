@@ -6,13 +6,15 @@ import { useCreditBalance } from '../hooks/user.hooks';
 import { currencyMapper } from '../utils';
 
 const Shield = require('../assets/icons/shield.png');
+const Card = require('../assets/icons/card.png');
 
-const RequestBlindProfileModal = ({ visible, setVisible }) => {
+const RequestBlindProfileModal = ({ visible, onSubmit, onClose }) => {
   const { data } = useCreditBalance();
 
   return (
-    <View style={styles.modalContainer}>
-      <Modal visible={visible} animationType='fade' transparent={true}>
+    <>
+      {visible ? <View style={styles.filter} /> : null}
+      <Modal visible={visible} animationType='slide' transparent={true}>
         <View style={styles.main}>
           <View style={styles.content}>
             <Text style={styles.mainHeading}>Request Confirmation</Text>
@@ -21,24 +23,33 @@ const RequestBlindProfileModal = ({ visible, setVisible }) => {
               more.{' '}
             </Text>
             <View style={styles.pointSection}>
-              {data?.creditViews ? (
-                <Text style={styles.pay}>
-                  You Pay: $0 &nbsp;&nbsp;
-                  <Text style={styles.notPay}>$100</Text>
-                </Text>
-              ) : (
-                <Text style={styles.pay}>
-                  You Pay: {currencyMapper(data?.amount.currency)}
-                  {data?.amount.value}
-                </Text>
-              )}
-              <View style={styles.creditRow}>
+              <View style={styles.card}>
+                <Image source={Card} />
+              </View>
+              <View>
                 {data?.creditViews ? (
-                  <Text style={styles.credit}>By using 1 Credit</Text>
-                ) : null}
-                <Text style={styles.creditBalance}>
-                  Your Credit Point Balance: {data?.creditViews}
-                </Text>
+                  <Text style={styles.pay}>
+                    You Pay: {currencyMapper(data?.amount.currency)}0
+                    &nbsp;&nbsp;
+                    <Text style={styles.notPay}>
+                      {currencyMapper(data?.amount.currency)}
+                      {data?.amount.value}
+                    </Text>
+                  </Text>
+                ) : (
+                  <Text style={styles.pay}>
+                    You Pay: {currencyMapper(data?.amount.currency)}
+                    {data?.amount.value}
+                  </Text>
+                )}
+                <View style={styles.creditRow}>
+                  {data?.creditViews ? (
+                    <Text style={styles.credit}>By using 1 Credit</Text>
+                  ) : null}
+                  <Text style={styles.creditBalance}>
+                    Your Credit Point Balance: {data?.creditViews}
+                  </Text>
+                </View>
               </View>
             </View>
             <View style={styles.terms}>
@@ -50,12 +61,16 @@ const RequestBlindProfileModal = ({ visible, setVisible }) => {
             </View>
             <View style={styles.actionButtons}>
               <View style={styles.rightButton}>
-                <PrimaryButton title='Confirm Request' noLoader />
+                <PrimaryButton
+                  title='Confirm Request'
+                  onClick={onSubmit}
+                  noLoader
+                />
               </View>
               <View style={styles.leftButton}>
                 <SecondaryButton
                   title='Cancel Request'
-                  onClick={() => setVisible(false)}
+                  onClick={onClose}
                   noLoader
                 />
               </View>
@@ -63,7 +78,7 @@ const RequestBlindProfileModal = ({ visible, setVisible }) => {
           </View>
         </View>
       </Modal>
-    </View>
+    </>
   );
 };
 
@@ -71,8 +86,13 @@ export default RequestBlindProfileModal;
 
 const styles = StyleSheet.create({
   main: {
-    backgroundColor: 'rgba(32,32,32,0.6)',
     flex: 1,
+  },
+  filter: {
+    backgroundColor: 'rgba(32,32,32,0.6)',
+    position: 'absolute',
+    height: '110%',
+    width: '100%',
   },
   content: {
     paddingHorizontal: 32,
@@ -91,10 +111,14 @@ const styles = StyleSheet.create({
     color: '#637381',
   },
   pointSection: {
+    flexDirection: 'row',
     marginVertical: 24,
     backgroundColor: '#fbfbfb',
     padding: 16,
     borderRadius: 8,
+  },
+  card: {
+    marginRight: 16,
   },
   pay: {
     fontSize: 18,
@@ -107,14 +131,14 @@ const styles = StyleSheet.create({
   },
   creditRow: {
     marginTop: 8,
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'space-between',
-    alignItems: 'center',
   },
   credit: {
     color: '#5AB46A',
     fontSize: 14,
     fontWeight: '600',
+    marginBottom: 4,
   },
   creditBalance: {
     fontSize: 12,

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import {
+  ActivityIndicator,
   Image,
   Pressable,
   ScrollView,
@@ -8,7 +9,9 @@ import {
   View,
 } from 'react-native';
 import DealCard from '../../components/DealCard';
+import PrimaryButton from '../../components/PrimaryButton';
 import SearchTag from '../../components/SearchTag';
+import SecondaryButton from '../../components/SecondaryButton';
 import AuthContainer from '../../container/AuthContainer';
 import { useBuyerList, useSellerList } from '../../hooks/user.hooks';
 
@@ -32,8 +35,8 @@ const tabs = [
 
 const DealRoom = ({ navigation }) => {
   const [activeTab, setActiveTab] = useState('All');
-  const { data: buyerList } = useBuyerList();
-  const { data: sellerList } = useSellerList();
+  const { data: buyerList, isLoading: buyerListLoading } = useBuyerList();
+  const { data: sellerList, isLoading: sellerListLoading } = useSellerList();
 
   const getDealList = (tab) => {
     switch (tab) {
@@ -60,14 +63,32 @@ const DealRoom = ({ navigation }) => {
             />
           ))}
         </View>
-        <ScrollView
-          bounces={false}
-          contentContainerStyle={styles.cardContainer}
-        >
-          {getDealList(activeTab).map((item, index) => (
-            <DealCard key={index} dealData={item} navigation={navigation} />
-          ))}
-        </ScrollView>
+        {getDealList(activeTab).length ? (
+          <ScrollView
+            bounces={false}
+            contentContainerStyle={styles.cardContainer}
+          >
+            {getDealList(activeTab).map((item, index) => (
+              <DealCard key={index} dealData={item} navigation={navigation} />
+            ))}
+          </ScrollView>
+        ) : buyerListLoading && sellerListLoading ? (
+          <ActivityIndicator size='large' />
+        ) : (
+          <View style={styles.noDealContainer}>
+            <View style={styles.noDealCard}>
+              <Text style={styles.heading}>You don’t have any deals yet.</Text>
+              <Text style={styles.subHeading}>
+                You can either explore exciting opportunities listed by other
+                members or list a few of your own portfolio companies{' '}
+              </Text>
+              <View style={styles.buttonContainer}>
+                <PrimaryButton title='Explore Opportunities' noLoader />
+                <SecondaryButton title='List Companies' noLoader />
+              </View>
+            </View>
+          </View>
+        )}
       </View>
     </AuthContainer>
   );
@@ -96,5 +117,24 @@ const styles = StyleSheet.create({
   cardContainer: {
     paddingHorizontal: 16,
     paddingBottom: 120,
+  },
+  noDealCard: {
+    paddingVertical: 32,
+    paddingHorizontal: 16,
+    backgroundColor: 'rgba(251, 251, 251, 1)',
+  },
+  noDealContainer: {
+    paddingHorizontal: 16,
+  },
+  heading: {
+    fontSize: 20,
+    fontWeight: '700',
+    marginBottom: 16,
+  },
+  subHeading: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: 'rgba(118, 118, 118, 1)',
+    marginBottom: 32,
   },
 });

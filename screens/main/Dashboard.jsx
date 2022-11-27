@@ -1,5 +1,4 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import React, { useEffect } from 'react';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import UserHeader from '../../components/UserHeader';
 import AuthContainer from '../../container/AuthContainer';
 import DashboardActivities from '../../components/DashboardActivities';
@@ -7,6 +6,7 @@ import DashboardInviteCard from '../../components/DashboardInviteCard';
 import DashboardBookCall from '../../components/DashboardBookCall';
 import DashboardNumbers from '../../components/DashboardNumbers';
 import DashboardAccordionContainer from '../../components/DashboardAccordionContainer';
+import { paddingSizes } from '../../utils';
 
 const Dashboard = ({ navigation }) => {
   return (
@@ -39,12 +39,6 @@ const styles = StyleSheet.create({
     paddingBottom: Platform.OS === 'ios' ? 118 : 30,
   },
   scrollView: {
-    paddingHorizontal: 24,
-  },
-  text: {
-    fontSize: 35,
-    textAlign: 'center',
-    fontWeight: '600',
-    marginVertical: 20,
+    paddingHorizontal: paddingSizes.p2,
   },
 });

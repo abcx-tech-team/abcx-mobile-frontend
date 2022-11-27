@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { pieFilling } from '../utils';
+import { colors, pieFilling } from '../utils';
 import DashboardActivityCard from './DashboardActivityCard';
 
 const percentage = 25;
@@ -71,7 +71,7 @@ export default DashboardActivities;
 
 const styles = StyleSheet.create({
   activities: {
-    backgroundColor: 'rgba(180, 126, 165, 0.1)',
+    backgroundColor: colors.dashboardBackgroundPink,
     borderRadius: 16,
     padding: 16,
     marginTop: 8,
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     marginVertical: 24,
   },
   tab: {
-    backgroundColor: 'rgba(248, 176, 50, 0.2)',
+    backgroundColor: colors.yellowBackground,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   tabText: {
-    color: '#E89612',
+    color: colors.yellow,
     fontSize: 12,
     fontWeight: 'bold',
   },

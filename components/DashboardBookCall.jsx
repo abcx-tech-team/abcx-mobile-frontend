@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Pressable, Image } from 'react-native';
 import React from 'react';
-import { colors } from '../utils';
+import { colors, sizes } from '../utils';
 
 const Calender = require('../assets/icons/calender.png');
 
@@ -29,16 +29,16 @@ export default DashboardBookCall;
 const styles = StyleSheet.create({
   call: {
     flexDirection: 'row',
-    marginHorizontal: -24,
+    marginHorizontal: -sizes.p3,
     backgroundColor: colors.lightRedBackground,
-    marginTop: 24,
-    paddingVertical: 16,
+    marginTop: sizes.p3,
+    paddingVertical: sizes.p2,
     justifyContent: 'space-between',
     flexShrink: 0,
-    marginBottom: 24,
+    marginBottom: sizes.p3,
   },
   left: {
-    paddingLeft: 32,
+    paddingLeft: sizes.p4,
     flexDirection: 'column',
     justifyContent: 'space-between',
     width: 280,
@@ -51,11 +51,13 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 20,
     fontWeight: '600',
+    color: colors.text80,
     letterSpacing: 1.2,
   },
   subHeading: {
     fontSize: 18,
-    marginTop: 8,
+    marginTop: sizes.p1,
+    color: colors.text80,
   },
   cta: {
     borderWidth: 1,

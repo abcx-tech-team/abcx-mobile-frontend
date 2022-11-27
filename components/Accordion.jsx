@@ -7,6 +7,7 @@ import {
   View,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import { colors, sizes } from '../utils';
 
 const Accordion = ({ title, data, expanded, setExpanded, index }) => {
   const toggleExpand = () => {
@@ -39,27 +40,28 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: colors.text80,
   },
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: 56,
+    height: sizes.p7,
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderBottomColor: '#efefef',
-    paddingBottom: 16,
-    marginBottom: 16,
+    borderBottomColor: colors.borderColor,
+    paddingBottom: sizes.p2,
+    marginBottom: sizes.p2,
   },
   parentHr: {
     height: 1,
     width: '100%',
   },
   child: {
-    paddingVertical: 8,
+    paddingVertical: sizes.p1,
   },
   data: {
     fontSize: 15,
-    color: '#637381',
+    color: colors.text60,
   },
 });
 

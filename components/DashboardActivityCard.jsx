@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Image } from 'react-native';
 import React from 'react';
+import { colors, sizes } from '../utils';
 
 const DashboardActivityCard = ({
   leftIcon,
@@ -29,11 +30,11 @@ export default DashboardActivityCard;
 
 const styles = StyleSheet.create({
   activityCard: {
-    backgroundColor: '#fff',
-    padding: 16,
+    backgroundColor: colors.white,
+    padding: sizes.p2,
     flexDirection: 'row',
-    borderRadius: 8,
-    shadowColor: '#000',
+    borderRadius: sizes.p1,
+    shadowColor: colors.textFull,
     shadowOffset: {
       width: 0,
       height: 1,
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
     shadowRadius: 1.0,
 
     elevation: 1,
-    marginBottom: 16,
+    marginBottom: sizes.p2,
   },
   circleTick: {
     height: 22,
@@ -51,11 +52,12 @@ const styles = StyleSheet.create({
   cardHeading: {
     fontSize: 18,
     fontWeight: 'bold',
+    color: colors.text80,
   },
   cardSubHeading: {
     fontSize: 15,
-    color: '#898989',
-    marginVertical: 8,
+    color: colors.text40,
+    marginVertical: sizes.p1,
   },
   cardCta: {
     flexDirection: 'row',
@@ -65,10 +67,10 @@ const styles = StyleSheet.create({
   cardCtaText: {
     fontSize: 13,
     fontWeight: '500',
-    color: '#0018FF',
+    color: colors.blue,
   },
   left: {
-    marginRight: 16,
+    marginRight: sizes.p2,
   },
   right: {
     flex: 1,

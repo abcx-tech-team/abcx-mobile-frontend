@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback, useContext } from 'react';
 import LogoHeader from '../components/LogoHeader';
 import IntroBottomTab from '../components/IntroBottomTab';
 import { getToken } from '../utils/asyncStorage';
-import { ScreenNames, USER_TOKEN_ID_KEY } from '../utils';
+import { ScreenNames, sizes, USER_TOKEN_ID_KEY } from '../utils';
 import { AuthContext } from '../context/authContext';
 
 const userAlreadyPreferred = true;
@@ -55,8 +55,8 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 35,
     fontWeight: 'bold',
-    marginBottom: 80,
-    paddingHorizontal: 24,
+    marginBottom: sizes.p6,
+    paddingHorizontal: sizes.p4,
   },
   textContainer: {
     flex: 3,

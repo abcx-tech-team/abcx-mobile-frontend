@@ -16,7 +16,7 @@ export const ScreenNames = {
 
 export const colors = {
   green: '#5AB46A',
-  greenBackground: '#9ac87f',
+  greenBackground: 'rgba(154, 200, 127, 0.2)',
   primary: '#6F0652',
   textFull: '#000000',
   text80: 'rgba(0, 0, 0, 0.8)',
@@ -31,9 +31,11 @@ export const colors = {
   lightBlue: '#D7DAFA',
   primaryBackground: 'rgba(171, 0, 133, 0.16)',
   grayBackground: '#FBFBFB',
+  borderColor: '#F4F4F0',
   white: '#fff',
   lightRed: 'rgba(224, 106, 110, 0.6)',
   lightRedBackground: 'rgba(224, 106, 110, 0.2)',
+  backdrop: 'rgba(0,0,0,0.4)',
 };
 
 export const currencyMapper = (name) => {
@@ -91,13 +93,16 @@ export const pieFilling = (percentageDone) => {
   }
 };
 
-export const paddingSizes = {
+export const sizes = {
   pHalf: 4,
   p1: 8,
   p2: 16,
   p3: 24,
   p4: 32,
   p5: 40,
+  p6: 48,
+  p7: 56,
+  p8: 64,
 };
 
 export const iconStyles = {

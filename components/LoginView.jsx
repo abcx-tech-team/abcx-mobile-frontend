@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import React, { useContext } from 'react';
 import PrimaryButton from './PrimaryButton';
-import { ScreenNames, USER_TOKEN_ID_KEY } from '../utils';
+import { colors, ScreenNames, sizes, USER_TOKEN_ID_KEY } from '../utils';
 import CustomTextInput from './TextInput';
 import { useForm, FormProvider } from 'react-hook-form';
 import * as yup from 'yup';
@@ -96,7 +96,7 @@ const LoginView = ({ navigation }) => {
 
               <Text
                 style={[styles.link, styles.forgotPassword]}
-                onPress={() => navigation.navigate(ScreenNames.main)}
+                onPress={() => navigation.navigate(ScreenNames.resetPassword)}
               >
                 Forgot password?
               </Text>
@@ -128,28 +128,27 @@ export default LoginView;
 
 const styles = StyleSheet.create({
   innerContainer: {
-    backgroundColor: '#fff',
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
+    backgroundColor: colors.white,
+    borderRadius: sizes.p3,
     flexDirection: 'column',
-    paddingHorizontal: 24,
-    paddingVertical: 56,
+    paddingHorizontal: sizes.p4,
+    paddingVertical: sizes.p7,
   },
   text: {
     fontSize: 14,
     textAlign: 'center',
-    marginRight: 8,
+    marginRight: sizes.p1,
     fontWeight: '600',
   },
   link: {
     fontWeight: '600',
-    color: '#0018FF',
+    color: colors.blue,
   },
   forgotPassword: {
-    marginTop: 8,
+    marginTop: sizes.p1,
   },
   textContainer: {
-    marginTop: 16,
+    marginTop: sizes.p3,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -159,7 +158,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   form: {
-    marginTop: 24,
-    marginBottom: 40,
+    marginTop: sizes.p4,
+    marginBottom: sizes.p5,
   },
 });

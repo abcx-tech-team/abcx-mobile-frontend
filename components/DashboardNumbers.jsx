@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import { colors, sizes } from '../utils';
 
 const DashboardNumbers = () => {
   return (
     <View style={styles.numbers}>
-      <Text style={styles.heading}>Trust ar the core</Text>
+      <Text style={styles.heading}>Trust at the core</Text>
       <Text style={styles.subHeading}>ABCXchange is a growing community</Text>
       <View style={styles.numberContainer}>
         <View style={styles.left}>
@@ -24,32 +25,34 @@ export default DashboardNumbers;
 
 const styles = StyleSheet.create({
   numbers: {
-    marginHorizontal: -24,
-    borderBottomColor: '#C6D6E3',
+    marginHorizontal: -sizes.p3,
+    borderBottomColor: colors.borderColor,
     borderBottomWidth: 2,
-    borderRadius: 8,
-    marginTop: 24,
-    paddingVertical: 16,
+    borderRadius: sizes.p1,
+    marginTop: sizes.p3,
+    paddingVertical: sizes.p2,
     flexDirection: 'column',
     alignItems: 'center',
   },
   heading: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 8,
+    color: colors.text80,
+    marginBottom: sizes.p1,
   },
   subHeading: {
     fontSize: 16,
     color: '#2D2C2D',
-    marginBottom: 24,
+    marginBottom: sizes.p3,
+    color: colors.text80,
   },
   numberContainer: {
     flexDirection: 'row',
-    marginBottom: 16,
+    marginBottom: sizes.p2,
     justifyContent: 'space-evenly',
   },
   left: {
-    marginRight: 56,
+    marginRight: sizes.p6,
     alignItems: 'center',
   },
   right: {
@@ -58,11 +61,11 @@ const styles = StyleSheet.create({
   number: {
     fontSize: 32,
     fontWeight: 'bold',
-    color: '#727272',
+    color: colors.text60,
   },
   detail: {
     fontSize: 18,
-    marginTop: 8,
-    color: '#727272',
+    marginTop: sizes.p1,
+    color: colors.text60,
   },
 });

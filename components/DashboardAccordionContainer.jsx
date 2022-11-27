@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import Accordion from './Accordion';
+import { sizes } from '../utils';
 
 const accordionData = [
   {
@@ -39,12 +40,12 @@ export default DashboardAccordionContainer;
 
 const styles = StyleSheet.create({
   accordionContainer: {
-    marginTop: 24,
-    paddingHorizontal: 16,
+    marginTop: sizes.p3,
+    paddingHorizontal: sizes.p2,
   },
   heading: {
     fontSize: 22,
     fontWeight: '500',
-    marginBottom: 20,
+    marginBottom: sizes.p3,
   },
 });

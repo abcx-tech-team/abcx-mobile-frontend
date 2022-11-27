@@ -1,5 +1,6 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import { colors, sizes } from '../utils';
 
 const Chat = require('../assets/icons/messages.png');
 
@@ -30,15 +31,15 @@ export default DashboardInviteCard;
 const styles = StyleSheet.create({
   invite: {
     flexDirection: 'row',
-    marginHorizontal: -24,
-    backgroundColor: '#F9F9FF',
-    marginTop: 24,
-    paddingVertical: 16,
+    marginHorizontal: -sizes.p2,
+    backgroundColor: colors.lightBlueBackground,
+    marginTop: sizes.p3,
+    paddingVertical: sizes.p2,
     justifyContent: 'space-between',
     flexShrink: 0,
   },
   left: {
-    paddingLeft: 32,
+    paddingLeft: sizes.p4,
     flexDirection: 'column',
     justifyContent: 'space-between',
     width: 280,
@@ -51,13 +52,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '600',
     letterSpacing: 1.2,
+    color: colors.text80,
   },
   subHeading: {
     fontSize: 18,
-    marginTop: 8,
+    color: colors.text80,
+    marginTop: sizes.p1,
   },
   ctaText: {
-    marginTop: 16,
+    marginTop: sizes.p2,
     fontSize: 16,
     textDecorationLine: 'underline',
   },

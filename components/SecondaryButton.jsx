@@ -6,6 +6,7 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
+import { colors, sizes } from '../utils';
 
 const SecondaryButton = ({
   title,
@@ -22,7 +23,7 @@ const SecondaryButton = ({
             {isLoading ? (
               <ActivityIndicator
                 size='small'
-                color='#fff'
+                color={colors.white}
                 style={styles.loader}
               />
             ) : null}
@@ -41,22 +42,22 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '100%',
-    borderRadius: 8,
+    borderRadius: sizes.p1,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-    paddingVertical: 16,
+    paddingVertical: sizes.p2,
   },
   text: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#0018FF',
+    color: colors.blue,
   },
   loaderContainer: {
     height: 20,
     width: 20,
   },
   loader: {
-    marginLeft: 16,
+    marginLeft: sizes.p2,
   },
 });

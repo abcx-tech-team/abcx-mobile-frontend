@@ -1,14 +1,22 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import React, { useContext } from 'react';
 import Badge from './Badge';
 import { useLoggedInUser } from '../hooks/user.hooks';
 import { Avatar } from 'react-native-paper';
+import { colors, sizes, USER_TOKEN_ID_KEY } from '../utils';
+import { AuthContext } from '../context/authContext';
+import { removeStorage } from '../utils/asyncStorage';
 
 const AvatarImg = require('../assets/avatar_abcx.png');
 const Bell = require('../assets/icons/bell.png');
 
 const UserHeader = () => {
   const { data: userData } = useLoggedInUser();
+  const { setState } = useContext(AuthContext);
+  const handleLogOut = () => {
+    setState('');
+    removeStorage(USER_TOKEN_ID_KEY);
+  };
   return (
     <View style={styles.header}>
       <View style={styles.headerTextContainer}>
@@ -22,8 +30,10 @@ const UserHeader = () => {
           <Badge status='success' number={3} style={styles.badgeStyle} />
         </View>
         <View style={styles.avatarContainer}>
-          <Avatar.Image source={AvatarImg} size={30} />
-          <Badge status='success' />
+          <Pressable style={styles.avatar} onPress={handleLogOut}>
+            <Avatar.Image source={AvatarImg} size={30} />
+            <Badge status='success' />
+          </Pressable>
         </View>
       </View>
     </View>
@@ -34,13 +44,13 @@ export default UserHeader;
 
 const styles = StyleSheet.create({
   header: {
-    paddingHorizontal: 24,
+    paddingHorizontal: sizes.p4,
     height: 115,
     justifyContent: 'space-between',
-    paddingBottom: 24,
+    paddingBottom: sizes.p3,
     flexDirection: 'row',
     alignItems: 'flex-end',
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
   },
   icons: {
     flexDirection: 'row',
@@ -48,7 +58,7 @@ const styles = StyleSheet.create({
   },
   bellContainer: {
     position: 'relative',
-    marginRight: 24,
+    marginRight: sizes.p3,
   },
   avatarContainer: {
     position: 'relative',

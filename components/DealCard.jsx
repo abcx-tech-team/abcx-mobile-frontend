@@ -1,17 +1,9 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
-import { ScreenNames } from '../utils';
+import { colors, ScreenNames, sizes } from '../utils';
 
 const Investing = require('../assets/icons/money_active.png');
 const Clock = require('../assets/icons/clock_deal.png');
-
-const data = {
-  name: 'Kalyp Technology Limited',
-  type: 'Investing',
-  counterPartMember: 'Octopus Ventures',
-  currentStage: 'Access Brief Profile',
-  tag: 'Pending Approval',
-};
 
 const DealCard = ({ dealData, navigation }) => {
   return (
@@ -51,7 +43,7 @@ const DealCard = ({ dealData, navigation }) => {
           style={styles.infoButton}
         >
           <Text style={styles.infoButtonText}>View Deal</Text>
-          <Entypo name='chevron-right' size={24} color='#6F0652' />
+          <Entypo name='chevron-right' size={24} color={colors.primary} />
         </Pressable>
       </View>
     </View>
@@ -63,35 +55,35 @@ export default DealCard;
 const styles = StyleSheet.create({
   dealCard: {
     borderWidth: 1,
-    borderColor: '#efefef',
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 16,
+    borderColor: colors.borderColor,
+    borderRadius: sizes.p2,
+    padding: sizes.p2,
+    marginBottom: sizes.p2,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingBottom: 16,
-    borderBottomColor: '#cecece',
+    paddingBottom: sizes.p2,
+    borderBottomColor: colors.borderColor,
     borderBottomWidth: 1,
   },
   companyName: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#34495E',
+    color: colors.text80,
   },
   dealType: {
     flexDirection: 'row',
-    backgroundColor: 'rgba(171, 0, 133, 0.16)',
-    paddingVertical: 7,
-    paddingHorizontal: 10,
+    backgroundColor: colors.primaryBackground,
+    paddingVertical: sizes.p1,
+    paddingHorizontal: sizes.p2,
     alignItems: 'center',
-    borderRadius: 16,
+    borderRadius: sizes.p2,
   },
   dealTypeText: {
-    color: '#6F0652',
-    marginLeft: 8,
+    color: colors.primary,
+    marginLeft: sizes.p1,
     fontWeight: '700',
   },
   dealTypeImage: {
@@ -99,11 +91,11 @@ const styles = StyleSheet.create({
     width: 13,
   },
   dealDetails: {
-    marginVertical: 16,
+    marginVertical: sizes.p2,
   },
   dealDetailsText: {
     fontSize: 14,
-    color: '#51575E',
+    color: colors.text60,
     fontWeight: '600',
   },
   footer: {
@@ -112,16 +104,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   tag: {
-    backgroundColor: 'rgba(154, 200, 127, 0.2)',
-    paddingVertical: 4,
-    paddingHorizontal: 10,
-    borderRadius: 16,
+    backgroundColor: colors.greenBackground,
+    paddingVertical: sizes.pHalf,
+    paddingHorizontal: sizes.p2,
+    borderRadius: sizes.p2,
     flexDirection: 'row',
     alignItems: 'center',
   },
   tagText: {
-    color: '#5AB46A',
-    marginLeft: 8,
+    color: colors.green,
+    marginLeft: sizes.p1,
   },
   tagImage: {
     height: 12,
@@ -132,9 +124,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   infoButtonText: {
-    marginRight: 4,
+    marginRight: sizes.pHalf,
     fontWeight: '600',
-    color: '#6F0652',
+    color: colors.primary,
   },
   dealImage: {
     height: 18,

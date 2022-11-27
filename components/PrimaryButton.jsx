@@ -6,6 +6,7 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
+import { colors, sizes } from '../utils';
 
 const PrimaryButton = ({
   title,
@@ -22,7 +23,7 @@ const PrimaryButton = ({
             {isLoading ? (
               <ActivityIndicator
                 size='small'
-                color='#fff'
+                color={colors.white}
                 style={styles.loader}
               />
             ) : null}
@@ -41,15 +42,15 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '100%',
-    backgroundColor: '#6F0652',
-    borderRadius: 8,
+    backgroundColor: colors.primary,
+    borderRadius: sizes.p1,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-    paddingVertical: 16,
+    height: sizes.p5,
   },
   text: {
-    color: '#fff',
+    color: colors.white,
     fontSize: 16,
     fontWeight: '600',
   },
@@ -58,6 +59,6 @@ const styles = StyleSheet.create({
     width: 20,
   },
   loader: {
-    marginLeft: 16,
+    marginLeft: sizes.p2,
   },
 });

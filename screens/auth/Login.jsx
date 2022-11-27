@@ -10,7 +10,7 @@ import LogoHeader from '../../components/LogoHeader';
 import LoginView from '../../components/LoginView';
 import Loading from '../../components/Loading';
 import { getToken } from '../../utils/asyncStorage';
-import { ScreenNames, USER_TOKEN_ID_KEY } from '../../utils';
+import { colors, ScreenNames, USER_TOKEN_ID_KEY } from '../../utils';
 
 const Login = ({ navigation }) => {
   return (
@@ -29,6 +29,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between',
-    backgroundColor: 'gray',
+    backgroundColor: colors.backdrop,
   },
 });

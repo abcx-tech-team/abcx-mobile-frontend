@@ -6,7 +6,7 @@ import DashboardInviteCard from '../../components/DashboardInviteCard';
 import DashboardBookCall from '../../components/DashboardBookCall';
 import DashboardNumbers from '../../components/DashboardNumbers';
 import DashboardAccordionContainer from '../../components/DashboardAccordionContainer';
-import { paddingSizes } from '../../utils';
+import { colors, sizes } from '../../utils';
 
 const Dashboard = ({ navigation }) => {
   return (
@@ -35,10 +35,10 @@ const styles = StyleSheet.create({
   },
   dashboard: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
     paddingBottom: Platform.OS === 'ios' ? 118 : 30,
   },
   scrollView: {
-    paddingHorizontal: paddingSizes.p2,
+    paddingHorizontal: sizes.p2,
   },
 });

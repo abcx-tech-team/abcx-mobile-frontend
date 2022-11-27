@@ -1,7 +1,7 @@
 import { Linking, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import PrimaryButton from './PrimaryButton';
-import { ScreenNames } from '../utils';
+import { colors, ScreenNames, sizes } from '../utils';
 
 const IntroBottomTab = ({ navigation }) => {
   return (
@@ -9,6 +9,7 @@ const IntroBottomTab = ({ navigation }) => {
       <PrimaryButton
         onClick={() => navigation.navigate(ScreenNames.login)}
         title='Get Started'
+        noLoader
       />
       <View style={styles.textContainer}>
         <Text style={styles.text}>Don’t have an account?</Text>
@@ -29,11 +30,11 @@ export default IntroBottomTab;
 
 const styles = StyleSheet.create({
   bottomTab: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
     flex: 1.5,
-    borderRadius: 24,
+    borderRadius: sizes.p3,
     justifyContent: 'center',
-    paddingHorizontal: 24,
+    paddingHorizontal: sizes.p4,
     elevation: 20,
     shadowColor: '#171717',
     shadowOffset: { width: 0, height: 0 },
@@ -43,15 +44,15 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 14,
     textAlign: 'center',
-    marginRight: 8,
+    marginRight: sizes.p1,
     fontWeight: '600',
   },
   link: {
     fontWeight: '600',
-    color: '#0018FF',
+    color: colors.blue,
   },
   textContainer: {
-    marginTop: 16,
+    marginTop: sizes.p3,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

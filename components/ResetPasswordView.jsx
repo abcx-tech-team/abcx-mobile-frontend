@@ -6,7 +6,7 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import { ScreenNames } from '../utils';
+import { colors, ScreenNames, sizes } from '../utils';
 import PrimaryButton from './PrimaryButton';
 import CustomTextInput from './TextInput';
 import { useForm, FormProvider } from 'react-hook-form';
@@ -87,12 +87,12 @@ export default ResetPasswordView;
 const styles = StyleSheet.create({
   resetContainer: {
     backgroundColor: '#fff',
-    borderRadius: 24,
+    borderRadius: sizes.p3,
   },
   innerContainer: {
     flexDirection: 'column',
-    paddingHorizontal: 24,
-    paddingVertical: 56,
+    paddingHorizontal: sizes.p4,
+    paddingVertical: sizes.p7,
     justifyContent: 'space-between',
   },
   text: {
@@ -103,10 +103,10 @@ const styles = StyleSheet.create({
   },
   link: {
     fontWeight: '600',
-    color: '#0018FF',
+    color: colors.blue,
   },
   textContainer: {
-    marginTop: 16,
+    marginTop: sizes.p3,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   form: {
-    marginTop: 24,
-    marginBottom: 40,
+    marginTop: sizes.p3,
+    marginBottom: sizes.p3,
   },
 });

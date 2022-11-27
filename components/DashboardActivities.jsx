@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { colors, pieFilling } from '../utils';
+import { colors, sizes, pieFilling } from '../utils';
 import DashboardActivityCard from './DashboardActivityCard';
 
 const percentage = 25;
@@ -73,14 +73,14 @@ const styles = StyleSheet.create({
   activities: {
     backgroundColor: colors.dashboardBackgroundPink,
     borderRadius: 16,
-    padding: 16,
+    padding: sizes.p2,
     marginTop: 8,
   },
   activityHeading: {
     flexDirection: 'row',
   },
   left: {
-    marginRight: 16,
+    marginRight: sizes.p2,
   },
   pie: {
     height: 72,
@@ -105,15 +105,16 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 20,
     fontWeight: '700',
-    marginBottom: 8,
+    marginBottom: sizes.p1,
+    color: colors.text80,
   },
   subHeading: {
     fontSize: 15,
-    color: '#898989',
+    color: colors.text40,
   },
   tabContainer: {
     flexDirection: 'row',
-    marginVertical: 24,
+    marginVertical: sizes.p3,
   },
   tab: {
     backgroundColor: colors.yellowBackground,
@@ -121,13 +122,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     paddingVertical: 8,
-    paddingHorizontal: 16,
+    paddingHorizontal: sizes.p2,
     borderRadius: 50,
   },
   clock: {
     height: 15,
     width: 15,
-    marginRight: 8,
+    marginRight: sizes.p1,
   },
   tabText: {
     color: colors.yellow,

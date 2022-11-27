@@ -1,8 +1,6 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   ActivityIndicator,
-  Image,
-  Pressable,
   ScrollView,
   StyleSheet,
   Text,
@@ -14,6 +12,7 @@ import SearchTag from '../../components/SearchTag';
 import SecondaryButton from '../../components/SecondaryButton';
 import AuthContainer from '../../container/AuthContainer';
 import { useBuyerList, useSellerList } from '../../hooks/user.hooks';
+import { colors, sizes } from '../../utils';
 
 const tabs = [
   {
@@ -99,42 +98,42 @@ export default DealRoom;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    paddingTop: 64,
+    backgroundColor: colors.white,
+    paddingTop: sizes.p8,
   },
   screenName: {
     fontSize: 24,
     fontWeight: 'bold',
-    paddingHorizontal: 16,
-    color: '#34495E',
+    paddingHorizontal: sizes.p2,
+    color: colors.text80,
   },
   tabsContainer: {
-    marginVertical: 24,
-    paddingHorizontal: 16,
+    marginVertical: sizes.p3,
+    paddingHorizontal: sizes.p2,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   cardContainer: {
-    paddingHorizontal: 16,
+    paddingHorizontal: sizes.p2,
     paddingBottom: 120,
   },
   noDealCard: {
-    paddingVertical: 32,
-    paddingHorizontal: 16,
-    backgroundColor: 'rgba(251, 251, 251, 1)',
+    paddingVertical: sizes.p4,
+    paddingHorizontal: sizes.p2,
+    backgroundColor: colors.grayBackground,
   },
   noDealContainer: {
-    paddingHorizontal: 16,
+    paddingHorizontal: sizes.p2,
   },
   heading: {
     fontSize: 20,
     fontWeight: '700',
-    marginBottom: 16,
+    marginBottom: sizes.p2,
   },
   subHeading: {
     fontSize: 14,
     fontWeight: '500',
-    color: 'rgba(118, 118, 118, 1)',
-    marginBottom: 32,
+    color: colors.text60,
+    marginBottom: sizes.p4,
   },
 });

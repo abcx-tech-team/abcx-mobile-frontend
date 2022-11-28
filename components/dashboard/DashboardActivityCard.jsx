@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import React from 'react';
 import { colors, sizes } from '../../utils';
 
@@ -19,7 +19,16 @@ const DashboardActivityCard = ({
         <Text style={styles.cardSubHeading}>{subHeading}</Text>
         <View style={styles.cardCta}>
           <Text style={styles.cardCtaText}>{ctaText}</Text>
-          <Image style={styles.arrowIcon} source={ctaIcon} />
+          <Pressable
+            style={({ pressed }) => [
+              styles.back,
+              {
+                backgroundColor: pressed ? colors.text20 : colors.white,
+              },
+            ]}
+          >
+            <Image style={styles.arrowIcon} source={ctaIcon} />
+          </Pressable>
         </View>
       </View>
     </View>
@@ -74,5 +83,12 @@ const styles = StyleSheet.create({
   },
   right: {
     flex: 1,
+  },
+  back: {
+    height: sizes.p5,
+    width: sizes.p5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 100,
   },
 });

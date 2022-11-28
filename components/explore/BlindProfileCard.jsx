@@ -1,7 +1,7 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
 import BlindProfileButton from './BlindProfileButton';
-import { ScreenNames } from '../../utils';
+import { colors, ScreenNames, sizes } from '../../utils';
 import { useSaveBlindProfile } from '../../hooks/blindProfile.hooks';
 import Toast from 'react-native-toast-message';
 
@@ -21,14 +21,14 @@ const BriefProfileCard = ({ briefProfile, navigation }) => {
       await saveBlindProfile({ company_id, isSaved });
       setBookmarked(isSaved);
       Toast.show({
-        type: 'error',
+        type: 'success',
         text1: isSaved
           ? 'Blind profile added to bookmark successfully'
           : 'Blind profile removed from bookmark successfully',
       });
     } catch (err) {
       Toast.show({
-        type: 'error',
+        type: 'success',
         text1: err,
       });
     }
@@ -122,70 +122,70 @@ export default BriefProfileCard;
 
 const styles = StyleSheet.create({
   briefProfileCard: {
-    backgroundColor: '#fff',
-    borderRadius: 16,
-    elevation: 8,
-    shadowColor: '#000',
+    backgroundColor: colors.white,
+    borderRadius: sizes.p2,
+    elevation: sizes.p1,
+    shadowColor: colors.textFull,
     shadowOffset: {
       width: 0,
-      height: 4,
+      height: sizes.pHalf,
     },
     shadowOpacity: 0.1,
     shadowRadius: 10.65,
     paddingHorizontal: 10,
-    paddingVertical: 24,
-    marginBottom: 32,
-    marginTop: 16,
+    paddingVertical: sizes.p3,
+    marginBottom: sizes.p4,
+    marginTop: sizes.p2,
   },
   topBar: {
-    paddingHorizontal: 16,
-    marginBottom: 16,
+    paddingHorizontal: sizes.p2,
+    marginBottom: sizes.p2,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   fundingRound: {
-    color: '#6F0652',
+    color: colors.primary,
     fontSize: 20,
     fontWeight: '700',
   },
   aboutCompany: {
-    backgroundColor: '#fbfbfb',
-    paddingHorizontal: 16,
-    paddingVertical: 24,
-    marginBottom: 16,
+    backgroundColor: colors.grayBackground,
+    paddingHorizontal: sizes.p2,
+    paddingVertical: sizes.p3,
+    marginBottom: sizes.p2,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   companyFunding: {
-    paddingHorizontal: 16,
+    paddingHorizontal: sizes.p2,
     flexDirection: 'column',
   },
   label: {
     fontSize: 14,
-    color: '#C7C7C7',
+    color: colors.text20,
     fontWeight: '600',
-    marginBottom: 8,
+    marginBottom: sizes.p1,
   },
   value: {
     fontSize: 18,
-    color: '#000',
+    color: colors.textFull,
     fontWeight: '600',
   },
   fundingRow: {
     flexDirection: 'row',
-    marginBottom: 16,
+    marginBottom: sizes.p2,
     justifyContent: 'space-between',
   },
   fundingInfo: {
     width: '48%',
   },
   aboutInfo: {
-    marginBottom: 16,
+    marginBottom: sizes.p2,
   },
   cta: {
-    marginVertical: 16,
-    paddingHorizontal: 16,
+    marginVertical: sizes.p2,
+    paddingHorizontal: sizes.p2,
   },
   bookMark: {
     height: 20,

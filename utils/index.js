@@ -38,6 +38,7 @@ export const colors = {
   backdrop: 'rgba(0,0,0,0.4)',
   badgeOrange: '#FF9966',
   badgeRed: '#FF0000',
+  blindProfileBackground: 'rgba(42, 60, 137, 0.1)',
 };
 
 export const currencyMapper = (name) => {

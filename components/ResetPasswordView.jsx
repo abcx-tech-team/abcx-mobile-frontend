@@ -86,7 +86,7 @@ export default ResetPasswordView;
 
 const styles = StyleSheet.create({
   resetContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
     borderRadius: sizes.p3,
   },
   innerContainer: {

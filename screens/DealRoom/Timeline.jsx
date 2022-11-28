@@ -53,6 +53,7 @@ export default Timeline;
 const styles = StyleSheet.create({
   screen: {
     backgroundColor: colors.white,
+    flex: 1,
   },
   stepContainer: {
     marginTop: sizes.p3,

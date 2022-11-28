@@ -7,7 +7,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import { ScreenNames } from '../../utils';
+import { colors, ScreenNames, sizes } from '../../utils';
 import { useBriefProfileById } from '../../hooks/blindProfile.hooks';
 import PrimaryButton from '../../components/common/PrimaryButton';
 import RequestBlindProfileModal from '../../components/modals/RequestBlindProfileModal';
@@ -60,7 +60,12 @@ const BriefProfile = ({ route, navigation }) => {
     <View style={styles.container}>
       <Pressable
         onPress={() => navigation.navigate(ScreenNames.explore)}
-        style={styles.back}
+        style={({ pressed }) => [
+          styles.back,
+          {
+            backgroundColor: pressed ? colors.text20 : null,
+          },
+        ]}
       >
         <Image source={Back} />
       </Pressable>
@@ -205,41 +210,46 @@ export default BriefProfile;
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 60,
+    paddingTop: sizes.p8,
     flex: 1,
-    backgroundColor: 'rgba(42, 60, 137, 0.1)',
+    backgroundColor: colors.blindProfileBackground,
     position: 'relative',
   },
 
   companyMetaData: {
-    paddingHorizontal: 24,
+    paddingHorizontal: sizes.p3,
     flexDirection: 'column',
     height: Platform.OS === 'ios' ? '23%' : '20%',
     justifyContent: 'space-evenly',
   },
   aboutCompany: {
-    paddingHorizontal: 24,
-    paddingVertical: 24,
-    backgroundColor: '#fff',
-    marginTop: 8,
+    paddingHorizontal: sizes.p3,
+    paddingVertical: sizes.p3,
+    backgroundColor: colors.white,
+    marginTop: sizes.p1,
   },
   CTA: {
-    paddingHorizontal: 24,
+    paddingHorizontal: sizes.p3,
     height: Platform.OS === 'ios' ? '19%' : '20%',
-    backgroundColor: '#fff',
-    borderTopColor: 'rgba(239, 239, 239, 1)',
+    backgroundColor: colors.white,
+    borderTopColor: colors.borderColor,
     borderTopWidth: 1,
-    paddingTop: 24,
+    paddingTop: sizes.p3,
   },
   back: {
-    marginBottom: 32,
-    marginLeft: 24,
+    marginBottom: sizes.p2,
+    marginLeft: sizes.p3,
+    height: sizes.p5,
+    width: sizes.p5,
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   companyDetails: {
-    color: 'rgba(99, 115, 129, 1)',
+    color: colors.text40,
     fontSize: 18,
     fontWeight: '500',
-    marginBottom: 24,
+    marginBottom: sizes.p3,
   },
   companyMeta: {
     flexDirection: 'row',
@@ -253,33 +263,33 @@ const styles = StyleSheet.create({
     width: 20,
   },
   dataText: {
-    color: 'rgba(52, 73, 94, 1)',
+    color: colors.text60,
     fontSize: 16,
     fontWeight: '600',
   },
   companyFunding: {
-    paddingHorizontal: 16,
+    paddingHorizontal: sizes.p2,
     flexDirection: 'column',
-    backgroundColor: '#FBFBFB',
-    paddingTop: 16,
-    borderRadius: 8,
-    marginTop: Platform.OS === 'ios' ? 16 : 8,
-    marginBottom: Platform.OS === 'ios' ? 24 : 16,
+    backgroundColor: colors.grayBackground,
+    paddingTop: sizes.p2,
+    borderRadius: sizes.p1,
+    marginTop: Platform.OS === 'ios' ? sizes.p2 : sizes.p1,
+    marginBottom: Platform.OS === 'ios' ? sizes.p3 : sizes.p2,
   },
   label: {
     fontSize: Platform.OS === 'ios' ? 12 : 10,
-    color: '#C7C7C7',
+    color: colors.text20,
     fontWeight: '600',
-    marginBottom: 8,
+    marginBottom: sizes.p1,
   },
   value: {
     fontSize: Platform.OS === 'ios' ? 15 : 12,
-    color: '#000',
+    color: colors.textFull,
     fontWeight: '600',
   },
   fundingRow: {
     flexDirection: 'row',
-    marginBottom: 16,
+    marginBottom: sizes.p2,
     justifyContent: 'space-between',
   },
   fundingInfo: {
@@ -288,21 +298,21 @@ const styles = StyleSheet.create({
   companyInfoRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 16,
+    marginBottom: sizes.p2,
   },
   companyInfoCard: {
-    backgroundColor: '#fbfbfb',
-    borderRadius: 8,
-    padding: 16,
+    backgroundColor: colors.grayBackground,
+    borderRadius: sizes.p1,
+    padding: sizes.p2,
     flexGrow: 1,
     flexShrink: 0,
   },
   tag: {
-    backgroundColor: '#fbfbfb',
-    padding: 8,
+    backgroundColor: colors.grayBackground,
+    padding: sizes.p1,
     flexDirection: 'row',
-    borderRadius: 32,
-    marginRight: 16,
+    borderRadius: sizes.p4,
+    marginRight: sizes.p2,
     alignItems: 'center',
   },
   noMarginRight: {
@@ -315,8 +325,8 @@ const styles = StyleSheet.create({
   tagText: {
     fontSize: Platform.OS === 'ios' ? 14 : 12,
     fontWeight: 'bold',
-    color: '#637381',
-    marginLeft: 8,
+    color: colors.text40,
+    marginLeft: sizes.p1,
   },
   tags: {
     flexDirection: 'row',

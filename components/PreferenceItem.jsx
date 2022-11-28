@@ -26,7 +26,7 @@ export default PreferenceItem;
 const styles = StyleSheet.create({
   preferenceItem: {
     borderWidth: 2,
-    borderColor: '#efefef',
+    borderColor: colors.borderColor,
     paddingVertical: sizes.p2,
     marginBottom: sizes.p3,
     borderRadius: sizes.p1,

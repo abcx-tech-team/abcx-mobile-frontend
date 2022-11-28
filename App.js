@@ -35,16 +35,4 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  a: {
-    backgroundColor: '#895545',
-    flex: 1,
-  },
-  b: {
-    flex: 2,
-    backgroundColor: '#123540',
-  },
-  c: {
-    flex: 1,
-    backgroundColor: '#323568',
-  },
 });

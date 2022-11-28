@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import DealScreenHeader from '../../components/dealRoom/DealScreenHeader';
-import { colors, ScreenNames } from '../../utils';
+import { colors, ScreenNames, sizes } from '../../utils';
 import DealRoomStep from '../../components/dealRoom/DealRoomStep';
 
 const nextStepsData = [
@@ -48,9 +48,10 @@ export default NextSteps;
 const styles = StyleSheet.create({
   screen: {
     backgroundColor: colors.white,
+    flex: 1,
   },
   stepContainer: {
-    marginTop: 24,
-    paddingHorizontal: 16,
+    marginTop: sizes.p3,
+    paddingHorizontal: sizes.p2,
   },
 });

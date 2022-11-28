@@ -1,5 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import { colors } from '../../utils';
 
 const BlindProfileButton = ({ title, onClick }) => {
   return (
@@ -19,14 +20,14 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '100%',
-    backgroundColor: '#fbfbfa',
+    backgroundColor: colors.grayBackground,
     height: 40,
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
   },
   text: {
-    color: '#6F0652',
+    color: colors.primary,
     fontWeight: 'bold',
   },
 });

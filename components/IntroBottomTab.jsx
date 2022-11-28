@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: sizes.p4,
     elevation: 20,
-    shadowColor: '#171717',
+    shadowColor: colors.textFull,
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.1,
     shadowRadius: 10,

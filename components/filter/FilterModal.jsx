@@ -5,6 +5,7 @@ import FundRound from './FundRound';
 import FundType from './FundType';
 import Country from './Country';
 import SecondaryButton from '../common/SecondaryButton';
+import { colors, sizes } from '../../utils';
 
 const Cross = require('../../assets/icons/cross.png');
 
@@ -22,7 +23,15 @@ const FilterModal = ({
     <Modal animationType='slide' visible={showFilter}>
       <View style={styles.filterModal}>
         <View style={styles.action}>
-          <Pressable onPress={() => setShowFilter(false)}>
+          <Pressable
+            onPress={() => setShowFilter(false)}
+            style={({ pressed }) => [
+              styles.closeModal,
+              {
+                backgroundColor: pressed ? colors.text20 : colors.white,
+              },
+            ]}
+          >
             <Image source={Cross} />
           </Pressable>
           <Text style={styles.actionText}>Filter</Text>
@@ -79,44 +88,44 @@ export default FilterModal;
 const styles = StyleSheet.create({
   filterModal: {
     paddingTop: Platform.OS === 'ios' ? 80 : 30,
-    paddingHorizontal: 24,
+    paddingHorizontal: sizes.p3,
     flex: 1,
   },
   action: {
-    marginBottom: 16,
+    marginBottom: sizes.p2,
     flexDirection: 'row',
     alignItems: 'center',
   },
   actionText: {
-    fontSize: 24,
+    fontSize: sizes.p3,
     fontWeight: 'bold',
-    marginLeft: 24,
+    marginLeft: sizes.p3,
   },
   actionButtons: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
     width: '100%',
-    marginBottom: 40,
-    paddingHorizontal: 24,
-    paddingTop: 24,
+    marginBottom: sizes.p5,
+    paddingHorizontal: sizes.p3,
+    paddingTop: sizes.p3,
     borderTopWidth: 1,
-    borderTopColor: '#efefef',
+    borderTopColor: colors.borderColor,
   },
   rightButton: {
-    marginBottom: 16,
+    marginBottom: sizes.p2,
   },
   filterItem: {
-    paddingTop: 16,
+    paddingTop: sizes.p2,
   },
   filterText: {
     textAlign: 'center',
-    marginBottom: 16,
+    marginBottom: sizes.p2,
   },
   activeFilterItem: {
-    backgroundColor: '#d1cfcf',
+    backgroundColor: colors.text20,
   },
   gradientBackground: {
     height: 1,
-    backgroundColor: 'gray',
+    backgroundColor: colors.text20,
   },
   mainFilter: {
     flexDirection: 'row',
@@ -124,10 +133,17 @@ const styles = StyleSheet.create({
   },
   left: {
     width: '40%',
-    backgroundColor: '#fbfbfb',
+    backgroundColor: colors.grayBackground,
   },
   right: {
     width: '60%',
-    paddingLeft: 16,
+    paddingLeft: sizes.p2,
+  },
+  closeModal: {
+    height: sizes.p5,
+    width: sizes.p5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 100,
   },
 });

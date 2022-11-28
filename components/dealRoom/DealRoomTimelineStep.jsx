@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import DealStepTags from './DealStepTags';
@@ -13,7 +13,16 @@ const DealRoomTimelineStep = ({ name, image, tag }) => {
       </View>
       <View style={styles.stepActions}>
         {DealStepTags(tag)}
-        <AntDesign name='arrowright' size={24} color='#34495E' />
+        <Pressable
+          style={({ pressed }) => [
+            styles.back,
+            {
+              backgroundColor: pressed ? colors.text20 : colors.white,
+            },
+          ]}
+        >
+          <AntDesign name='arrowright' size={24} color={colors.text80} />
+        </Pressable>
       </View>
     </View>
   );
@@ -48,5 +57,12 @@ const styles = StyleSheet.create({
     marginTop: sizes.p2,
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  back: {
+    height: sizes.p5,
+    width: sizes.p5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 100,
   },
 });

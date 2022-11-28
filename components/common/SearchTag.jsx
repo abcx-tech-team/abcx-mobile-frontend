@@ -1,5 +1,6 @@
 import { Image, Pressable, StyleSheet, Text } from 'react-native';
 import React from 'react';
+import { colors, sizes } from '../../utils';
 
 const SearchTag = ({
   image,
@@ -37,10 +38,10 @@ const styles = StyleSheet.create({
   tab: {
     flexDirection: 'row',
     borderWidth: 1,
-    borderColor: '#69737C',
+    borderColor: colors.borderColor,
     borderRadius: 50,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingHorizontal: sizes.p2,
+    paddingVertical: sizes.p1,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -48,16 +49,16 @@ const styles = StyleSheet.create({
     height: 18,
     width: 18,
     resizeMode: 'contain',
-    marginRight: 8,
+    marginRight: sizes.p1,
   },
   tabText: {
     fontWeight: '600',
     fontSize: 12,
   },
   activeTab: {
-    borderColor: '#6F0652',
+    borderColor: colors.primary,
   },
   activeTabText: {
-    color: '#6F0652',
+    color: colors.primary,
   },
 });

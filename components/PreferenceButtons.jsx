@@ -1,8 +1,8 @@
 import { StyleSheet, View } from 'react-native';
 import React from 'react';
-import PrimaryButton from './PrimaryButton';
-import SecondaryButton from './SecondaryButton';
-import { ScreenNames } from '../utils';
+import PrimaryButton from './common/PrimaryButton';
+import SecondaryButton from './common/SecondaryButton';
+import { colors, ScreenNames, sizes } from '../utils';
 
 const PreferenceButtons = ({
   primaryCTA,
@@ -39,13 +39,13 @@ PreferenceButtons.defaultProps = {
 
 const styles = StyleSheet.create({
   preferenceButton: {
-    paddingBottom: 40,
-    paddingTop: 24,
-    paddingHorizontal: 24,
+    paddingBottom: sizes.p5,
+    paddingTop: sizes.p3,
+    paddingHorizontal: sizes.p4,
     borderTopWidth: 1,
-    borderTopColor: '#EFEFEF',
+    borderTopColor: colors.borderColor,
   },
   topButton: {
-    marginBottom: 16,
+    marginBottom: sizes.p2,
   },
 });

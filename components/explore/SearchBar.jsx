@@ -7,12 +7,12 @@ import {
   View,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import FilterModal from './filter/FilterModal';
+import FilterModal from '../filter/FilterModal';
 import MultiSelect from 'react-native-multiple-select';
-import { useSearchKeywords } from '../hooks/masters.hooks';
+import { useSearchKeywords } from '../../hooks/masters.hooks';
 
-const MagnifyingGlass = require('../assets/icons/search.png');
-const Filter = require('../assets/icons/filter.png');
+const MagnifyingGlass = require('../../assets/icons/search.png');
+const Filter = require('../../assets/icons/filter.png');
 
 const SearchBar = ({ setQuery, setBlindProfiles, query }) => {
   const [showFilter, setShowFilter] = useState(false);

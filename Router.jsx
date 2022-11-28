@@ -7,6 +7,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './screens/auth/Login';
 import ResetPassword from './screens/auth/ResetPassword';
 import BlindProfile from './screens/Explore/BlindProfile';
+import DealDetails from './screens/DealRoom/DealDetails';
+import NextSteps from './screens/DealRoom/NextSteps';
+import Timeline from './screens/DealRoom/Timeline';
 
 const StackScreens = [
   {
@@ -36,6 +39,18 @@ const StackScreens = [
   {
     name: ScreenNames.blindProfile,
     component: BlindProfile,
+  },
+  {
+    name: ScreenNames.dealDetails,
+    component: DealDetails,
+  },
+  {
+    name: ScreenNames.nextSteps,
+    component: NextSteps,
+  },
+  {
+    name: ScreenNames.timeline,
+    component: Timeline,
   },
 ];
 

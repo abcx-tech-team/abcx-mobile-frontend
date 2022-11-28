@@ -8,12 +8,12 @@ import {
   ScrollView,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import SearchBar from '../../components/SearchBar';
-import BriefProfileCard from '../../components/BlindProfileCard';
+import SearchBar from '../../components/explore/SearchBar';
+import BriefProfileCard from '../../components/explore/BlindProfileCard';
 import AuthContainer from '../../container/AuthContainer';
 import { useBlindProfiles } from '../../hooks/blindProfile.hooks';
 import { serialize } from '../../utils';
-import SearchTag from '../../components/SearchTag';
+import SearchTag from '../../components/common/SearchTag';
 
 const tabs = [
   {

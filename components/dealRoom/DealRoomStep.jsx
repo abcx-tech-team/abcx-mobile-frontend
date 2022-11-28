@@ -1,24 +1,29 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { AntDesign } from '@expo/vector-icons';
-import DealStepTags from './DealStepTags';
+import { colors } from '../../utils';
 
-const DealRoomTimelineStep = ({ name, image, tag }) => {
+const DealRoomStep = ({ name, description, active }) => {
   return (
-    <View style={styles.dealRoomStep}>
+    <View style={[styles.dealRoomStep, active ? styles.active : null]}>
       <View style={styles.stepDetail}>
-        <Image source={image} style={styles.stepImage} />
-        <Text style={styles.stepText}>{name}</Text>
+        <Text style={[styles.stepText, active ? styles.activeText : null]}>
+          {name}
+        </Text>
       </View>
       <View style={styles.stepActions}>
-        {DealStepTags(tag)}
-        <AntDesign name='arrowright' size={24} color='#34495E' />
+        <Text style={styles.descriptionText}>{description}</Text>
+        <AntDesign
+          name='arrowright'
+          size={24}
+          color={active ? colors.primary : '#34495E'}
+        />
       </View>
     </View>
   );
 };
 
-export default DealRoomTimelineStep;
+export default DealRoomStep;
 
 const styles = StyleSheet.create({
   dealRoomStep: {
@@ -47,5 +52,14 @@ const styles = StyleSheet.create({
     marginTop: 16,
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  descriptionText: {
+    color: '#768591',
+  },
+  active: {
+    borderColor: colors.primary,
+  },
+  activeText: {
+    color: colors.primary,
   },
 });

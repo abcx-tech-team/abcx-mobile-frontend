@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import { ScreenNames } from '../utils';
+import { ScreenNames } from '../../utils';
 
 const Office = require('../assets/dashboard.png');
 

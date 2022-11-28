@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import React from 'react';
-import DealScreenHeader from '../../components/DealScreenHeader';
-import { ScreenNames } from '../../utils';
-import DealRoomTimelineStep from '../../components/DealRoomTimelineStep';
+import DealScreenHeader from '../../components/dealRoom/DealScreenHeader';
+import { colors, ScreenNames, sizes } from '../../utils';
+import DealRoomTimelineStep from '../../components/dealRoom/DealRoomTimelineStep';
 
 const timelineData = [
   {
@@ -34,7 +34,7 @@ const timelineData = [
 
 const Timeline = ({ navigation }) => {
   return (
-    <View>
+    <View style={styles.screen}>
       <DealScreenHeader
         screenName='Timeline'
         onBackPress={() => navigation.navigate(ScreenNames.dealRoom)}
@@ -51,8 +51,11 @@ const Timeline = ({ navigation }) => {
 export default Timeline;
 
 const styles = StyleSheet.create({
+  screen: {
+    backgroundColor: colors.white,
+  },
   stepContainer: {
-    marginTop: 24,
-    paddingHorizontal: 16,
+    marginTop: sizes.p3,
+    paddingHorizontal: sizes.p2,
   },
 });

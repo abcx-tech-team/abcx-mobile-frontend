@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import { colors } from '../../utils';
 
 const Badge = ({ number, style, textStyle }) => {
   return (
@@ -16,7 +17,7 @@ const styles = StyleSheet.create({
     height: 14,
     width: 14,
     borderRadius: 100,
-    backgroundColor: '#FF9966',
+    backgroundColor: colors.badgeOrange,
     position: 'absolute',
     left: '75%',
     top: '-5%',
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    color: '#fff',
+    color: colors.white,
     fontSize: 10,
     fontWeight: 'bold',
   },

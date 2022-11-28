@@ -2,7 +2,7 @@ import { FlatList } from 'react-native';
 import React, { memo } from 'react';
 import { useSearchCountry } from '../../hooks/masters.hooks';
 import { RadioButton } from 'react-native-paper';
-import MemoizedRadioButton from '../MemoizedRadioButton';
+import MemoizedRadioButton from '../common/MemoizedRadioButton';
 
 const Country = ({ query, handleApplyFilter }) => {
   const { data } = useSearchCountry();

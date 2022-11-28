@@ -31,11 +31,13 @@ export const colors = {
   lightBlue: '#D7DAFA',
   primaryBackground: 'rgba(171, 0, 133, 0.16)',
   grayBackground: '#FBFBFB',
-  borderColor: '#F4F4F0',
+  borderColor: 'rgba(0,0,0,0.1)',
   white: '#fff',
   lightRed: 'rgba(224, 106, 110, 0.6)',
   lightRedBackground: 'rgba(224, 106, 110, 0.2)',
   backdrop: 'rgba(0,0,0,0.4)',
+  badgeOrange: '#FF9966',
+  badgeRed: '#FF0000',
 };
 
 export const currencyMapper = (name) => {
@@ -103,6 +105,8 @@ export const sizes = {
   p6: 48,
   p7: 56,
   p8: 64,
+  p9: 72,
+  p10: 80,
 };
 
 export const iconStyles = {
@@ -122,3 +126,42 @@ export const iconStyles = {
     resizeMode: 'contain',
   },
 };
+
+export const revenuePreference = [
+  'Pre-Revenue',
+  '$0-1M',
+  '$1-10M',
+  '$10-25M',
+  '$25M and above',
+];
+export const industryPreference = [
+  'Fintech',
+  'AdTech',
+  'AgroTech',
+  'Artificial Intelligence',
+  'Technology',
+];
+export const fundingPreference = [
+  'Seed to Series A',
+  'Series A and Above',
+  'Pre-Seed',
+  'Early Investor',
+  'Any Size',
+];
+
+export const regionPreference = [
+  'Asia',
+  'Europe',
+  'Africa',
+  'North America',
+  'Australia',
+];
+
+export const countryPreference = [
+  'Germany',
+  'United Kingdom',
+  'Portugal',
+  'France',
+  'Croatia',
+  'NetherLands',
+];

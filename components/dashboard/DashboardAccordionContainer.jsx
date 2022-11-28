@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import Accordion from './Accordion';
-import { sizes } from '../utils';
+import Accordion from '../common/Accordion';
+import { sizes } from '../../utils';
 
 const accordionData = [
   {

@@ -1,12 +1,12 @@
 import { Image, Modal, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import SecondaryButton from './SecondaryButton';
-import PrimaryButton from './PrimaryButton';
-import { useCreditBalance } from '../hooks/user.hooks';
-import { currencyMapper } from '../utils';
+import SecondaryButton from '../common/SecondaryButton';
+import PrimaryButton from '../common/PrimaryButton';
+import { useCreditBalance } from '../../hooks/user.hooks';
+import { currencyMapper } from '../../utils';
 
-const Shield = require('../assets/icons/shield.png');
-const Card = require('../assets/icons/card.png');
+const Shield = require('../../assets/icons/shield.png');
+const Card = require('../../assets/icons/card.png');
 
 const RequestBlindProfileModal = ({ visible, onSubmit, onClose }) => {
   const { data } = useCreditBalance();

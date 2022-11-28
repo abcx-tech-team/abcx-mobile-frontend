@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React, { useState, useEffect, useCallback, useContext } from 'react';
-import LogoHeader from '../components/LogoHeader';
+import LogoHeader from '../components/common/LogoHeader';
 import IntroBottomTab from '../components/IntroBottomTab';
 import { getToken } from '../utils/asyncStorage';
 import { ScreenNames, sizes, USER_TOKEN_ID_KEY } from '../utils';

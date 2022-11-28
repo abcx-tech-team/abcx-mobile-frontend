@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View, Image } from 'react-native';
 import React from 'react';
 
-const Clock = require('../assets/icons/clock.png');
-const CircleTick = require('../assets/icons/circle_tick_green.png');
+const Clock = require('../../assets/icons/clock.png');
+const CircleTick = require('../../assets/icons/circle_tick_green.png');
 
 const DealStepTags = (tagName) => {
   switch (tagName) {

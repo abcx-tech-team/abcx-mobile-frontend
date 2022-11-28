@@ -1,8 +1,8 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { colors, sizes } from '../utils';
+import { colors, sizes } from '../../utils';
 
-const Chat = require('../assets/icons/messages.png');
+const Chat = require('../../assets/icons/messages.png');
 
 const DashboardInviteCard = () => {
   const handleClick = () => {

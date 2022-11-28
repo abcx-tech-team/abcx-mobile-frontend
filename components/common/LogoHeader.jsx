@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { sizes } from '../utils';
-const Logo = require('../assets/abcx_logo.png');
+import { sizes } from '../../utils';
+const Logo = require('../../assets/abcx_logo.png');
 
 const LogoHeader = () => {
   return (

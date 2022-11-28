@@ -5,7 +5,7 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import LogoHeader from '../../components/LogoHeader';
+import LogoHeader from '../../components/common/LogoHeader';
 import ResetPasswordView from '../../components/ResetPasswordView';
 import { colors } from '../../utils';
 

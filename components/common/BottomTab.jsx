@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View, Image } from 'react-native';
 import React from 'react';
+import { colors, sizes } from '../../utils';
 
 const BottomTab = ({ label, activeImage, inActiveImage, focused }) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, focused ? styles.activeContainer : null]}>
       <Image
         source={focused ? activeImage : inActiveImage}
         style={styles.image}
@@ -11,7 +12,7 @@ const BottomTab = ({ label, activeImage, inActiveImage, focused }) => {
       />
       <Text
         style={{
-          color: focused ? '#6F0652' : '#B7B7B7',
+          color: focused ? colors.primary : colors.text40,
           ...styles.text,
         }}
       >
@@ -24,11 +25,16 @@ const BottomTab = ({ label, activeImage, inActiveImage, focused }) => {
 export default BottomTab;
 
 const styles = StyleSheet.create({
-  image: { height: 25, width: 25, marginBottom: 8 },
+  image: { height: 28, width: 28, marginBottom: 8 },
   container: {
     alignItems: 'center',
     justifyContent: 'center',
-    top: Platform.OS === 'ios' ? 16 : 8,
+    height: '100%',
+    width: sizes.p9,
   },
   text: { fontSize: 12 },
+  activeContainer: {
+    borderTopColor: colors.primary,
+    borderTopWidth: 4,
+  },
 });

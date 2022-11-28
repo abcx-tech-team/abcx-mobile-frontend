@@ -1,4 +1,5 @@
 import { Image, Pressable, StyleSheet, Text } from 'react-native';
+import { colors, sizes } from '../utils';
 const Tick = require('../assets/icons/tick.png');
 
 const PreferenceItem = ({ name, onClick, selected }) => {
@@ -26,9 +27,9 @@ const styles = StyleSheet.create({
   preferenceItem: {
     borderWidth: 2,
     borderColor: '#efefef',
-    paddingVertical: 16,
-    marginBottom: 24,
-    borderRadius: 8,
+    paddingVertical: sizes.p2,
+    marginBottom: sizes.p3,
+    borderRadius: sizes.p1,
     flexDirection: 'row',
     justifyContent: 'center',
     position: 'relative',
@@ -39,10 +40,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   activePreference: {
-    borderColor: '#6F0652',
+    borderColor: colors.primary,
   },
   activePreferenceText: {
-    color: '#6F0652',
+    color: colors.primary,
   },
   tick: {
     height: 15,

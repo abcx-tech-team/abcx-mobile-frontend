@@ -3,7 +3,7 @@ import Dashboard from '../screens/main/Dashboard';
 import Explore from '../screens/main/Explore';
 import DealRoom from '../screens/main/DealRoom';
 import { ScreenNames } from '../utils';
-import BottomTab from '../components/BottomTab';
+import BottomTab from '../components/common/BottomTab';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const DashboardActive = require('../assets/icons/pie_active.png');
@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     zIndex: 100,
     borderTopWidth: 0,
+    paddingBottom: 0,
   },
   mainAppContainer: {
     flex: 1,

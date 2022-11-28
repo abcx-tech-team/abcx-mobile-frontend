@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View, Pressable, Image } from 'react-native';
 import React from 'react';
-import { colors, sizes } from '../utils';
+import { colors, sizes } from '../../utils';
 
-const Calender = require('../assets/icons/calender.png');
+const Calender = require('../../assets/icons/calender.png');
 
 const DashboardBookCall = () => {
   const handleClick = () => {
@@ -61,14 +61,14 @@ const styles = StyleSheet.create({
   },
   cta: {
     borderWidth: 1,
-    borderColor: '#2C61F3',
+    borderColor: colors.text60,
     paddingHorizontal: 24,
     marginTop: 24,
     paddingVertical: 10,
     borderRadius: 50,
   },
   ctaText: {
-    color: '#2C61F3',
+    color: colors.text60,
     fontSize: 16,
     flexDirection: 'row',
   },

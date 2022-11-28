@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import DealScreenHeader from '../../components/DealScreenHeader';
-import { ScreenNames } from '../../utils';
-import DealRoomStep from '../../components/DealRoomStep';
+import DealScreenHeader from '../../components/dealRoom/DealScreenHeader';
+import { colors, ScreenNames } from '../../utils';
+import DealRoomStep from '../../components/dealRoom/DealRoomStep';
 
 const nextStepsData = [
   {
@@ -29,7 +29,7 @@ const nextStepsData = [
 
 const NextSteps = ({ navigation }) => {
   return (
-    <View>
+    <View style={styles.screen}>
       <DealScreenHeader
         screenName='Next Steps'
         onBackPress={() => navigation.navigate(ScreenNames.dealRoom)}
@@ -46,6 +46,9 @@ const NextSteps = ({ navigation }) => {
 export default NextSteps;
 
 const styles = StyleSheet.create({
+  screen: {
+    backgroundColor: colors.white,
+  },
   stepContainer: {
     marginTop: 24,
     paddingHorizontal: 16,

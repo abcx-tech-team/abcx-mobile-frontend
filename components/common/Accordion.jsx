@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import { colors, sizes } from '../utils';
+import { colors, sizes } from '../../utils';
 
 const Accordion = ({ title, data, expanded, setExpanded, index }) => {
   const toggleExpand = () => {

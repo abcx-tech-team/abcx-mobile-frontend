@@ -1,6 +1,6 @@
 import { Linking, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import PrimaryButton from './PrimaryButton';
+import PrimaryButton from './common/PrimaryButton';
 import { colors, ScreenNames, sizes } from '../utils';
 
 const IntroBottomTab = ({ navigation }) => {

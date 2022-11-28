@@ -1,11 +1,11 @@
 import { ScrollView, StyleSheet, View } from 'react-native';
-import UserHeader from '../../components/UserHeader';
+import UserHeader from '../../components/common/UserHeader';
 import AuthContainer from '../../container/AuthContainer';
-import DashboardActivities from '../../components/DashboardActivities';
-import DashboardInviteCard from '../../components/DashboardInviteCard';
-import DashboardBookCall from '../../components/DashboardBookCall';
-import DashboardNumbers from '../../components/DashboardNumbers';
-import DashboardAccordionContainer from '../../components/DashboardAccordionContainer';
+import DashboardActivities from '../../components/dashboard/DashboardActivities';
+import DashboardInviteCard from '../../components/dashboard/DashboardInviteCard';
+import DashboardBookCall from '../../components/dashboard/DashboardBookCall';
+import DashboardNumbers from '../../components/dashboard/DashboardNumbers';
+import DashboardAccordionContainer from '../../components/dashboard/DashboardAccordionContainer';
 import { colors, sizes } from '../../utils';
 
 const Dashboard = ({ navigation }) => {

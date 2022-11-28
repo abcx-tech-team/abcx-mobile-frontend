@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View, Modal, Pressable, Image } from 'react-native';
 import React, { useState } from 'react';
-import PrimaryButton from '../PrimaryButton';
+import PrimaryButton from '../common/PrimaryButton';
 import FundRound from './FundRound';
 import FundType from './FundType';
 import Country from './Country';
-import SecondaryButton from '../SecondaryButton';
+import SecondaryButton from '../common/SecondaryButton';
 
 const Cross = require('../../assets/icons/cross.png');
 

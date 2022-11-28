@@ -1,7 +1,6 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
-import React from 'react';
 import PreferenceButtons from '../components/PreferenceButtons';
-import { ScreenNames } from '../utils';
+import { colors, sizes } from '../utils';
 
 const Back = require('../assets/icons/back.png');
 
@@ -19,7 +18,15 @@ const PreferenceLayout = ({
   return (
     <View style={styles.container}>
       <View style={styles.topBar}>
-        <Pressable onPress={BackArrowClick} style={styles.back}>
+        <Pressable
+          onPress={BackArrowClick}
+          style={({ pressed }) => [
+            {
+              backgroundColor: pressed ? colors.text20 : colors.white,
+            },
+            styles.back,
+          ]}
+        >
           <Image source={Back} />
         </Pressable>
         {showNumber ? (
@@ -45,17 +52,24 @@ export default PreferenceLayout;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
+  back: {
+    height: sizes.p5,
+    width: sizes.p5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 100,
+  },
   topBar: {
-    paddingTop: 60,
-    paddingBottom: 32,
+    paddingTop: sizes.p8,
+    paddingBottom: sizes.p4,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 24,
+    paddingHorizontal: sizes.p3,
   },
   number: {
     fontSize: 16,
@@ -63,6 +77,6 @@ const styles = StyleSheet.create({
   },
   main: {
     flex: 1,
-    paddingHorizontal: 24,
+    paddingHorizontal: sizes.p3,
   },
 });

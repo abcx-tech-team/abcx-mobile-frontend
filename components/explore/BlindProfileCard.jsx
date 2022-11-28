@@ -1,15 +1,15 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
 import BlindProfileButton from './BlindProfileButton';
-import { ScreenNames } from '../utils';
-import { useSaveBlindProfile } from '../hooks/blindProfile.hooks';
+import { ScreenNames } from '../../utils';
+import { useSaveBlindProfile } from '../../hooks/blindProfile.hooks';
 import Toast from 'react-native-toast-message';
 
-const BookMark = require('../assets/icons/bookmark.png');
-const BookMarkActive = require('../assets/icons/bookmark_active.png');
+const BookMark = require('../../assets/icons/bookmark.png');
+const BookMarkActive = require('../../assets/icons/bookmark_active.png');
 
 const dummyData = {
-  image: require('../assets/terminal.png'),
+  image: require('../../assets/terminal.png'),
 };
 
 const BriefProfileCard = ({ briefProfile, navigation }) => {

@@ -1,17 +1,17 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import PrimaryButton from './PrimaryButton';
-import { ScreenNames } from '../utils';
+import PrimaryButton from '../PrimaryButton';
+import { ScreenNames } from '../../utils';
 
 const ImageURL = require('../assets/activities.png');
 
-const SellingActivities = ({ navigation }) => {
+const BuyingActivities = ({ navigation }) => {
   return (
-    <View style={styles.sellingContainer}>
+    <View style={styles.buyingContainer}>
       <View style={styles.headingContainer}>
-        <Text style={styles.sectionHeading}>SELLING ACTIVITY</Text>
+        <Text style={styles.sectionHeading}>BUYING ACTIVITY</Text>
       </View>
-      <View style={styles.sellingActivities}>
+      <View style={styles.buyingActivities}>
         <Text style={styles.heading}>No activities yet</Text>
         <View style={styles.imageContainer}>
           <Image source={ImageURL} style={styles.image} />
@@ -25,11 +25,11 @@ const SellingActivities = ({ navigation }) => {
   );
 };
 
-export default SellingActivities;
+export default BuyingActivities;
 
 const styles = StyleSheet.create({
-  sellingContainer: {
-    paddingBottom: 150,
+  buyingContainer: {
+    marginBottom: 24,
   },
   headingContainer: {
     marginVertical: 24,
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     letterSpacing: 2,
   },
-  sellingActivities: {
+  buyingActivities: {
     padding: 24,
     borderRadius: 16,
     shadowColor: '#000',

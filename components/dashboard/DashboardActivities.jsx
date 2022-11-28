@@ -1,38 +1,38 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { colors, sizes, pieFilling } from '../utils';
+import { colors, sizes, pieFilling } from '../../utils';
 import DashboardActivityCard from './DashboardActivityCard';
 
 const percentage = 25;
 
-const Clock = require('../assets/icons/clock.png');
+const Clock = require('../../assets/icons/clock.png');
 
 const activityCardData = [
   {
     id: 1,
-    leftIcon: require('../assets/icons/circle-tick.png'),
+    leftIcon: require('../../assets/icons/circle-tick.png'),
     heading: 'Tell us more about you',
     subHeading: 'Add the sectors, stages revenue number that you prefer',
     ctaText: 'Why should you do this?',
-    ctaIcon: require('../assets/icons/right-arrow.png'),
+    ctaIcon: require('../../assets/icons/right-arrow.png'),
   },
   {
     id: 2,
-    leftIcon: require('../assets/icons/circle-tick.png'),
+    leftIcon: require('../../assets/icons/circle-tick.png'),
     heading: 'Explore companies',
     subHeading:
       'Find a recommended list of companies that suits your investment style',
     ctaText: 'How do we curate this list?',
-    ctaIcon: require('../assets/icons/right-arrow.png'),
+    ctaIcon: require('../../assets/icons/right-arrow.png'),
   },
   {
     id: 3,
-    leftIcon: require('../assets/icons/circle-tick.png'),
+    leftIcon: require('../../assets/icons/circle-tick.png'),
     heading: 'List portfolio companies',
     subHeading:
       'Find relevant institutional investors within 36 hours of listing. ',
     ctaText: 'Why should you list companies?',
-    ctaIcon: require('../assets/icons/right-arrow.png'),
+    ctaIcon: require('../../assets/icons/right-arrow.png'),
   },
 ];
 

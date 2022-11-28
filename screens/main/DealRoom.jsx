@@ -6,10 +6,9 @@ import {
   Text,
   View,
 } from 'react-native';
-import DealCard from '../../components/DealCard';
-import PrimaryButton from '../../components/PrimaryButton';
-import SearchTag from '../../components/SearchTag';
-import SecondaryButton from '../../components/SecondaryButton';
+import DealCard from '../../components/dealRoom/DealCard';
+import NoDealCard from '../../components/dealRoom/NoDealCard';
+import SearchTag from '../../components/common/SearchTag';
 import AuthContainer from '../../container/AuthContainer';
 import { useBuyerList, useSellerList } from '../../hooks/user.hooks';
 import { colors, sizes } from '../../utils';
@@ -74,19 +73,7 @@ const DealRoom = ({ navigation }) => {
         ) : buyerListLoading && sellerListLoading ? (
           <ActivityIndicator size='large' />
         ) : (
-          <View style={styles.noDealContainer}>
-            <View style={styles.noDealCard}>
-              <Text style={styles.heading}>You don’t have any deals yet.</Text>
-              <Text style={styles.subHeading}>
-                You can either explore exciting opportunities listed by other
-                members or list a few of your own portfolio companies{' '}
-              </Text>
-              <View style={styles.buttonContainer}>
-                <PrimaryButton title='Explore Opportunities' noLoader />
-                <SecondaryButton title='List Companies' noLoader />
-              </View>
-            </View>
-          </View>
+          <NoDealCard />
         )}
       </View>
     </AuthContainer>
@@ -100,6 +87,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
     paddingTop: sizes.p8,
+    paddingBottom: 120,
   },
   screenName: {
     fontSize: 24,
@@ -115,25 +103,5 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     paddingHorizontal: sizes.p2,
-    paddingBottom: 120,
-  },
-  noDealCard: {
-    paddingVertical: sizes.p4,
-    paddingHorizontal: sizes.p2,
-    backgroundColor: colors.grayBackground,
-  },
-  noDealContainer: {
-    paddingHorizontal: sizes.p2,
-  },
-  heading: {
-    fontSize: 20,
-    fontWeight: '700',
-    marginBottom: sizes.p2,
-  },
-  subHeading: {
-    fontSize: 14,
-    fontWeight: '500',
-    color: colors.text60,
-    marginBottom: sizes.p4,
   },
 });

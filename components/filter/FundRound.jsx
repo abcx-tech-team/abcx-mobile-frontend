@@ -2,7 +2,7 @@ import { FlatList } from 'react-native';
 import React from 'react';
 import { useSearchFundRound } from '../../hooks/masters.hooks';
 import { RadioButton } from 'react-native-paper';
-import MemoizedRadioButton from '../MemoizedRadioButton';
+import MemoizedRadioButton from '../common/MemoizedRadioButton';
 
 const FundRound = ({ query, handleApplyFilter }) => {
   const { data } = useSearchFundRound();

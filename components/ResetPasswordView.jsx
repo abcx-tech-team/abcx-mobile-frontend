@@ -7,8 +7,8 @@ import {
 } from 'react-native';
 import React from 'react';
 import { colors, ScreenNames, sizes } from '../utils';
-import PrimaryButton from './PrimaryButton';
-import CustomTextInput from './TextInput';
+import PrimaryButton from './common/PrimaryButton';
+import CustomTextInput from './forms/TextInput';
 import { useForm, FormProvider } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';

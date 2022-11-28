@@ -1,9 +1,9 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
-import { colors, ScreenNames, sizes } from '../utils';
+import { colors, ScreenNames, sizes } from '../../utils';
 
-const Investing = require('../assets/icons/money_active.png');
-const Clock = require('../assets/icons/clock_deal.png');
+const Investing = require('../../assets/icons/money_active.png');
+const Clock = require('../../assets/icons/clock_deal.png');
 
 const DealCard = ({ dealData, navigation }) => {
   return (

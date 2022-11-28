@@ -1,9 +1,9 @@
 import { Image, Modal, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import SecondaryButton from './SecondaryButton';
-import PrimaryButton from './PrimaryButton';
+import SecondaryButton from '../common/SecondaryButton';
+import PrimaryButton from '../common/PrimaryButton';
 
-const Tick = require('../assets/icons/circle_tick_green.png');
+const Tick = require('../../assets/icons/circle_tick_green.png');
 
 const RequestConfirmBlindProfile = ({ visible, onSubmit, onClose }) => {
   return (

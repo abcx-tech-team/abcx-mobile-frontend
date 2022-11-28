@@ -8,9 +8,9 @@ import {
   View,
 } from 'react-native';
 import React, { useContext } from 'react';
-import PrimaryButton from './PrimaryButton';
+import PrimaryButton from './common/PrimaryButton';
 import { colors, ScreenNames, sizes, USER_TOKEN_ID_KEY } from '../utils';
-import CustomTextInput from './TextInput';
+import CustomTextInput from './forms/TextInput';
 import { useForm, FormProvider } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -18,7 +18,7 @@ import { useLogin } from '../hooks/auth.hooks';
 import useIsLogin from '../hooks/useIsLogin.hook';
 import Toast from 'react-native-toast-message';
 import { setToken } from '../utils/asyncStorage';
-import CustomPasswordInput from './PasswordInput';
+import CustomPasswordInput from './forms/PasswordInput';
 import { AuthContext } from '../context/authContext';
 
 const schema = yup.object().shape({

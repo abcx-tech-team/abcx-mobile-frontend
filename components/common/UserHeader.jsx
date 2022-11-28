@@ -1,14 +1,14 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import React, { useContext } from 'react';
 import Badge from './Badge';
-import { useLoggedInUser } from '../hooks/user.hooks';
+import { useLoggedInUser } from '../../hooks/user.hooks';
 import { Avatar } from 'react-native-paper';
-import { colors, sizes, USER_TOKEN_ID_KEY } from '../utils';
-import { AuthContext } from '../context/authContext';
-import { removeStorage } from '../utils/asyncStorage';
+import { colors, sizes, USER_TOKEN_ID_KEY } from '../../utils';
+import { AuthContext } from '../../context/authContext';
+import { removeStorage } from '../../utils/asyncStorage';
 
-const AvatarImg = require('../assets/avatar_abcx.png');
-const Bell = require('../assets/icons/bell.png');
+const AvatarImg = require('../../assets/avatar_abcx.png');
+const Bell = require('../../assets/icons/bell.png');
 
 const UserHeader = () => {
   const { data: userData } = useLoggedInUser();
@@ -77,6 +77,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   badgeStyle: {
-    backgroundColor: '#FF0000',
+    backgroundColor: colors.badgeRed,
   },
 });

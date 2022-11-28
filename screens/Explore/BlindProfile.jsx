@@ -9,10 +9,10 @@ import {
 } from 'react-native';
 import { ScreenNames } from '../../utils';
 import { useBriefProfileById } from '../../hooks/blindProfile.hooks';
-import PrimaryButton from '../../components/PrimaryButton';
-import RequestBlindProfileModal from '../../components/RequestBlindProfileModal';
+import PrimaryButton from '../../components/common/PrimaryButton';
+import RequestBlindProfileModal from '../../components/modals/RequestBlindProfileModal';
 import { useConfirmation } from '../../context/ModalContext';
-import RequestConfirmBlindProfile from '../../components/RequestConfirmBlindProfile';
+import RequestConfirmBlindProfile from '../../components/modals/RequestConfirmBlindProfile';
 
 const Back = require('../../assets/icons/back.png');
 const House = require('../../assets/icons/house.png');

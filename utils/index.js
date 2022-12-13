@@ -12,6 +12,10 @@ export const ScreenNames = {
   dealDetails: 'Deal Details',
   timeline: 'Deal Timeline',
   nextSteps: 'Deal Next Steps',
+  companyProfile: 'Company Profile',
+  dataRoom: 'Data Room',
+  loi: 'Letter of Intent',
+  meetingRoom: 'Meeting Room',
 };
 
 export const colors = {
@@ -179,3 +183,51 @@ export const sameObject = (obj1, obj2) => {
 };
 
 export const redeemType = (credits) => (credits ? 'credit-view' : 'amount');
+
+export const dealStageCodes = {
+  meetingRoom: 'MRS',
+  timeline: 'TML',
+  dataRoom: 'DRS',
+  letterOfIntent: 'LOI',
+  companyProfile: 'CPR',
+  dealClosure: 'DCE',
+  nextSteps: 'NXT',
+  accessCounterParty: 'ACI',
+};
+
+export const dealStageStates = {
+  inActive: 'INACTIVE',
+  pendingApproval: 'PENDING_APPROVAL',
+  approved: 'APPROVED',
+  active: 'ACTIVE',
+};
+
+export const openRoomModalData = {
+  MRS: {
+    heading: 'Open Meeting Room Confirmation?',
+    subHeading:
+      'An intro call with management team allows clear communication between members of the company. ',
+    contextData: 'Fastest way to schedule a meeting',
+  },
+  DRS: {
+    heading: 'Open Data Room Confirmation?',
+    subHeading:
+      'Data room is a discreet cloud folder only accessible by the parties and gets deleted after the use. ',
+    contextData: 'Safest way to share files',
+  },
+  LOI: {
+    heading: 'Open Term Sheet Confirmation?',
+    subHeading:
+      'We will send an email introducting to both the parties. Are you sure you want to proceed? ',
+    contextData: 'On success, we raise a fee of £100 to company',
+  },
+  ACI: {
+    heading: 'Access counterparty information',
+    subHeading:
+      'We will send an email introducting to both the parties. Are you sure you want to proceed? ',
+    contextData: 'On success, we raise a fee of £100 to company',
+    price: '0',
+    actualPrice: '100',
+    currency: 'gbp',
+  },
+};

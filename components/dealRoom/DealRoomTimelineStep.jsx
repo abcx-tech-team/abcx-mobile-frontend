@@ -4,7 +4,14 @@ import { AntDesign } from '@expo/vector-icons';
 import DealStepTags from './DealStepTags';
 import { colors, sizes } from '../../utils';
 
-const DealRoomTimelineStep = ({ name, image, tag }) => {
+const DealRoomTimelineStep = ({
+  name,
+  image,
+  tag,
+  onClick,
+  id,
+  disabled = false,
+}) => {
   return (
     <View style={styles.dealRoomStep}>
       <View style={styles.stepDetail}>
@@ -20,6 +27,8 @@ const DealRoomTimelineStep = ({ name, image, tag }) => {
               backgroundColor: pressed ? colors.text20 : colors.white,
             },
           ]}
+          onPress={() => onClick(id)}
+          disabled={disabled}
         >
           <AntDesign name='arrowright' size={24} color={colors.text80} />
         </Pressable>

@@ -6,6 +6,12 @@ const Investing = require('../../assets/icons/money_active.png');
 const Clock = require('../../assets/icons/clock_deal.png');
 
 const DealCard = ({ dealData, navigation }) => {
+  const handleViewDeal = () => {
+    navigation.navigate(ScreenNames.dealDetails, {
+      dealId: dealData.dealMeta.dealUUID,
+    });
+  };
+
   return (
     <View style={styles.dealCard}>
       <View style={styles.header}>
@@ -33,15 +39,7 @@ const DealCard = ({ dealData, navigation }) => {
           <Image source={Clock} style={styles.tagImage} />
           <Text style={styles.tagText}>{dealData.dealStatus}</Text>
         </View>
-        <Pressable
-          onPress={() => {
-            console.log(dealData.dealMeta.dealUUID);
-            navigation.navigate(ScreenNames.dealDetails, {
-              dealId: dealData.dealMeta.dealUUID,
-            });
-          }}
-          style={styles.infoButton}
-        >
+        <Pressable onPress={handleViewDeal} style={styles.infoButton}>
           <Text style={styles.infoButtonText}>View Deal</Text>
           <Entypo name='chevron-right' size={24} color={colors.primary} />
         </Pressable>

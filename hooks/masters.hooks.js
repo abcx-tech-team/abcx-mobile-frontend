@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import {
+  dataRoomFileCategory,
   searchCountry,
   searchFundRound,
   searchFundType,
@@ -44,4 +45,16 @@ export const useSearchFundType = (enabled) =>
       return res;
     },
     { enabled }
+  );
+
+export const useDataRoomFileCategory = (enabled) =>
+  useQuery(
+    ['file-category'],
+    async () => {
+      const res = await dataRoomFileCategory();
+      return res;
+    },
+    {
+      enabled,
+    }
   );

@@ -13,7 +13,8 @@ const Bell = require('../../assets/icons/bell.png');
 const UserHeader = () => {
   const { data: userData } = useLoggedInUser();
   const { setState } = useContext(AuthContext);
-  const handleLogOut = () => {
+
+  const handleLogOut = async () => {
     setState('');
     removeStorage(USER_TOKEN_ID_KEY);
   };

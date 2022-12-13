@@ -2,6 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import {
   blindProfileById,
   blindProfiles,
+  requestBlindProfile,
   saveBlindProfile,
 } from '../requests/blindProfile.requests';
 import Toast from 'react-native-toast-message';
@@ -40,5 +41,11 @@ export const useBlindProfiles = (query, enabled = true) =>
 export const useSaveBlindProfile = () =>
   useMutation(async (data) => {
     const res = await saveBlindProfile(data);
+    return res;
+  });
+
+export const useRequestBlindProfile = () =>
+  useMutation(async (data) => {
+    const res = await requestBlindProfile(data);
     return res;
   });

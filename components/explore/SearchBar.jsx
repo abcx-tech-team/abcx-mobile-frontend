@@ -1,11 +1,4 @@
-import {
-  Image,
-  Platform,
-  Pressable,
-  StyleSheet,
-  TextInput,
-  View,
-} from 'react-native';
+import { Image, Platform, Pressable, StyleSheet, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import FilterModal from '../filter/FilterModal';
 import MultiSelect from 'react-native-multiple-select';

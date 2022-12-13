@@ -166,3 +166,16 @@ export const countryPreference = [
   'Croatia',
   'NetherLands',
 ];
+
+export const sameObject = (obj1, obj2) => {
+  let flag = true;
+  for (const key in obj1) {
+    if (obj1[key] !== obj2[key]) {
+      flag = false;
+      return flag;
+    }
+  }
+  return flag;
+};
+
+export const redeemType = (credits) => (credits ? 'credit-view' : 'amount');

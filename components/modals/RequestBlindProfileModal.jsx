@@ -3,13 +3,39 @@ import React from 'react';
 import SecondaryButton from '../common/SecondaryButton';
 import PrimaryButton from '../common/PrimaryButton';
 import { useCreditBalance } from '../../hooks/user.hooks';
-import { currencyMapper } from '../../utils';
+import { currencyMapper, redeemType, sizes } from '../../utils';
+import { useRequestBlindProfile } from '../../hooks/blindProfile.hooks';
 
 const Shield = require('../../assets/icons/shield.png');
 const Card = require('../../assets/icons/card.png');
 
-const RequestBlindProfileModal = ({ visible, onSubmit, onClose }) => {
-  const { data } = useCreditBalance();
+const RequestBlindProfileModal = ({
+  visible,
+  onSubmit,
+  onClose,
+  company_id,
+}) => {
+  const { data, isLoading: loadingCredit } = useCreditBalance();
+  const {
+    mutateAsync: requestBlindProfile,
+    isLoading: requestingBriefProfile,
+  } = useRequestBlindProfile();
+
+  const handleSubmit = async () => {
+    try {
+      const { result } = await requestBlindProfile({
+        company_id,
+        redeemType: redeemType(Number(data.creditViews)),
+      });
+      if (result.statusCode === 200) {
+        onSubmit();
+      } else {
+        throw new Error(result.statusMessage);
+      }
+    } catch (err) {
+      onClose();
+    }
+  };
 
   return (
     <>
@@ -63,15 +89,16 @@ const RequestBlindProfileModal = ({ visible, onSubmit, onClose }) => {
               <View style={styles.rightButton}>
                 <PrimaryButton
                   title='Confirm Request'
-                  onClick={onSubmit}
-                  noLoader
+                  onClick={handleSubmit}
+                  isLoading={requestingBriefProfile || loadingCredit}
+                  disabled={requestingBriefProfile || loadingCredit}
                 />
               </View>
               <View style={styles.leftButton}>
                 <SecondaryButton
                   title='Cancel Request'
                   onClick={onClose}
-                  noLoader
+                  disabled={requestingBriefProfile}
                 />
               </View>
             </View>
@@ -149,7 +176,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 8,
+    marginBottom: sizes.p2,
   },
   termImage: {
     height: 15,

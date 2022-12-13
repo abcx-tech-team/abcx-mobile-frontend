@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: sizes.p2,
+    marginBottom: sizes.p2,
   },
   back: {
     marginRight: sizes.p2,

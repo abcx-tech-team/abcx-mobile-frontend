@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import DealScreenHeader from '../../components/dealRoom/DealScreenHeader';
 import { colors, ScreenNames, sizes } from '../../utils';
@@ -34,11 +34,13 @@ const NextSteps = ({ navigation }) => {
         screenName='Next Steps'
         onBackPress={() => navigation.navigate(ScreenNames.dealRoom)}
       />
-      <View style={styles.stepContainer}>
-        {nextStepsData.map((item) => (
-          <DealRoomStep {...item} key={item.name} />
-        ))}
-      </View>
+      <ScrollView>
+        <View style={styles.stepContainer}>
+          {nextStepsData.map((item) => (
+            <DealRoomStep {...item} key={item.name} />
+          ))}
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   stepContainer: {
-    marginTop: sizes.p3,
+    marginBottom: sizes.p4,
     paddingHorizontal: sizes.p2,
   },
 });

@@ -13,10 +13,11 @@ const PrimaryButton = ({
   onClick,
   isLoading = false,
   noLoader = false,
+  disabled = false,
 }) => {
   return (
     <View style={styles.buttonContainer}>
-      <Pressable onPress={onClick} style={styles.button}>
+      <Pressable onPress={onClick} style={styles.button} disabled={disabled}>
         <Text style={styles.text}>{title}</Text>
         {!noLoader ? (
           <View style={styles.loaderContainer}>

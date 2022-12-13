@@ -2,10 +2,20 @@ import { Image, Modal, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import SecondaryButton from '../common/SecondaryButton';
 import PrimaryButton from '../common/PrimaryButton';
+import * as RootNavigation from '../../utils/RootNavigation';
+import { ScreenNames } from '../../utils';
 
 const Tick = require('../../assets/icons/circle_tick_green.png');
 
 const RequestConfirmBlindProfile = ({ visible, onSubmit, onClose }) => {
+  const handleDealRom = () => {
+    onSubmit();
+    RootNavigation.navigate(ScreenNames.dealRoom);
+  };
+  const handleBack = () => {
+    onClose();
+    RootNavigation.navigate(ScreenNames.explore);
+  };
   return (
     <>
       {visible ? <View style={styles.filter} /> : null}
@@ -22,10 +32,18 @@ const RequestConfirmBlindProfile = ({ visible, onSubmit, onClose }) => {
             </Text>
             <View style={styles.actionButtons}>
               <View style={styles.rightButton}>
-                <PrimaryButton title='View Deal' onClick={onSubmit} noLoader />
+                <PrimaryButton
+                  title='View Deal'
+                  onClick={handleDealRom}
+                  noLoader
+                />
               </View>
               <View style={styles.leftButton}>
-                <SecondaryButton title='Go Back' onClick={onClose} noLoader />
+                <SecondaryButton
+                  title='Go Back'
+                  onClick={handleBack}
+                  noLoader
+                />
               </View>
             </View>
           </View>

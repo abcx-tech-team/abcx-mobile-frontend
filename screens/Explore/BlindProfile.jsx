@@ -13,6 +13,8 @@ import PrimaryButton from '../../components/common/PrimaryButton';
 import RequestBlindProfileModal from '../../components/modals/RequestBlindProfileModal';
 import { useConfirmation } from '../../context/ModalContext';
 import RequestConfirmBlindProfile from '../../components/modals/RequestConfirmBlindProfile';
+import ConfirmationAnimation from '../../components/modals/ConfirmationAnimation';
+import { useEffect } from 'react';
 
 const Back = require('../../assets/icons/back.png');
 const House = require('../../assets/icons/house.png');
@@ -41,20 +43,29 @@ const BriefProfile = ({ route, navigation }) => {
   const confirmation = useConfirmation();
 
   const { briefProfileId } = route.params;
-  const { data: briefProfileData } = useBriefProfileById(
+  const { data: briefProfileData, isLoading } = useBriefProfileById(
     briefProfileId,
     !!briefProfileId
   );
 
   const handleRequestBlindProfile = async (companyId) => {
     try {
-      await confirmation({ Component: RequestBlindProfileModal });
-      console.log(companyId);
+      await confirmation({
+        Component: RequestBlindProfileModal,
+        company_id: companyId,
+      });
+      await confirmation({ Component: ConfirmationAnimation });
       await confirmation({ Component: RequestConfirmBlindProfile });
     } catch (err) {
-      console.log('catch e');
+      console.log('Err');
     }
   };
+
+  useEffect(() => {
+    if (!briefProfileData?.results.length) {
+      navigation.navigate(ScreenNames.explore);
+    }
+  }, [briefProfileData]);
 
   return (
     <View style={styles.container}>
@@ -72,7 +83,7 @@ const BriefProfile = ({ route, navigation }) => {
       <View style={styles.companyMetaData}>
         <View>
           <Text style={styles.companyDetails}>
-            {briefProfileData?.results[0].subtitle || ''}
+            {briefProfileData?.results[0]?.subtitle || ''}
           </Text>
         </View>
         <View>
@@ -82,7 +93,7 @@ const BriefProfile = ({ route, navigation }) => {
             </View>
             <View style={styles.data}>
               <Text style={styles.dataText}>
-                Founded: {briefProfileData?.results[0].metaDetails.founded}
+                Founded: {briefProfileData?.results[0]?.metaDetails.founded}
               </Text>
             </View>
           </View>
@@ -93,10 +104,10 @@ const BriefProfile = ({ route, navigation }) => {
             <View style={styles.data}>
               <Text style={styles.dataText}>
                 Location:{' '}
-                {briefProfileData?.results[0].metaDetails.location?.city
-                  ? `${briefProfileData?.results[0].metaDetails.location?.city}, `
+                {briefProfileData?.results[0]?.metaDetails.location?.city
+                  ? `${briefProfileData?.results[0]?.metaDetails.location?.city}, `
                   : ''}
-                {briefProfileData?.results[0].metaDetails.location?.country ||
+                {briefProfileData?.results[0]?.metaDetails.location?.country ||
                   ''}
               </Text>
             </View>
@@ -109,8 +120,8 @@ const BriefProfile = ({ route, navigation }) => {
             <View style={styles.companyInfoCard}>
               <Text style={styles.label}>Sector</Text>
               <Text style={[styles.value, { fontSize: 18 }]}>
-                {briefProfileData?.results[0].metaDetails?.sector?.sectorName ||
-                  ''}
+                {briefProfileData?.results[0]?.metaDetails?.sector
+                  ?.sectorName || ''}
               </Text>
             </View>
           </View>
@@ -118,19 +129,20 @@ const BriefProfile = ({ route, navigation }) => {
             <View style={[styles.companyInfoCard, { paddingRight: 8 }]}>
               <Text style={styles.label}>Market Type</Text>
               <Text style={styles.value}>
-                {briefProfileData?.results[0].metaDetails?.marketType || ''}
+                {briefProfileData?.results[0]?.metaDetails?.marketType || ''}
               </Text>
             </View>
             <View style={[styles.companyInfoCard, { paddingHorizontal: 8 }]}>
               <Text style={styles.label}>No of Employee</Text>
               <Text style={styles.value}>
-                {briefProfileData?.results[0].metaDetails?.employeeRange || ''}
+                {briefProfileData?.results[0]?.metaDetails?.employeeRange || ''}
               </Text>
             </View>
             <View style={[styles.companyInfoCard, { paddingLeft: 8 }]}>
               <Text style={styles.label}>Revenue</Text>
               <Text style={styles.value}>
-                {briefProfileData?.results[0].metaDetails?.currentRevenue || ''}
+                {briefProfileData?.results[0]?.metaDetails?.currentRevenue ||
+                  ''}
               </Text>
             </View>
           </View>
@@ -140,14 +152,14 @@ const BriefProfile = ({ route, navigation }) => {
             <View style={styles.fundingInfo}>
               <Text style={styles.label}>Total Funding Round</Text>
               <Text style={styles.value}>
-                {briefProfileData?.results[0].companyDetails?.totalFunding ||
+                {briefProfileData?.results[0]?.companyDetails?.totalFunding ||
                   ''}
               </Text>
             </View>
             <View style={styles.fundingInfo}>
               <Text style={styles.label}>Next Funding Round</Text>
               <Text style={styles.value}>
-                {briefProfileData?.results[0].companyDetails
+                {briefProfileData?.results[0]?.companyDetails
                   ?.nextFundingTarget || ''}
               </Text>
             </View>
@@ -156,22 +168,22 @@ const BriefProfile = ({ route, navigation }) => {
             <View style={styles.fundingInfo}>
               <Text style={styles.label}>Last Funding</Text>
               <Text style={styles.value}>
-                {briefProfileData?.results[0].companyDetails?.lastFundRound
+                {briefProfileData?.results[0]?.companyDetails?.lastFundRound
                   ?.year
-                  ? `${briefProfileData?.results[0].companyDetails?.lastFundRound.year} - `
+                  ? `${briefProfileData?.results[0]?.companyDetails?.lastFundRound.year} - `
                   : null}{' '}
-                {briefProfileData?.results[0].companyDetails?.lastFundRound
+                {briefProfileData?.results[0]?.companyDetails?.lastFundRound
                   ?.type || ''}
               </Text>
             </View>
             <View style={styles.fundingInfo}>
               <Text style={styles.label}>Next Funding</Text>
               <Text style={styles.value}>
-                {briefProfileData?.results[0].companyDetails?.nextFundRound
+                {briefProfileData?.results[0]?.companyDetails?.nextFundRound
                   ?.year
-                  ? `${briefProfileData?.results[0].companyDetails?.nextFundRound?.year} - `
+                  ? `${briefProfileData?.results[0]?.companyDetails?.nextFundRound?.year} - `
                   : null}{' '}
-                {briefProfileData?.results[0].companyDetails?.nextFundRound
+                {briefProfileData?.results[0]?.companyDetails?.nextFundRound
                   ?.type || ''}
               </Text>
             </View>
@@ -198,8 +210,10 @@ const BriefProfile = ({ route, navigation }) => {
         <PrimaryButton
           title='Request Brief Profile'
           onClick={() =>
-            handleRequestBlindProfile(briefProfileData.results[0].companyUUID)
+            handleRequestBlindProfile(briefProfileData?.results[0]?.companyUUID)
           }
+          isLoading={isLoading}
+          disabled={isLoading}
         />
       </View>
     </View>

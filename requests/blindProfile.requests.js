@@ -8,3 +8,6 @@ export const blindProfiles = (query) =>
 
 export const saveBlindProfile = (data) =>
   http.post('/explore/save-blind-profile/', data);
+
+export const requestBlindProfile = (data) =>
+  http.post('/transaction/access-brief-profile/request', data);

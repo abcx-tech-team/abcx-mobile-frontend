@@ -14,6 +14,8 @@
 
 - [x] Folder in component folder
 
+- [x] Pull Refresh on explore section
+
 - [ ] Disable Screen Capture
 
 - [ ] Recommendation card

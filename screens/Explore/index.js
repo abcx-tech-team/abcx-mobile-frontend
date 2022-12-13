@@ -12,8 +12,9 @@ import SearchBar from '../../components/explore/SearchBar';
 import BriefProfileCard from '../../components/explore/BlindProfileCard';
 import AuthContainer from '../../container/AuthContainer';
 import { useBlindProfiles } from '../../hooks/blindProfile.hooks';
-import { serialize } from '../../utils';
+import { colors, sameObject, serialize } from '../../utils';
 import SearchTag from '../../components/common/SearchTag';
+import { useQueryClient } from '@tanstack/react-query';
 
 const tabs = [
   {
@@ -53,6 +54,15 @@ const tabs = [
   },
 ];
 
+const queryInitialValue = {
+  pageNo: 1,
+  pageSize: 10,
+  ctrm: '',
+  tprm: '',
+  ftrm: '',
+  strm: '',
+};
+
 const FooterComponent = ({ isLoading, data }) =>
   isLoading ? (
     <View style={[styles.loader]}>
@@ -66,14 +76,10 @@ const FooterComponent = ({ isLoading, data }) =>
 
 const Explore = ({ navigation }) => {
   const [activeTab, setActiveTab] = useState('All');
+  const [pullRefresh, setPullRefresh] = useState(false);
 
   const [query, setQuery] = useState({
-    pageNo: 1,
-    pageSize: 10,
-    ctrm: '',
-    tprm: '',
-    ftrm: '',
-    strm: '',
+    ...queryInitialValue,
   });
 
   const [blindProfiles, setBlindProfiles] = useState({
@@ -91,18 +97,25 @@ const Explore = ({ navigation }) => {
     }
   };
 
+  const handlePullRefresh = () => {
+    if (!sameObject({ ...queryInitialValue }, { ...query })) {
+      setQuery({ ...queryInitialValue });
+      setPullRefresh(true);
+    }
+  };
+
   useEffect(() => {
     if (blindProfileData) {
-      if (blindProfileData.next) {
-        setBlindProfiles((prev) => ({
-          ...prev,
-          hasMore: true,
-          data: [...prev.data, ...blindProfileData.results],
-        }));
+      if (pullRefresh) {
+        setBlindProfiles({
+          hasMore: !!blindProfileData.next,
+          data: [...blindProfileData.results],
+        });
+        setPullRefresh(false);
       } else {
         setBlindProfiles((prev) => ({
           ...prev,
-          hasMore: false,
+          hasMore: !!blindProfileData.next,
           data: [...prev.data, ...blindProfileData.results],
         }));
       }
@@ -139,7 +152,7 @@ const Explore = ({ navigation }) => {
         </View>
         <View style={styles.dashboard}>
           <FlatList
-            bounces={false}
+            bounces={true}
             data={blindProfiles.data}
             renderItem={({ item }) => (
               <BriefProfileCard briefProfile={item} navigation={navigation} />
@@ -160,6 +173,8 @@ const Explore = ({ navigation }) => {
               width: '100%',
               marginBottom: 16,
             }}
+            refreshing={pullRefresh}
+            onRefresh={handlePullRefresh}
           />
         </View>
       </View>
@@ -178,7 +193,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
   },
   text: {
     fontSize: 35,

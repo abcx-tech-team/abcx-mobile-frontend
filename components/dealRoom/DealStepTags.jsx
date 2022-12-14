@@ -1,27 +1,46 @@
 import { StyleSheet, Text, View, Image } from 'react-native';
 import React from 'react';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
-const Clock = require('../../assets/icons/clock.png');
 const CircleTick = require('../../assets/icons/circle_tick_green.png');
 
 const DealStepTags = (tagName) => {
   switch (tagName) {
-    case 'Approved':
+    case 'Completed':
       return (
         <View style={[styles.successTag, styles.tab]}>
-          <Image source={CircleTick} style={styles.clock} />
-          <Text style={[styles.successTabText, styles.tabText]}>
-            Needs Attention
-          </Text>
+          <AntDesign
+            name='checkcircleo'
+            size={15}
+            color='#5AB46A'
+            style={styles.marginRight}
+          />
+          <Text style={[styles.successTabText, styles.tabText]}>{tagName}</Text>
         </View>
       );
     case 'Yet to Start':
       return (
         <View style={[styles.pendingTag, styles.tab]}>
-          <Image source={Clock} style={styles.clock} />
-          <Text style={[styles.pendingTabText, styles.tabText]}>
-            yet to Start
-          </Text>
+          <AntDesign
+            name='clockcircleo'
+            size={15}
+            color='#E89612'
+            style={styles.marginRight}
+          />
+          <Text style={[styles.pendingTabText, styles.tabText]}>{tagName}</Text>
+        </View>
+      );
+    case 'In progress':
+      return (
+        <View style={[styles.pendingTag, styles.tab]}>
+          <MaterialCommunityIcons
+            name='progress-check'
+            size={15}
+            color='#E89612'
+            style={styles.marginRight}
+          />
+          <Text style={[styles.pendingTabText, styles.tabText]}>{tagName}</Text>
         </View>
       );
     default:
@@ -43,9 +62,8 @@ const styles = StyleSheet.create({
   pendingTag: {
     backgroundColor: 'rgba(248, 176, 50, 0.2)',
   },
-  clock: {
-    height: 15,
-    width: 15,
+  marginRight: {
+    fontWeight: 'bold',
     marginRight: 8,
   },
   tabText: {

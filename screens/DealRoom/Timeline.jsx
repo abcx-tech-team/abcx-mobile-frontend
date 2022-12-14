@@ -1,6 +1,10 @@
 import { ScrollView, StyleSheet, View } from 'react-native';
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import DealScreenHeader from '../../components/dealRoom/DealScreenHeader';
+import DealRoomTimelineStep from '../../components/dealRoom/DealRoomTimelineStep';
+import OpenRoomModal from '../../components/modals/OpenRoomModal';
+import { useConfirmation } from '../../context/ModalContext';
+import { TabListContext } from '../../context/dealContext';
 import {
   colors,
   dealStageCodes,
@@ -8,14 +12,12 @@ import {
   ScreenNames,
   sizes,
 } from '../../utils';
-import DealRoomTimelineStep from '../../components/dealRoom/DealRoomTimelineStep';
 import {
+  useAccessCounterPartyCost,
   useDataRoomCost,
   useLOICost,
   useMeetingRoomCost,
 } from '../../hooks/deal.hooks';
-import { useConfirmation } from '../../context/ModalContext';
-import OpenRoomModal from '../../components/modals/OpenRoomModal';
 
 const timelineData = [
   {
@@ -51,13 +53,32 @@ const timelineData = [
 ];
 
 const Timeline = ({ navigation, route }) => {
-  const { dealId, tabList } = route.params;
+  const { dealId } = route.params;
+  const { tabList } = useContext(TabListContext);
+
+  const [timeline, setTimeline] = useState([...timelineData]);
+
+  useEffect(() => {
+    setTimeline((prev) =>
+      prev.map((item) => {
+        const data = tabList.find((tab) => item.id === tab.id);
+        if (data?.currentStage === 'APPROVED') {
+          return { ...item, tag: 'Completed' };
+        } else if (data?.currentStage === 'IN-PROGRESS') {
+          return { ...item, tag: 'In progress' };
+        }
+        return { ...item, tag: 'Yet to Start' };
+      })
+    );
+  }, [tabList]);
 
   const { data: meetingRoomCost, isLoading: meetingRoomCostLoading } =
     useMeetingRoomCost(dealId);
   const { data: dataRoomCost, isLoading: dataRoomCostLoading } =
     useDataRoomCost(dealId);
   const { data: loiCost, isLoading: LOIRoomCostLoading } = useLOICost(dealId);
+  const { data: accessCounterPartyCost, isLoading: accessCounterPartyLoading } =
+    useAccessCounterPartyCost();
 
   const confirmation = useConfirmation();
 
@@ -87,6 +108,13 @@ const Timeline = ({ navigation, route }) => {
             actualPrice: loiCost?.amount.value,
             currency: loiCost?.amount.currency,
           };
+        } else if (stageId === dealStageCodes.accessCounterParty) {
+          obj = {
+            ...obj,
+            price: 100,
+            actualPrice: accessCounterPartyCost?.amount.value,
+            currency: accessCounterPartyCost?.amount.currency,
+          };
         }
         await confirmation({ ...obj });
       } catch (err) {
@@ -101,11 +129,11 @@ const Timeline = ({ navigation, route }) => {
     <View style={styles.screen}>
       <DealScreenHeader
         screenName='Timeline'
-        onBackPress={() => navigation.navigate(ScreenNames.dealRoom)}
+        onBackPress={() => navigation.goBack()}
       />
       <ScrollView>
         <View style={styles.stepContainer}>
-          {timelineData.map((item) => (
+          {timeline.map((item) => (
             <DealRoomTimelineStep
               {...item}
               key={item.name}
@@ -113,7 +141,8 @@ const Timeline = ({ navigation, route }) => {
               disabled={
                 meetingRoomCostLoading ||
                 dataRoomCostLoading ||
-                LOIRoomCostLoading
+                LOIRoomCostLoading ||
+                accessCounterPartyLoading
               }
             />
           ))}

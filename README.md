@@ -16,6 +16,8 @@
 
 - [x] Pull Refresh on explore section
 
+- [ ] activity loader cutting on pull refresh
+
 - [ ] Disable Screen Capture
 
 - [ ] Recommendation card

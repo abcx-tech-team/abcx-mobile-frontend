@@ -16,6 +16,8 @@ export const ScreenNames = {
   dataRoom: 'Data Room',
   loi: 'Letter of Intent',
   meetingRoom: 'Meeting Room',
+  dealCompletion: 'Deal Completion',
+  dealCancelled: 'Deal Cancelled',
 };
 
 export const colors = {
@@ -43,6 +45,7 @@ export const colors = {
   badgeOrange: '#FF9966',
   badgeRed: '#FF0000',
   blindProfileBackground: 'rgba(42, 60, 137, 0.1)',
+  tagDark: 'rgba(245, 245, 245, 1)',
 };
 
 export const currencyMapper = (name) => {

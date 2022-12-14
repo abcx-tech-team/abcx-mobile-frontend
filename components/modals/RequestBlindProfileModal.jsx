@@ -33,6 +33,7 @@ const RequestBlindProfileModal = ({
         throw new Error(result.statusMessage);
       }
     } catch (err) {
+      console.log(err);
       onClose();
     }
   };

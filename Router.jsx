@@ -10,6 +10,9 @@ import BlindProfile from './screens/Explore/BlindProfile';
 import DealDetails from './screens/DealRoom/DealDetails';
 import NextSteps from './screens/DealRoom/NextSteps';
 import Timeline from './screens/DealRoom/Timeline';
+import CompanyProfile from './screens/DealRoom/CompanyProfile';
+import DealCompletion from './screens/DealRoom/DealCompletion';
+import DealCancellation from './screens/DealRoom/DealCancellation';
 
 const StackScreens = [
   {
@@ -51,6 +54,18 @@ const StackScreens = [
   {
     name: ScreenNames.timeline,
     component: Timeline,
+  },
+  {
+    name: ScreenNames.companyProfile,
+    component: CompanyProfile,
+  },
+  {
+    name: ScreenNames.dealCompletion,
+    component: DealCompletion,
+  },
+  {
+    name: ScreenNames.dealCancelled,
+    component: DealCancellation,
   },
 ];
 

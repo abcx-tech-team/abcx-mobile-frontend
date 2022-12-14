@@ -61,6 +61,7 @@ const queryInitialValue = {
   tprm: '',
   ftrm: '',
   strm: '',
+  seed: Math.random(),
 };
 
 const FooterComponent = ({ isLoading, data }) =>
@@ -98,10 +99,9 @@ const Explore = ({ navigation }) => {
   };
 
   const handlePullRefresh = () => {
-    if (!sameObject({ ...queryInitialValue }, { ...query })) {
-      setQuery({ ...queryInitialValue });
-      setPullRefresh(true);
-    }
+    setPullRefresh(true);
+    setQuery({ ...queryInitialValue, seed: Math.random() });
+    setBlindProfiles({ hasMore: true, data: [] });
   };
 
   useEffect(() => {

@@ -3,30 +3,56 @@ import React from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import { colors, sizes } from '../../utils';
 
-const DealRoomStep = ({ name, description, active }) => {
+const DealRoomStep = ({
+  nextStepName,
+  nextStepDesc,
+  isRecommended,
+  isEnabled,
+  buttonDisabled = false,
+  onClick,
+  nextStepCode,
+}) => {
   return (
-    <View style={[styles.dealRoomStep, active ? styles.active : null]}>
+    <View style={[styles.dealRoomStep, isRecommended ? styles.active : null]}>
       <View style={styles.stepDetail}>
-        <Text style={[styles.stepText, active ? styles.activeText : null]}>
-          {name}
+        <Text
+          style={[
+            styles.stepText,
+            isRecommended ? styles.activeText : null,
+            !isEnabled ? styles.disabledText : null,
+          ]}
+        >
+          {nextStepName}
         </Text>
       </View>
       <View style={styles.stepActions}>
-        <Text style={styles.descriptionText}>{description}</Text>
-        <Pressable
-          style={({ pressed }) => [
-            styles.back,
-            {
-              backgroundColor: pressed ? colors.text20 : colors.white,
-            },
-          ]}
-        >
-          <AntDesign
-            name='arrowright'
-            size={24}
-            color={active ? colors.primary : colors.text80}
-          />
-        </Pressable>
+        <Text style={styles.descriptionText}>{nextStepDesc}</Text>
+        <View style={styles.backContainer}>
+          <Pressable
+            style={({ pressed }) => [
+              styles.back,
+              isEnabled
+                ? {
+                    backgroundColor: pressed ? colors.text20 : colors.white,
+                  }
+                : null,
+            ]}
+            disabled={buttonDisabled || !isEnabled}
+            onPress={() => onClick(nextStepCode)}
+          >
+            <AntDesign
+              name='arrowright'
+              size={24}
+              color={
+                isRecommended
+                  ? colors.primary
+                  : isEnabled
+                  ? colors.text80
+                  : colors.text40
+              }
+            />
+          </Pressable>
+        </View>
       </View>
     </View>
   );
@@ -64,6 +90,10 @@ const styles = StyleSheet.create({
   },
   descriptionText: {
     color: colors.text40,
+    width: '85%',
+  },
+  disabledText: {
+    color: colors.text40,
   },
   active: {
     borderColor: colors.primaryBackground,
@@ -77,5 +107,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 100,
+  },
+  backContainer: {
+    width: '15%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

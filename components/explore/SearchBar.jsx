@@ -44,6 +44,7 @@ const SearchBar = ({ setQuery, setBlindProfiles, query }) => {
       tprm: '',
       ftrm: '',
       strm: '',
+      seed: Math.random(),
     });
     setBlindProfiles({ hasMore: true, data: [] });
     setShowFilter(false);

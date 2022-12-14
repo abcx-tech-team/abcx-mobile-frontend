@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: colors.text80,
+    width: '45%',
   },
   dealType: {
     flexDirection: 'row',

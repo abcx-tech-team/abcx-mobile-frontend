@@ -1,8 +1,8 @@
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import React, { useContext, useEffect, useMemo } from 'react';
 import { useDealDetails } from '../../hooks/deal.hooks';
-import { DealContext } from '../../context/dealContext';
-import CompanyProfile from './CompanyProfile/index';
+import { DealContext, TabListContext } from '../../context/dealContext';
+import SellerApproveForm from './SellerApproveForm';
 import { Button } from 'react-native-paper';
 import { ScreenNames } from '../../utils';
 
@@ -10,6 +10,8 @@ const DealDetails = ({ navigation, route }) => {
   const { dealId } = route.params;
   const { deal, setDeal } = useContext(DealContext);
   const { data: dealDetails } = useDealDetails(dealId);
+
+  const { setTabList } = useContext(TabListContext);
 
   useEffect(() => {
     if (dealDetails) {
@@ -48,29 +50,67 @@ const DealDetails = ({ navigation, route }) => {
     }
   }, [deal]);
 
+  useEffect(() => {
+    setTabList([...tabList]);
+  }, [tabList]);
+
   const showSellerApprovalForm = useMemo(() => {
     return !isBuyer && tabList?.[1]?.currentStage === 'PENDING_APPROVAL';
   }, [isBuyer, tabList]);
 
   return (
-    <View style={{ marginTop: 100 }}>
+    <View style={styles.dealDetailsContainer}>
       {showSellerApprovalForm ? (
-        <Text>Show Seller Approval Form here</Text>
+        <SellerApproveForm
+          dealId={dealId}
+          companyName={deal?.dealMeta?.companyName}
+          navigation={navigation}
+          isBuyer={isBuyer}
+        />
+      ) : isBuyer ? (
+        <View style={{ marginTop: 100 }}>
+          <Text>This is the buyer, don't have anything to show</Text>
+        </View>
       ) : (
-        <CompanyProfile />
+        <View style={{ marginTop: 100 }}>
+          <Text>This is the Seller, don't have anything to show</Text>
+        </View>
       )}
       <Button
         onPress={() =>
-          navigation.navigate(ScreenNames.timeline, {
-            tabList,
-            dealId,
-          })
+          navigation.navigate(ScreenNames.companyProfile, { dealId: dealId })
+        }
+      >
+        Company Profile
+      </Button>
+      <Button
+        onPress={() =>
+          navigation.navigate(ScreenNames.nextSteps, { dealId: dealId })
+        }
+      >
+        Next Steps
+      </Button>
+      <Button
+        onPress={() =>
+          navigation.navigate(ScreenNames.timeline, { dealId: dealId })
         }
       >
         Timeline
       </Button>
+      <Button onPress={() => navigation.navigate(ScreenNames.dealCompletion)}>
+        Completed
+      </Button>
+      <Button onPress={() => navigation.navigate(ScreenNames.dealCancelled)}>
+        Cancelled
+      </Button>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  dealDetailsContainer: {
+    flex: 1,
+  },
+});
 
 export default DealDetails;

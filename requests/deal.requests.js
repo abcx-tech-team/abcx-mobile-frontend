@@ -6,15 +6,21 @@ export const approveBriefProfile = (data) =>
 export const declineBriefProfile = (data) =>
   http.post('/transaction/deal/access-brief-profile/decline/', data);
 
+export const dealNextSteps = (dealId) =>
+  http.get(`/transaction/get-next-steps/${dealId}/`);
+
 export const dealDetails = (dealId) => http.get(`/transaction/deal/${dealId}/`);
 
 export const buyerMemberProfile = (data) =>
   http.post('/transaction/access-brief-profile/buyer-member-profile/', data);
 
 export const companyProfile = (dealId) =>
-  http.get(
-    `api/v1/transaction/access-brief-profile/company-profile/${dealId}/`
-  );
+  http.get(`/transaction/access-brief-profile/company-profile/${dealId}/`);
+
+export const accessCounterPartyCost = () =>
+  http.get(`/transaction/deal/get-counterparty-cost/`);
+export const accessCounterPartyInfo = (data) =>
+  http.post('/transaction/deal/access-counterparty-info/', data);
 
 export const openMeetingRoom = (data) =>
   http.post('/transaction/deal/meeting-room/open/', data);

@@ -57,7 +57,7 @@ const BriefProfile = ({ route, navigation }) => {
       await confirmation({ Component: ConfirmationAnimation });
       await confirmation({ Component: RequestConfirmBlindProfile });
     } catch (err) {
-      console.log('Err');
+      console.log(err);
     }
   };
 

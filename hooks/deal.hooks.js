@@ -1,5 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import {
+  accessCounterPartyCost,
+  accessCounterPartyInfo,
   approveBriefProfile,
   approveMeetingRoomDate,
   buyerMemberProfile,
@@ -8,6 +10,7 @@ import {
   dataRoomCost,
   dataRoomFileList,
   dealDetails,
+  dealNextSteps,
   declineBriefProfile,
   deleteDataRoomFile,
   downloadDataRoomFile,
@@ -35,9 +38,21 @@ export const useDeclineBriefProfile = () =>
     return res;
   });
 
+export const useDealNextSteps = (dealId, enabled = true) =>
+  useQuery(
+    ['deal-next-steps'],
+    async () => {
+      const res = await dealNextSteps(dealId);
+      return res;
+    },
+    {
+      enabled,
+    }
+  );
+
 export const useDealDetails = (dealId, enabled = true) =>
   useQuery(
-    ['deal-details'],
+    ['deal-details', dealId],
     async () => {
       const res = await dealDetails(dealId);
       return res;
@@ -64,6 +79,24 @@ export const useCompanyProfile = (dealId, enabled = true) =>
       enabled,
     }
   );
+
+// AccessCounterparty
+
+export const useAccessCounterPartyCost = (enabled = true) =>
+  useQuery(
+    ['access-counter-party-cost'],
+    async () => {
+      const res = await accessCounterPartyCost();
+      return res;
+    },
+    { enabled }
+  );
+
+export const useAccessCounterPartyInfo = () =>
+  useMutation(async (data) => {
+    const res = await accessCounterPartyInfo(data);
+    return res;
+  });
 
 // Meeting Room Hooks
 

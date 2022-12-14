@@ -8,27 +8,30 @@ import { useState } from 'react';
 import { navigationRef } from './utils/RootNavigation';
 import Router from './Router';
 import { ConfirmationProvider } from './context/ModalContext';
-import { DealContext } from './context/dealContext';
+import { DealContext, TabListContext } from './context/dealContext';
 
 const queryClient = new QueryClient();
 export default function App() {
   const [authState, setAuthState] = useState('');
   const [deal, setDeal] = useState({});
+  const [tabList, setTabList] = useState([]);
   return (
     <QueryClientProvider client={queryClient}>
       <AuthContext.Provider
         value={{ token: authState, setState: setAuthState }}
       >
         <DealContext.Provider value={{ deal, setDeal }}>
-          <ConfirmationProvider>
-            <View style={styles.container}>
-              <NavigationContainer ref={navigationRef}>
-                <Router />
-              </NavigationContainer>
-              <StatusBar style='dark' />
-              <Toast />
-            </View>
-          </ConfirmationProvider>
+          <TabListContext.Provider value={{ tabList, setTabList }}>
+            <ConfirmationProvider>
+              <View style={styles.container}>
+                <NavigationContainer ref={navigationRef}>
+                  <Router />
+                </NavigationContainer>
+                <StatusBar style='dark' />
+                <Toast />
+              </View>
+            </ConfirmationProvider>
+          </TabListContext.Provider>
         </DealContext.Provider>
       </AuthContext.Provider>
     </QueryClientProvider>

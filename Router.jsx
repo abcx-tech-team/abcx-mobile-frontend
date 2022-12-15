@@ -11,8 +11,11 @@ import DealDetails from './screens/DealRoom/DealDetails';
 import NextSteps from './screens/DealRoom/NextSteps';
 import Timeline from './screens/DealRoom/Timeline';
 import CompanyProfile from './screens/DealRoom/CompanyProfile';
+import AccessCounterParty from './screens/DealRoom/AccessCounterParty';
 import DealCompletion from './screens/DealRoom/DealCompletion';
 import DealCancellation from './screens/DealRoom/DealCancellation';
+import DataRoom from './screens/DealRoom/DataRoom';
+import MeetingRoom from './screens/DealRoom/MeetingRoom';
 
 const StackScreens = [
   {
@@ -60,12 +63,24 @@ const StackScreens = [
     component: CompanyProfile,
   },
   {
+    name: ScreenNames.accessCounterParty,
+    component: AccessCounterParty,
+  },
+  {
     name: ScreenNames.dealCompletion,
     component: DealCompletion,
   },
   {
     name: ScreenNames.dealCancelled,
     component: DealCancellation,
+  },
+  {
+    name: ScreenNames.dataRoom,
+    component: DataRoom,
+  },
+  {
+    name: ScreenNames.meetingRoom,
+    component: MeetingRoom,
   },
 ];
 

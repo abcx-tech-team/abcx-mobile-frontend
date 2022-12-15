@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
   },
   openDataRoomContainer: {
     paddingHorizontal: sizes.p2,
-    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
   },

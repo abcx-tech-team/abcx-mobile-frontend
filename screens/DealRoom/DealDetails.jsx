@@ -103,6 +103,7 @@ const DealDetails = ({ navigation, route }) => {
       <Button onPress={() => navigation.navigate(ScreenNames.dealCancelled)}>
         Cancelled
       </Button>
+      <Button onPress={() => navigation.goBack()}>Back</Button>
     </View>
   );
 };

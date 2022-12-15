@@ -2,7 +2,18 @@ import { Image, Modal, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import SecondaryButton from '../common/SecondaryButton';
 import PrimaryButton from '../common/PrimaryButton';
-import { currencyMapper } from '../../utils';
+import { currencyMapper, dealStageCodes } from '../../utils';
+import {
+  useAccessCounterPartyCost,
+  useDataRoomCost,
+  useLOICost,
+  useMeetingRoomCost,
+  useAccessCounterPartyInfo,
+  useOpenDataRoom,
+  useOpenMeetingRoom,
+} from '../../hooks/deal.hooks';
+import Toast from 'react-native-toast-message';
+import { QueryClient, useQueryClient } from '@tanstack/react-query';
 
 const Card = require('../../assets/icons/card.png');
 
@@ -14,9 +25,136 @@ const RequestBlindProfileModal = ({
   subHeading,
   contextData,
   price,
-  actualPrice,
-  currency,
+  dealId,
+  stageId,
 }) => {
+  const queryCLient = useQueryClient();
+
+  const { data: meetingRoomCost } = useMeetingRoomCost(
+    dealId,
+    stageId === dealStageCodes.meetingRoom
+  );
+  const { data: dataRoomCost } = useDataRoomCost(
+    dealId,
+    stageId === dealStageCodes.dataRoom
+  );
+  const { data: loiCost } = useLOICost(
+    dealId,
+    stageId === dealStageCodes.letterOfIntent
+  );
+  const { data: accessCounterPartyCost } = useAccessCounterPartyCost(
+    stageId === dealStageCodes.accessCounterParty
+  );
+  const {
+    mutateAsync: accessCounterPartyInfo,
+    isLoading: accessingCounterParty,
+  } = useAccessCounterPartyInfo();
+  const { mutateAsync: openDataRoom, isLoading: openingDataRoom } =
+    useOpenDataRoom();
+  const { mutateAsync: openMeetingRoom, isLoading: openingMeetingRoom } =
+    useOpenMeetingRoom();
+
+  const handleAccessCounterPartyInfo = async () => {
+    try {
+      const data = await accessCounterPartyInfo({ deal_id: dealId });
+
+      if (data?.result?.statusCode === 400) {
+        throw new Error(data?.result?.statusMessage);
+      }
+      queryCLient.invalidateQueries({ queryKey: ['deal-details'] });
+      onSubmit();
+    } catch (err) {
+      Toast.show({
+        type: 'error',
+        text1: err.message,
+      });
+      onClose();
+    }
+  };
+
+  const handleOpenDataRoom = async () => {
+    try {
+      const data = await openDataRoom({ deal_id: dealId });
+      console.log(data);
+      if (data?.result?.statusCode === 400) {
+        throw new Error(data?.result?.statusMessage);
+      }
+      queryCLient.invalidateQueries({ queryKey: ['deal-details'] });
+      onSubmit();
+    } catch (err) {
+      Toast.show({
+        type: 'error',
+        text1: err.message,
+      });
+      onClose();
+    }
+  };
+
+  const handleOpenMeetingRoom = async () => {
+    try {
+      const data = await openMeetingRoom({ deal_id: dealId });
+      console.log(data);
+      if (data?.result?.statusCode === 400) {
+        throw new Error(data?.result?.statusMessage);
+      }
+      queryCLient.invalidateQueries({ queryKey: ['deal-details'] });
+      onSubmit();
+    } catch (err) {
+      Toast.show({
+        type: 'error',
+        text1: err.message,
+      });
+      onClose();
+    }
+  };
+
+  const handleOpenRoom = () => {
+    switch (stageId) {
+      case dealStageCodes.accessCounterParty:
+        handleAccessCounterPartyInfo();
+        return;
+      case dealStageCodes.dataRoom:
+        handleOpenDataRoom();
+        return;
+      case dealStageCodes.meetingRoom:
+        handleOpenMeetingRoom();
+        return;
+        F;
+      default:
+        return;
+    }
+  };
+
+  const getPrice = () => {
+    switch (stageId) {
+      case dealStageCodes.accessCounterParty:
+        return accessCounterPartyCost?.amount.value || 0;
+      case dealStageCodes.dataRoom:
+        return dataRoomCost?.amount.value || 0;
+      case dealStageCodes.meetingRoom:
+        return meetingRoomCost?.amount.value || 0;
+      case dealStageCodes.letterOfIntent:
+        return loiCost?.amount.value || 0;
+      default:
+        return 0;
+    }
+  };
+
+  const getCurrency = () => {
+    switch (stageId) {
+      case dealStageCodes.accessCounterParty:
+        return accessCounterPartyCost?.amount.currency || 'gbp';
+      case dealStageCodes.dataRoom:
+        return dataRoomCost?.amount.currency || 'gbp';
+      case dealStageCodes.meetingRoom:
+        return meetingRoomCost?.amount.currency || 'gbp';
+      case dealStageCodes.letterOfIntent:
+        return loiCost?.amount.currency || 'gbp';
+      default:
+        return 'gbp';
+    }
+  };
+
   return (
     <>
       {visible ? <View style={styles.filter} /> : null}
@@ -31,11 +169,11 @@ const RequestBlindProfileModal = ({
               </View>
               <View>
                 <Text style={styles.pay}>
-                  You Pay: {currencyMapper(currency || 'gbp')}
+                  You Pay: {currencyMapper(getCurrency())}
                   {price || 0} &nbsp;&nbsp;
                   <Text style={styles.notPay}>
-                    {currencyMapper(currency || 'gbp')}
-                    {actualPrice || 0}
+                    {currencyMapper(getCurrency())}
+                    {getPrice() || 0}
                   </Text>
                 </Text>
                 <Text style={styles.credit}>{contextData}</Text>
@@ -43,10 +181,31 @@ const RequestBlindProfileModal = ({
             </View>
             <View style={styles.actionButtons}>
               <View style={styles.rightButton}>
-                <PrimaryButton title='Confirm Request' onClick={onSubmit} />
+                <PrimaryButton
+                  title='Confirm Request'
+                  onClick={handleOpenRoom}
+                  isLoading={
+                    accessingCounterParty ||
+                    openingDataRoom ||
+                    openingMeetingRoom
+                  }
+                  disabled={
+                    accessingCounterParty ||
+                    openingDataRoom ||
+                    openingMeetingRoom
+                  }
+                />
               </View>
               <View style={styles.leftButton}>
-                <SecondaryButton title='Cancel Request' onClick={onClose} />
+                <SecondaryButton
+                  title='Cancel Request'
+                  onClick={onClose}
+                  disabled={
+                    accessingCounterParty ||
+                    openingDataRoom ||
+                    openingMeetingRoom
+                  }
+                />
               </View>
             </View>
           </View>

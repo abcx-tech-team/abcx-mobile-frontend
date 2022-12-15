@@ -12,6 +12,7 @@ export const ScreenNames = {
   dealDetails: 'Deal Details',
   timeline: 'Deal Timeline',
   nextSteps: 'Deal Next Steps',
+  accessCounterParty: 'Access Counter Party',
   companyProfile: 'Company Profile',
   dataRoom: 'Data Room',
   loi: 'Letter of Intent',
@@ -198,6 +199,14 @@ export const dealStageCodes = {
   accessCounterParty: 'ACI',
 };
 
+export const dealStageCodeToScreenName = {
+  [dealStageCodes.meetingRoom]: ScreenNames.meetingRoom,
+  [dealStageCodes.dataRoom]: ScreenNames.dataRoom,
+  [dealStageCodes.companyProfile]: ScreenNames.companyProfile,
+  [dealStageCodes.letterOfIntent]: ScreenNames.loi,
+  [dealStageCodes.accessCounterParty]: ScreenNames.accessCounterParty,
+};
+
 export const dealStageStates = {
   inActive: 'INACTIVE',
   pendingApproval: 'PENDING_APPROVAL',
@@ -233,4 +242,15 @@ export const openRoomModalData = {
     actualPrice: '100',
     currency: 'gbp',
   },
+};
+
+export const fileMapper = (fileType) => {
+  switch (fileType) {
+    case 'ppt':
+      return require('../assets/icons/power_point.png');
+    case 'pdf':
+      return require('../assets/icons/pdf.png');
+    default:
+      return require('../assets/icons/pdf.png');
+  }
 };

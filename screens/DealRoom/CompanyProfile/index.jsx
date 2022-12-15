@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Button } from 'react-native-paper';
 import PrimaryButton from '../../../components/common/PrimaryButton';
 import SecondaryButton from '../../../components/common/SecondaryButton';
 import { TabListContext } from '../../../context/dealContext';
@@ -7,13 +8,15 @@ import { useCompanyProfile } from '../../../hooks/deal.hooks';
 import { ScreenNames, sizes } from '../../../utils';
 
 const CompanyProfile = ({ navigation, route }) => {
-  const { dealId, isBuyer } = route.params;
+  const { dealId } = route.params;
   const { tabList } = useContext(TabListContext);
   const { data: companyData } = useCompanyProfile(dealId, !!dealId);
+
   return (
     <ScrollView>
       <View style={{ marginTop: 50 }}>
         <Text>CompanyProfile</Text>
+        <Button children='Back' onPress={() => navigation.goBack()} />
         <Text>{JSON.stringify(companyData, null, 2)}</Text>
         <View style={styles.actionButtons}>
           <View style={styles.primaryButtonContainer}>

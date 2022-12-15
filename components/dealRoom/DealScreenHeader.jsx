@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     marginBottom: sizes.p2,
   },
   back: {
-    marginRight: sizes.p2,
+    marginRight: sizes.p1,
     height: 40,
     width: 40,
     borderRadius: 100,

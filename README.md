@@ -16,6 +16,8 @@
 
 - [x] Pull Refresh on explore section
 
+- [ ] change the cost api call location to the modals
+
 - [ ] activity loader cutting on pull refresh
 
 - [ ] Disable Screen Capture

@@ -3,13 +3,7 @@ import React, { useContext } from 'react';
 import DealScreenHeader from '../../components/dealRoom/DealScreenHeader';
 import { colors, openRoomModalData, sizes, dealStageCodes } from '../../utils';
 import DealRoomStep from '../../components/dealRoom/DealRoomStep';
-import {
-  useAccessCounterPartyCost,
-  useDataRoomCost,
-  useDealNextSteps,
-  useLOICost,
-  useMeetingRoomCost,
-} from '../../hooks/deal.hooks';
+import { useDealNextSteps } from '../../hooks/deal.hooks';
 import { useConfirmation } from '../../context/ModalContext';
 import OpenRoomModal from '../../components/modals/OpenRoomModal';
 import { TabListContext } from '../../context/dealContext';
@@ -20,13 +14,6 @@ const NextSteps = ({ navigation, route }) => {
   const { tabList } = useContext(TabListContext);
 
   const { data: nextSteps } = useDealNextSteps(dealId);
-  const { data: meetingRoomCost, isLoading: meetingRoomCostLoading } =
-    useMeetingRoomCost(dealId);
-  const { data: dataRoomCost, isLoading: dataRoomCostLoading } =
-    useDataRoomCost(dealId);
-  const { data: loiCost, isLoading: LOIRoomCostLoading } = useLOICost(dealId);
-  const { data: accessCounterPartyCost, isLoading: accessCounterPartyLoading } =
-    useAccessCounterPartyCost();
 
   const confirmation = useConfirmation();
 
@@ -35,34 +22,34 @@ const NextSteps = ({ navigation, route }) => {
     if (tabList.find((item) => item.id === stageId).isActive) {
       console.log('Ready to show its modal');
       try {
-        let obj = { ...openRoomModalData[stageId], Component: OpenRoomModal };
+        let obj = {
+          ...openRoomModalData[stageId],
+          Component: OpenRoomModal,
+          dealId,
+        };
         if (stageId === dealStageCodes.meetingRoom) {
           obj = {
             ...obj,
             price: 100,
-            actualPrice: meetingRoomCost?.amount.value,
-            currency: meetingRoomCost?.amount.currency,
+            stageId,
           };
         } else if (stageId === dealStageCodes.dataRoom) {
           obj = {
             ...obj,
             price: 150,
-            actualPrice: dataRoomCost?.amount.value,
-            currency: dataRoomCost?.amount.currency,
+            stageId,
           };
         } else if (stageId === dealStageCodes.letterOfIntent) {
           obj = {
             ...obj,
             price: 200,
-            actualPrice: loiCost?.amount.value,
-            currency: loiCost?.amount.currency,
+            stageId,
           };
         } else if (stageId === dealStageCodes.accessCounterParty) {
           obj = {
             ...obj,
             price: 100,
-            actualPrice: accessCounterPartyCost?.amount.value,
-            currency: accessCounterPartyCost?.amount.currency,
+            stageId,
           };
         }
         await confirmation({ ...obj });
@@ -87,12 +74,6 @@ const NextSteps = ({ navigation, route }) => {
               {...item}
               key={item.nextStepCode}
               onClick={handleNextStepItemClick}
-              buttonDisabled={
-                LOIRoomCostLoading ||
-                dataRoomCostLoading ||
-                meetingRoomCostLoading ||
-                accessCounterPartyLoading
-              }
             />
           ))}
         </View>

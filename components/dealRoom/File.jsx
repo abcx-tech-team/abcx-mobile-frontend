@@ -8,7 +8,7 @@ const File = ({ name, icon, time, type }) => {
     <View style={styles.fileRow}>
       <View style={styles.left}>
         <View style={styles.icon}>
-          <Image source={fileMapper(icon || 'ppt')} />
+          <Image source={fileMapper(icon || 'pdf')} />
         </View>
         <View>
           <Text style={styles.fileName}>{name || 'Pitchdeck.pptx'}</Text>

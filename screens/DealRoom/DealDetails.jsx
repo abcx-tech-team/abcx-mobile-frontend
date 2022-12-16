@@ -70,40 +70,86 @@ const DealDetails = ({ navigation, route }) => {
       ) : isBuyer ? (
         <View style={{ marginTop: 100 }}>
           <Text>This is the buyer, don't have anything to show</Text>
+          <Button
+            onPress={() =>
+              navigation.navigate(ScreenNames.companyProfile, {
+                dealId: dealId,
+              })
+            }
+          >
+            Company Profile
+          </Button>
+          <Button
+            onPress={() =>
+              navigation.navigate(ScreenNames.nextSteps, { dealId: dealId })
+            }
+          >
+            Next Steps
+          </Button>
+          <Button
+            onPress={() =>
+              navigation.navigate(ScreenNames.timeline, {
+                dealId: dealId,
+                isBuyer,
+              })
+            }
+          >
+            Timeline
+          </Button>
+          <Button
+            onPress={() => navigation.navigate(ScreenNames.dealCompletion)}
+          >
+            Completed
+          </Button>
+          <Button
+            onPress={() => navigation.navigate(ScreenNames.dealCancelled)}
+          >
+            Cancelled
+          </Button>
+          <Button onPress={() => navigation.goBack()}>Back</Button>
         </View>
       ) : (
         <View style={{ marginTop: 100 }}>
           <Text>This is the Seller, don't have anything to show</Text>
+          <Button
+            onPress={() =>
+              navigation.navigate(ScreenNames.companyProfile, {
+                dealId: dealId,
+              })
+            }
+          >
+            Company Profile
+          </Button>
+          <Button
+            onPress={() =>
+              navigation.navigate(ScreenNames.nextSteps, { dealId: dealId })
+            }
+          >
+            Next Steps
+          </Button>
+          <Button
+            onPress={() =>
+              navigation.navigate(ScreenNames.timeline, {
+                dealId: dealId,
+                isBuyer,
+              })
+            }
+          >
+            Timeline
+          </Button>
+          <Button
+            onPress={() => navigation.navigate(ScreenNames.dealCompletion)}
+          >
+            Completed
+          </Button>
+          <Button
+            onPress={() => navigation.navigate(ScreenNames.dealCancelled)}
+          >
+            Cancelled
+          </Button>
+          <Button onPress={() => navigation.goBack()}>Back</Button>
         </View>
       )}
-      <Button
-        onPress={() =>
-          navigation.navigate(ScreenNames.companyProfile, { dealId: dealId })
-        }
-      >
-        Company Profile
-      </Button>
-      <Button
-        onPress={() =>
-          navigation.navigate(ScreenNames.nextSteps, { dealId: dealId })
-        }
-      >
-        Next Steps
-      </Button>
-      <Button
-        onPress={() =>
-          navigation.navigate(ScreenNames.timeline, { dealId: dealId })
-        }
-      >
-        Timeline
-      </Button>
-      <Button onPress={() => navigation.navigate(ScreenNames.dealCompletion)}>
-        Completed
-      </Button>
-      <Button onPress={() => navigation.navigate(ScreenNames.dealCancelled)}>
-        Cancelled
-      </Button>
-      <Button onPress={() => navigation.goBack()}>Back</Button>
     </View>
   );
 };

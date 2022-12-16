@@ -1,4 +1,11 @@
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Pressable,
+} from 'react-native';
 import React, { useCallback, useEffect, useState } from 'react';
 import {
   useApproveBriefProfile,
@@ -68,6 +75,9 @@ const SellerApproveForm = ({ dealId, companyName, navigation, isBuyer }) => {
   return (
     <View style={styles.sellerApproveFormContainer}>
       <View style={styles.sellerApproveForm}>
+        <Pressable onPress={() => navigation.goBack()}>
+          <Text>Back</Text>
+        </Pressable>
         <Image source={Mail} />
         <Text style={styles.heading}>
           {buyerMember?.actionUserName} is requesting access for{' '}

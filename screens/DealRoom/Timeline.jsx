@@ -48,7 +48,7 @@ const timelineData = [
 ];
 
 const Timeline = ({ navigation, route }) => {
-  const { dealId } = route.params;
+  const { dealId, isBuyer } = route.params;
   const { tabList } = useContext(TabListContext);
 
   const [timeline, setTimeline] = useState([...timelineData]);
@@ -109,7 +109,10 @@ const Timeline = ({ navigation, route }) => {
         console.log(err);
       }
     } else {
-      navigation.navigate(dealStageCodeToScreenName[stageId], { dealId });
+      navigation.navigate(dealStageCodeToScreenName[stageId], {
+        dealId,
+        isBuyer,
+      });
     }
   };
 

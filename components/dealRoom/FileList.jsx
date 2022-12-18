@@ -8,11 +8,12 @@ const FileList = ({ files, setUploadFile }) => {
   return (
     <View style={styles.filesContainer}>
       <UploadFileSmall onClick={() => setUploadFile(true)} />
-      {files.map((file) => (
+      {files.map((file, index) => (
         <File
           name={file.fileName}
           time={file.actionDatetime}
           type={file.fileCategory}
+          key={index}
         />
       ))}
     </View>

@@ -11,6 +11,7 @@ import {
   useAccessCounterPartyInfo,
   useOpenDataRoom,
   useOpenMeetingRoom,
+  useOpenLOI,
 } from '../../hooks/deal.hooks';
 import Toast from 'react-native-toast-message';
 import { QueryClient, useQueryClient } from '@tanstack/react-query';
@@ -53,6 +54,7 @@ const RequestBlindProfileModal = ({
     useOpenDataRoom();
   const { mutateAsync: openMeetingRoom, isLoading: openingMeetingRoom } =
     useOpenMeetingRoom();
+  const { mutateAsync: openLOI, isLoading: openingLOI } = useOpenLOI();
 
   const handleAccessCounterPartyInfo = async () => {
     try {
@@ -108,6 +110,24 @@ const RequestBlindProfileModal = ({
     }
   };
 
+  const handleOpenLetterOfIntent = async () => {
+    try {
+      const data = await openLOI({ deal_id: dealId });
+      console.log(data);
+      if (data?.result?.statusCode === 400) {
+        throw new Error(data?.result?.statusMessage);
+      }
+      queryCLient.invalidateQueries({ queryKey: ['deal-details'] });
+      onSubmit();
+    } catch (err) {
+      Toast.show({
+        type: 'error',
+        text1: err.message,
+      });
+      onClose();
+    }
+  };
+
   const handleOpenRoom = () => {
     switch (stageId) {
       case dealStageCodes.accessCounterParty:
@@ -119,7 +139,8 @@ const RequestBlindProfileModal = ({
       case dealStageCodes.meetingRoom:
         handleOpenMeetingRoom();
         return;
-        F;
+      case dealStageCodes.letterOfIntent:
+        handleOpenLetterOfIntent();
       default:
         return;
     }
@@ -187,12 +208,14 @@ const RequestBlindProfileModal = ({
                   isLoading={
                     accessingCounterParty ||
                     openingDataRoom ||
-                    openingMeetingRoom
+                    openingMeetingRoom ||
+                    openingLOI
                   }
                   disabled={
                     accessingCounterParty ||
                     openingDataRoom ||
-                    openingMeetingRoom
+                    openingMeetingRoom ||
+                    openingLOI
                   }
                 />
               </View>
@@ -203,7 +226,8 @@ const RequestBlindProfileModal = ({
                   disabled={
                     accessingCounterParty ||
                     openingDataRoom ||
-                    openingMeetingRoom
+                    openingMeetingRoom ||
+                    openingLOI
                   }
                 />
               </View>

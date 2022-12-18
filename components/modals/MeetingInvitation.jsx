@@ -4,8 +4,54 @@ import { AntDesign } from '@expo/vector-icons';
 import PrimaryButton from '../common/PrimaryButton';
 import SecondaryButton from '../common/SecondaryButton';
 import { colors, sizes } from '../../utils';
+import dayjs from 'dayjs';
+import { useSetMeetingRoomDates } from '../../hooks/deal.hooks';
+import Toast from 'react-native-toast-message';
+import { useQueryClient } from '@tanstack/react-query';
 
-const MeetingInvitation = ({ visible, onSubmit, onClose }) => {
+const MeetingInvitation = ({
+  visible,
+  onSubmit,
+  onClose,
+  date,
+  time,
+  dealId,
+}) => {
+  const {
+    mutateAsync: setMeetingRoomDates,
+    isLoading: settingMeetingRoomDates,
+  } = useSetMeetingRoomDates();
+  const queryClient = useQueryClient();
+
+  const handleSetDate = async () => {
+    const data = {
+      deal_id: dealId,
+      dateArray: [
+        { order: 1, value: dayjs(date).format('DD-MM-YYYY H:mm:ss ZZ') },
+        { order: 2, value: dayjs(date).format('DD-MM-YYYY H:mm:ss ZZ') },
+        { order: 3, value: dayjs(date).format('DD-MM-YYYY H:mm:ss ZZ') },
+      ],
+    };
+
+    if (dayjs(date).isValid()) {
+      try {
+        const res = await setMeetingRoomDates(data);
+        console.log(res);
+        await queryClient.invalidateQueries({
+          queryKey: ['meeting-room-dates'],
+        });
+        Toast.show({ type: 'success', text1: 'Date set successfully' });
+        onSubmit();
+      } catch (err) {
+        console.log(err);
+        onClose();
+      }
+    } else {
+      Toast.show({ type: 'error', text1: 'Date is not valid' });
+      onClose();
+    }
+  };
+
   return (
     <>
       {visible ? <View style={styles.filter} /> : null}
@@ -18,17 +64,31 @@ const MeetingInvitation = ({ visible, onSubmit, onClose }) => {
               <Text style={styles.label}>Meeting Title</Text>
               <Text style={styles.value}>Intro Call - Counterparty name</Text>
               <Text style={styles.label}>Meeting Date</Text>
-              <Text style={styles.value}>12 December 2022</Text>
+              <Text style={styles.value}>
+                {dayjs(date).format('D MMMM YYYY')}
+              </Text>
               <Text style={styles.label}>Meeting Time</Text>
-              <Text style={styles.value}>01:00 Pm -02:00 PM (IST)</Text>
+              <Text style={styles.value}>
+                {dayjs(time).format('h:mm A')} -
+                {dayjs(time).add(1, 'hour').format('h:mm A')} (IST)
+              </Text>
             </View>
 
             <View style={styles.actionButtons}>
               <View style={styles.rightButton}>
-                <PrimaryButton title='Send Invitation' onClick={onSubmit} />
+                <PrimaryButton
+                  title='Send Invitation'
+                  onClick={() => handleSetDate()}
+                  isLoading={settingMeetingRoomDates}
+                  disabled={settingMeetingRoomDates}
+                />
               </View>
               <View style={styles.leftButton}>
-                <SecondaryButton title='Cancel Request' onClick={onClose} />
+                <SecondaryButton
+                  title='Cancel Request'
+                  onClick={onClose}
+                  disabled={settingMeetingRoomDates}
+                />
               </View>
             </View>
           </View>

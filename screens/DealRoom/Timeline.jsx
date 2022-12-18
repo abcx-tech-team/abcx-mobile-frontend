@@ -13,6 +13,7 @@ import {
   sizes,
 } from '../../utils';
 import ConfirmationAnimation from '../../components/modals/ConfirmationAnimation';
+import SignTermsheet from '../../components/modals/SignTermsheet';
 
 const timelineData = [
   {
@@ -71,7 +72,6 @@ const Timeline = ({ navigation, route }) => {
 
   const handleTimelineItemClick = async (stageId) => {
     if (tabList.find((item) => item.id === stageId).isActive) {
-      console.log('Ready to show its modal');
       try {
         let obj = {
           ...openRoomModalData[stageId],
@@ -109,10 +109,14 @@ const Timeline = ({ navigation, route }) => {
         console.log(err);
       }
     } else {
-      navigation.navigate(dealStageCodeToScreenName[stageId], {
-        dealId,
-        isBuyer,
-      });
+      if (stageId === dealStageCodes.letterOfIntent) {
+        await confirmation({ Component: SignTermsheet, dealId });
+      } else {
+        navigation.navigate(dealStageCodeToScreenName[stageId], {
+          dealId,
+          isBuyer,
+        });
+      }
     }
   };
 

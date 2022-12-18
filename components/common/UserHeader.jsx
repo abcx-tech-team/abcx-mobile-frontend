@@ -11,8 +11,9 @@ const AvatarImg = require('../../assets/avatar_abcx.png');
 const Bell = require('../../assets/icons/bell.png');
 
 const UserHeader = () => {
-  const { data: userData } = useLoggedInUser();
-  const { setState } = useContext(AuthContext);
+  const { setState, token } = useContext(AuthContext);
+
+  const { data: userData } = useLoggedInUser(token, !!token);
 
   const handleLogOut = async () => {
     setState('');

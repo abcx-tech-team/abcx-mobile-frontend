@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useDataRoomFileList } from '../../../hooks/deal.hooks';
 import DealScreenHeader from '../../../components/dealRoom/DealScreenHeader';
@@ -10,7 +10,8 @@ import FileList from '../../../components/dealRoom/FileList';
 const DataRoom = ({ navigation, route }) => {
   const [files, setFiles] = useState([]);
   const { dealId } = route.params;
-  const { data: dataRoomFiles } = useDataRoomFileList(dealId);
+  const { data: dataRoomFiles, isLoading: loadingFiles } =
+    useDataRoomFileList(dealId);
   const [uploadFile, setUploadFile] = useState(false);
 
   useEffect(() => {
@@ -33,7 +34,9 @@ const DataRoom = ({ navigation, route }) => {
           <Entypo name='chevron-down' size={24} color='black' />
         </View>
       </View>
-      {!!files.length && !uploadFile ? (
+      {loadingFiles ? (
+        <ActivityIndicator size='large' />
+      ) : !!files.length && !uploadFile ? (
         <FileList files={files} setUploadFile={setUploadFile} />
       ) : (
         <FileUploadWidget

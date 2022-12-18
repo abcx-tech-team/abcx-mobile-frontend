@@ -6,9 +6,9 @@ import {
   creditBalance,
 } from '../requests/user.requests';
 
-export const useLoggedInUser = (enabled = true) =>
+export const useLoggedInUser = (token, enabled = true) =>
   useQuery(
-    ['loggedInUser'],
+    ['loggedInUser', token],
     async () => {
       const res = await loggedInUser();
       return res;

@@ -1,10 +1,64 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
-import { colors, sizes } from '../../utils';
+import React, { useContext } from 'react';
+import {
+  colors,
+  dealStageCodes,
+  dealStageCodeToScreenName,
+  openRoomModalData,
+  ScreenNames,
+  sizes,
+} from '../../utils';
 import PrimaryButton from '../common/PrimaryButton';
 import SecondaryButton from '../common/SecondaryButton';
+import { TabListContext } from '../../context/dealContext';
+import { useCancelDeal } from '../../hooks/deal.hooks';
+import { useConfirmation } from '../../context/ModalContext';
+import Toast from 'react-native-toast-message';
+import ConfirmationAnimation from '../modals/ConfirmationAnimation';
+import OpenRoomModal from '../modals/OpenRoomModal';
 
-const OpenDataRoomCard = () => {
+const OpenDataRoomCard = ({ navigation, dealId, isBuyer }) => {
+  const { mutateAsync: cancelDeal, isLoading: cancellingDeal } =
+    useCancelDeal();
+
+  const { tabList } = useContext(TabListContext);
+  const confirmation = useConfirmation();
+
+  const handelCancelDeal = async () => {
+    try {
+      const data = {
+        deal_id: dealId,
+        stage_code: dealStageCodes.accessCounterParty,
+      };
+      await cancelDeal(data);
+      Toast.show({ icon: 'success', text1: 'Deal cancelled successfully' });
+      navigation.navigate(ScreenNames.dealRoom);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const handleOpenDataRoom = async () => {
+    if (tabList.find((item) => item.id === dealStageCodes.dataRoom).isActive) {
+      try {
+        let obj = {
+          ...openRoomModalData[dealStageCodes.dataRoom],
+          Component: OpenRoomModal,
+          dealId,
+          price: 150,
+          stageId: dealStageCodes.dataRoom,
+        };
+        await confirmation({ ...obj });
+        await confirmation({ Component: ConfirmationAnimation });
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      navigation.navigate(dealStageCodeToScreenName[dealStageCodes.dataRoom], {
+        dealId,
+        isBuyer,
+      });
+    }
+  };
   return (
     <View style={styles.openDataRoomContainer}>
       <View style={styles.openDataRoomCard}>
@@ -14,8 +68,17 @@ const OpenDataRoomCard = () => {
           and gets deleted after the use.
         </Text>
         <View style={styles.buttonContainer}>
-          <PrimaryButton title='Open Data Room' noLoader />
-          <SecondaryButton title='Cancel Deal' noLoader />
+          <PrimaryButton
+            title='Open Data Room'
+            onClick={handleOpenDataRoom}
+            disabled={cancellingDeal}
+          />
+          <SecondaryButton
+            title='Cancel Deal'
+            onClick={handelCancelDeal}
+            isLoading={cancellingDeal}
+            disabled={cancellingDeal}
+          />
         </View>
       </View>
     </View>

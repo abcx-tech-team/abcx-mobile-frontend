@@ -6,7 +6,8 @@ import DealScreenHeader from '../../../components/dealRoom/DealScreenHeader';
 import { Entypo } from '@expo/vector-icons';
 import PitchDeck from '../../../components/dealRoom/PitchDeck';
 
-const AccessCounterParty = ({ navigation }) => {
+const AccessCounterParty = ({ navigation, route }) => {
+  const { dealId, isBuyer } = route.params;
   return (
     <View style={styles.accessCounterPartyContainer}>
       <DealScreenHeader
@@ -21,7 +22,11 @@ const AccessCounterParty = ({ navigation }) => {
         </View>
         <PitchDeck />
       </View>
-      <OpenDataRoomCard />
+      <OpenDataRoomCard
+        dealId={dealId}
+        navigation={navigation}
+        isBuyer={isBuyer}
+      />
     </View>
   );
 };

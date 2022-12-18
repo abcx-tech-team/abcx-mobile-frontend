@@ -5,6 +5,7 @@ import { DealContext, TabListContext } from '../../context/dealContext';
 import SellerApproveForm from './SellerApproveForm';
 import { Button } from 'react-native-paper';
 import { ScreenNames } from '../../utils';
+import DealScreenHeader from '../../components/dealRoom/DealScreenHeader';
 
 const DealDetails = ({ navigation, route }) => {
   const { dealId } = route.params;
@@ -60,6 +61,10 @@ const DealDetails = ({ navigation, route }) => {
 
   return (
     <View style={styles.dealDetailsContainer}>
+      <DealScreenHeader
+        onBackPress={() => navigation.goBack()}
+        screenName='Deal Details'
+      />
       {showSellerApprovalForm ? (
         <SellerApproveForm
           dealId={dealId}
@@ -68,7 +73,7 @@ const DealDetails = ({ navigation, route }) => {
           isBuyer={isBuyer}
         />
       ) : isBuyer ? (
-        <View style={{ marginTop: 100 }}>
+        <View>
           <Text>This is the buyer, don't have anything to show</Text>
           <Button
             onPress={() =>
@@ -81,7 +86,10 @@ const DealDetails = ({ navigation, route }) => {
           </Button>
           <Button
             onPress={() =>
-              navigation.navigate(ScreenNames.nextSteps, { dealId: dealId })
+              navigation.navigate(ScreenNames.nextSteps, {
+                dealId: dealId,
+                isBuyer,
+              })
             }
           >
             Next Steps
@@ -106,10 +114,9 @@ const DealDetails = ({ navigation, route }) => {
           >
             Cancelled
           </Button>
-          <Button onPress={() => navigation.goBack()}>Back</Button>
         </View>
       ) : (
-        <View style={{ marginTop: 100 }}>
+        <View>
           <Text>This is the Seller, don't have anything to show</Text>
           <Button
             onPress={() =>
@@ -147,7 +154,6 @@ const DealDetails = ({ navigation, route }) => {
           >
             Cancelled
           </Button>
-          <Button onPress={() => navigation.goBack()}>Back</Button>
         </View>
       )}
     </View>
@@ -157,6 +163,7 @@ const DealDetails = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   dealDetailsContainer: {
     flex: 1,
+    backgroundColor: 'white',
   },
 });
 

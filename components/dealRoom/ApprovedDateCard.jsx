@@ -2,16 +2,21 @@ import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { colors, sizes } from '../../utils';
 import { AntDesign } from '@expo/vector-icons';
+import dayjs from 'dayjs';
 
-const ApprovedDateCard = () => {
+const ApprovedDateCard = ({ date }) => {
+  console.log(JSON.stringify(date, null, 2));
   return (
     <View style={styles.dateCard}>
       <AntDesign name='checkcircleo' size={40} color={colors.green} />
       <Text style={styles.label}>
         You’ll be meeting with Mr Elon Musk to discuss Space X.{' '}
       </Text>
-      <Text style={styles.time}>Tuesday, 01:00PM IST</Text>
-      <Text style={styles.date}>12 December 2022</Text>
+      <Text style={styles.time}>
+        {dayjs(date.date).format('dddd')}, {dayjs(date.date).format('h:mm A')}{' '}
+        IST
+      </Text>
+      <Text style={styles.date}>{dayjs(date.date).format('D MMMM YYYY')}</Text>
       <Text style={styles.invitation}>
         Your invitation was sent to gaurav@abcxchange.com
       </Text>

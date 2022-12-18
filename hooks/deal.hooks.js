@@ -40,7 +40,7 @@ export const useDeclineBriefProfile = () =>
 
 export const useDealNextSteps = (dealId, enabled = true) =>
   useQuery(
-    ['deal-next-steps'],
+    ['deal-next-steps', dealId],
     async () => {
       const res = await dealNextSteps(dealId);
       return res;
@@ -70,7 +70,7 @@ export const useBuyerMemberProfile = () =>
 
 export const useCompanyProfile = (dealId, enabled = true) =>
   useQuery(
-    ['company-profile'],
+    ['company-profile', dealId],
     async () => {
       const res = await companyProfile(dealId);
       return res;
@@ -108,7 +108,7 @@ export const useOpenMeetingRoom = () =>
 
 export const useMeetingRoomDates = (dealId, enabled = true) =>
   useQuery(
-    ['meeting-room-dates'],
+    ['meeting-room-dates', dealId],
     async () => {
       const res = await meetingRoomDates(dealId);
       return res;
@@ -120,19 +120,20 @@ export const useMeetingRoomDates = (dealId, enabled = true) =>
 
 export const useSetMeetingRoomDates = () =>
   useMutation(async (data) => {
+    console.log(data);
     const res = await setMeetingRoomDates(data);
     return res;
   });
 
 export const useApproveMeetingRoomDates = () =>
-  useMutation(async () => {
+  useMutation(async (data) => {
     const res = await approveMeetingRoomDate(data);
     return res;
   });
 
 export const useMeetingRoomCost = (dealId, enabled = true) =>
   useQuery(
-    ['meeting-room-cost'],
+    ['meeting-room-cost', dealId],
     async () => {
       const res = await meetingRoomCost(dealId);
       return res;
@@ -152,7 +153,7 @@ export const useOpenDataRoom = () =>
 
 export const useDataRoomFileList = (dealId, enabled = true) =>
   useQuery(
-    ['data-room-file-list'],
+    ['data-room-file-list', dealId],
     async () => {
       const res = await dataRoomFileList(dealId);
       return res;
@@ -181,7 +182,7 @@ export const useDeleteDataRoomFile = () =>
   });
 export const useDataRoomCost = (dealId, enabled = true) =>
   useQuery(
-    ['data-room-cost'],
+    ['data-room-cost', dealId],
     async () => {
       const res = await dataRoomCost(dealId);
       return res;
@@ -200,7 +201,7 @@ export const useOpenLOI = () =>
   });
 export const useLOIDetails = (dealId, enabled = true) =>
   useQuery(
-    ['LOI-details'],
+    ['LOI-details', dealId],
     async () => {
       const res = await LOIDetails(dealId);
       return res;
@@ -211,7 +212,7 @@ export const useLOIDetails = (dealId, enabled = true) =>
   );
 export const useLOICost = (dealId, enabled = true) =>
   useQuery(
-    ['LOI-cost'],
+    ['LOI-cost', dealId],
     async () => {
       const res = await LOICost(dealId);
       return res;

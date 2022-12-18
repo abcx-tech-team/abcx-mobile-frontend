@@ -9,6 +9,7 @@ const ButtonPair = ({
   secondaryCTA,
   secondaryCTAFunction,
   primaryCTAFunction,
+  primaryDisabled,
 }) => {
   return (
     <View style={styles.preferenceButton}>
@@ -16,13 +17,14 @@ const ButtonPair = ({
         <PrimaryButton
           title={primaryCTA}
           onClick={primaryCTAFunction}
+          disabled={primaryDisabled}
           noLoader
         />
       </View>
       <View style={styles.bottomButton}>
         <SecondaryButton
           title={secondaryCTA}
-          onClick={() => secondaryCTAFunction}
+          onClick={secondaryCTAFunction}
           noLoader
         />
       </View>

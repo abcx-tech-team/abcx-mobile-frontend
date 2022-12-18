@@ -24,9 +24,9 @@ export const ConfirmationProvider = ({ children }) => {
     setConfirmationState(null);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (data) => {
     if (awaitingPromiseRef.current) {
-      awaitingPromiseRef.current.resolve();
+      awaitingPromiseRef.current.resolve(data);
     }
 
     setConfirmationState(null);

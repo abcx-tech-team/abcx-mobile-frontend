@@ -1,26 +1,34 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import React, { useContext } from 'react';
 import DealScreenHeader from '../../components/dealRoom/DealScreenHeader';
-import { colors, openRoomModalData, sizes, dealStageCodes } from '../../utils';
+import {
+  colors,
+  openRoomModalData,
+  sizes,
+  dealStageCodes,
+  dealStageCodeToScreenName,
+} from '../../utils';
 import DealRoomStep from '../../components/dealRoom/DealRoomStep';
 import { useDealNextSteps } from '../../hooks/deal.hooks';
 import { useConfirmation } from '../../context/ModalContext';
 import OpenRoomModal from '../../components/modals/OpenRoomModal';
 import { TabListContext } from '../../context/dealContext';
+import ConfirmationAnimation from '../../components/modals/ConfirmationAnimation';
+import SignTermsheet from '../../components/modals/SignTermsheet';
+import { useQueryClient } from '@tanstack/react-query';
 
 const NextSteps = ({ navigation, route }) => {
-  const { dealId } = route.params;
+  const { dealId, isBuyer } = route.params;
 
   const { tabList } = useContext(TabListContext);
 
   const { data: nextSteps } = useDealNextSteps(dealId);
+  const queryClient = useQueryClient();
 
   const confirmation = useConfirmation();
 
   const handleNextStepItemClick = async (stageId) => {
-    console.log(stageId);
     if (tabList.find((item) => item.id === stageId).isActive) {
-      console.log('Ready to show its modal');
       try {
         let obj = {
           ...openRoomModalData[stageId],
@@ -53,11 +61,21 @@ const NextSteps = ({ navigation, route }) => {
           };
         }
         await confirmation({ ...obj });
+        await queryClient.invalidateQueries({ queryKey: ['deal-next-steps'] });
+        await confirmation({ Component: ConfirmationAnimation });
       } catch (err) {
         console.log(err);
       }
     } else {
-      console.log('navigate to the page');
+      if (stageId === dealStageCodes.letterOfIntent) {
+        console.log('Coming Here');
+        await confirmation({ Component: SignTermsheet, dealId });
+      } else {
+        navigation.navigate(dealStageCodeToScreenName[stageId], {
+          dealId,
+          isBuyer,
+        });
+      }
     }
   };
 

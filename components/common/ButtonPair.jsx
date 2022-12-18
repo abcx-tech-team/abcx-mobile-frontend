@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: sizes.p4,
     borderTopWidth: 1,
     borderTopColor: colors.borderColor,
+    backgroundColor: colors.white,
   },
   topButton: {
     marginBottom: sizes.p2,

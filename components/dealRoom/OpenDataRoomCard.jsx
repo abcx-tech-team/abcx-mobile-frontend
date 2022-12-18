@@ -53,7 +53,7 @@ const OpenDataRoomCard = ({ navigation, dealId, isBuyer }) => {
         console.log(err);
       }
     } else {
-      navigation.navigate(dealStageCodeToScreenName[dealStageCodes.dataRoom], {
+      navigation.navigate(ScreenNames.dataRoom, {
         dealId,
         isBuyer,
       });

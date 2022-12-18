@@ -78,7 +78,8 @@ const DealDetails = ({ navigation, route }) => {
           <Button
             onPress={() =>
               navigation.navigate(ScreenNames.companyProfile, {
-                dealId: dealId,
+                dealId,
+                isBuyer,
               })
             }
           >

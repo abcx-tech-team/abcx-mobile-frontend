@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import Accordion from '../common/Accordion';
 import { sizes } from '../../utils';
 
@@ -19,7 +19,7 @@ const accordionData = [
 ];
 
 const DashboardAccordionContainer = () => {
-  const [expanded, setExpanded] = React.useState(0);
+  const [expanded, setExpanded] = useState(0);
   return (
     <View style={styles.accordionContainer}>
       <Text style={styles.heading}>FAQs</Text>

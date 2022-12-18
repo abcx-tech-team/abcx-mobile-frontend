@@ -10,7 +10,7 @@ const DealScreenHeader = ({ screenName, onBackPress }) => {
         onPress={onBackPress}
         style={({ pressed }) => [
           {
-            backgroundColor: pressed ? colors.text20 : colors.white,
+            backgroundColor: pressed ? colors.text20 : 'transparent',
           },
           styles.back,
         ]}

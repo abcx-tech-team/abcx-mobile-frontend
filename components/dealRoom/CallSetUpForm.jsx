@@ -11,7 +11,6 @@ import TimeSelectModal from '../modals/TimeSelectModal';
 import DateSelectModal from '../modals/DateSelectModal';
 
 const CallSetUpForm = ({ navigation, dealId, showForm, setShowForm }) => {
-  console.log(showForm);
   const confirmation = useConfirmation();
   const [selectedDate, setSelectedDate] = useState(new Date());
 

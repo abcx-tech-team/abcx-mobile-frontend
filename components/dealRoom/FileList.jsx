@@ -4,7 +4,7 @@ import File from './File';
 import { sizes } from '../../utils';
 import UploadFileSmall from './UploadFileSmall';
 
-const FileList = ({ files, setUploadFile }) => {
+const FileList = ({ files, setUploadFile, dealId }) => {
   return (
     <View style={styles.filesContainer}>
       <UploadFileSmall onClick={() => setUploadFile(true)} />
@@ -14,6 +14,8 @@ const FileList = ({ files, setUploadFile }) => {
           time={file.actionDatetime}
           type={file.fileCategory}
           key={index}
+          hash={file.drTransactionHash}
+          dealId={dealId}
         />
       ))}
     </View>

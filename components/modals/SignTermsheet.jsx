@@ -11,17 +11,13 @@ const Card = require('../../assets/icons/card.png');
 const SignTermsheet = ({ visible, onSubmit, onClose, dealId }) => {
   const { mutateAsync: signLoi, isLoading: signingLoi } = useSIgnLOI();
 
-  const confirmation = useConfirmation();
-
   const handleSignLoi = async () => {
     try {
       const data = {
         deal_id: dealId,
-        signed_name: 'Somename',
+        signed_name: 'ABCXchange',
       };
-      console.log(data);
-      // await signLoi();
-      await confirmation({ Component: ConfirmationAnimation });
+      await signLoi(data);
       onSubmit();
     } catch (e) {
       console.log(e);

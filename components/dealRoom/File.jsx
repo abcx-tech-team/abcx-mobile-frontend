@@ -1,16 +1,26 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { colors, fileMapper, sizes } from '../../utils';
 import { Entypo } from '@expo/vector-icons';
+import { useConfirmation } from '../../context/ModalContext';
+import FileOptions from '../modals/FileOptions';
 
-const File = ({ name, icon, time, type }) => {
+const File = ({ name, icon, time, type, hash, dealId }) => {
+  const confirmation = useConfirmation();
+
+  const handleFileUpdate = async () => {
+    try {
+      await confirmation({ Component: FileOptions, hash, dealId });
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <View style={styles.fileRow}>
       <View style={styles.left}>
         <View style={styles.icon}>
           <Image source={fileMapper(icon || 'pdf')} />
         </View>
-        <View>
+        <View style={styles.fileNameContainer}>
           <Text style={styles.fileName}>{name || 'Pitchdeck.pptx'}</Text>
           <View style={styles.dateContainer}>
             <Text style={styles.fileDate}>{time || '11 Jan 2021 23:22'} </Text>
@@ -20,9 +30,15 @@ const File = ({ name, icon, time, type }) => {
           </View>
         </View>
       </View>
-      <View style={styles.more}>
+      <Pressable
+        onPress={() => handleFileUpdate(0)}
+        style={({ pressed }) => [
+          styles.more,
+          pressed ? { backgroundColor: colors.text20 } : null,
+        ]}
+      >
         <Entypo name='dots-three-horizontal' size={18} color='black' />
-      </View>
+      </Pressable>
     </View>
   );
 };
@@ -34,7 +50,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: sizes.p2,
+    marginBottom: sizes.p3,
   },
   left: {
     flexDirection: 'row',
@@ -72,5 +88,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: sizes.pHalf,
+  },
+  fileNameContainer: {
+    width: '75%',
+  },
+  more: {
+    height: 40,
+    width: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 100,
   },
 });

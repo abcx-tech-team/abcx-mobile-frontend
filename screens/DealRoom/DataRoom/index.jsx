@@ -37,11 +37,13 @@ const DataRoom = ({ navigation, route }) => {
       {loadingFiles ? (
         <ActivityIndicator size='large' />
       ) : !!files.length && !uploadFile ? (
-        <FileList files={files} setUploadFile={setUploadFile} />
+        <FileList files={files} setUploadFile={setUploadFile} dealId={dealId} />
       ) : (
         <FileUploadWidget
           setUploadFile={setUploadFile}
           navigation={navigation}
+          files={files}
+          dealId={dealId}
         />
       )}
     </View>

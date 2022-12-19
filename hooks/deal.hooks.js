@@ -120,7 +120,6 @@ export const useMeetingRoomDates = (dealId, enabled = true) =>
 
 export const useSetMeetingRoomDates = () =>
   useMutation(async (data) => {
-    console.log(data);
     const res = await setMeetingRoomDates(data);
     return res;
   });

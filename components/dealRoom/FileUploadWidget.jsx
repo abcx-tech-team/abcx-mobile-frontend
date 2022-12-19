@@ -9,18 +9,44 @@ import { TextInput } from 'react-native-paper';
 import UploadingFilePreview from './UploadingFilePreview';
 import PrimaryButton from '../common/PrimaryButton';
 import SecondaryButton from '../common/SecondaryButton';
+import Toast from 'react-native-toast-message';
+import { useUploadDataRoomFile } from '../../hooks/deal.hooks';
+import { useQueryClient } from '@tanstack/react-query';
 
-const FileUploadWidget = ({ setUploadFile, navigation }) => {
+const FileUploadWidget = ({ setUploadFile, navigation, files, dealId }) => {
   const [file, setFile] = useState(null);
   const [category, setCategory] = useState('');
+
   const { data: fileCategories } = useDataRoomFileCategory();
+  const { mutateAsync: uploadFile, isLoading: uploadingFile } =
+    useUploadDataRoomFile();
+  const queryClient = useQueryClient();
+
   const sheetRef = useRef(null);
-  const snapPoints = useMemo(() => ['65%'], []);
+  const snapPoints = useMemo(() => ['79%'], []);
 
   const pickDocument = async () => {
     let result = await DocumentPicker.getDocumentAsync({});
     if (result.type === 'success') {
       setFile(result);
+    }
+  };
+
+  const handleUploadFile = async () => {
+    try {
+      const fd = new FormData();
+      fd.append('deal_id', dealId);
+      fd.append('upload_file', file);
+      fd.append('category_name', category);
+      await uploadFile(fd);
+      queryClient.invalidateQueries({
+        queryKey: ['data-room-file-list'],
+      });
+      setUploadFile(false);
+      Toast.show({ type: 'success', text1: 'File uploaded successfully' });
+    } catch (err) {
+      console.log(err);
+      Toast.show({ type: 'error', text1: 'Something went wrong' });
     }
   };
 
@@ -62,14 +88,21 @@ const FileUploadWidget = ({ setUploadFile, navigation }) => {
           <View style={styles.line} />
           <PrimaryButton
             title='Upload File'
-            onClick={() => setUploadFile(false)}
-            noLoader
+            onClick={handleUploadFile}
+            disabled={!file || !category || uploadingFile}
+            isLoading={uploadingFile}
           />
         </View>
         <SecondaryButton
           title='Go Back'
-          onClick={() => navigation.goBack()}
-          noLoader
+          onClick={() => {
+            if (files.length) {
+              setUploadFile(false);
+            } else {
+              navigation.goBack();
+            }
+          }}
+          disabled={uploadingFile}
         />
       </View>
       <BottomSheet
@@ -77,13 +110,20 @@ const FileUploadWidget = ({ setUploadFile, navigation }) => {
         index={-1}
         snapPoints={snapPoints}
         enablePanDownToClose
+        backgroundStyle={styles.bottomSheetContainer}
+        handleStyle={{ top: 45 }}
       >
-        <View>
-          {(fileCategories ?? []).map((item) => (
+        <View style={styles.bottomSheetView}>
+          {(fileCategories ?? []).map((item, index) => (
             <Pressable
               key={item.category_code}
               onPress={() => setCategory(item.category_name)}
-              style={styles.fileCategories}
+              style={[
+                styles.fileCategories,
+                index === fileCategories.length - 1
+                  ? styles.noBorderBottom
+                  : null,
+              ]}
             >
               <Text
                 style={[
@@ -138,6 +178,8 @@ const styles = StyleSheet.create({
   },
   selectedCategory: {
     color: colors.primary,
+    fontWeight: '700',
+    fontSize: 18,
   },
   browse: {
     marginTop: sizes.p2,
@@ -160,5 +202,30 @@ const styles = StyleSheet.create({
     marginBottom: sizes.p3,
     borderColor: colors.text20,
     marginHorizontal: -sizes.p4,
+  },
+
+  bottomSheetContainer: {
+    backgroundColor: 'transparent',
+  },
+
+  bottomSheetView: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.39,
+    shadowRadius: 8.3,
+    elevation: 13,
+    width: '90%',
+    backgroundColor: 'white',
+    left: '5%',
+    marginTop: sizes.p2,
+    paddingTop: sizes.p3,
+    paddingBottom: sizes.p5,
+    borderRadius: sizes.p2,
+  },
+  noBorderBottom: {
+    borderBottomWidth: 0,
   },
 });

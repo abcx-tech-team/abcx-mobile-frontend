@@ -87,7 +87,7 @@ const renderComponent = ({
       <CommonCardView
         buyerSelectedDate={buyerSelectedDates[0]}
         sellerSelectedDate={sellerSelectedDates[0]}
-        isBuyer
+        isBuyer={isBuyer}
         dealId={dealId}
       />
     );

@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
   subHeading: {
     fontSize: 16,
     color: colors.text60,
+    textAlign: 'center',
   },
   content: {
     alignItems: 'center',

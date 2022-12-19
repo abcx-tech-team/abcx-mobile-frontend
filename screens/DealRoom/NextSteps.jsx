@@ -68,7 +68,6 @@ const NextSteps = ({ navigation, route }) => {
       }
     } else {
       if (stageId === dealStageCodes.letterOfIntent) {
-        console.log('Coming Here');
         await confirmation({ Component: SignTermsheet, dealId });
       } else {
         navigation.navigate(dealStageCodeToScreenName[stageId], {

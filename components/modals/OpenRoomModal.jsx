@@ -77,7 +77,6 @@ const RequestBlindProfileModal = ({
   const handleOpenDataRoom = async () => {
     try {
       const data = await openDataRoom({ deal_id: dealId });
-      console.log(data);
       if (data?.result?.statusCode === 400) {
         throw new Error(data?.result?.statusMessage);
       }
@@ -95,7 +94,6 @@ const RequestBlindProfileModal = ({
   const handleOpenMeetingRoom = async () => {
     try {
       const data = await openMeetingRoom({ deal_id: dealId });
-      console.log(data);
       if (data?.result?.statusCode === 400) {
         throw new Error(data?.result?.statusMessage);
       }
@@ -113,7 +111,6 @@ const RequestBlindProfileModal = ({
   const handleOpenLetterOfIntent = async () => {
     try {
       const data = await openLOI({ deal_id: dealId });
-      console.log(data);
       if (data?.result?.statusCode === 400) {
         throw new Error(data?.result?.statusMessage);
       }

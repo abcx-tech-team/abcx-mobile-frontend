@@ -15,6 +15,8 @@ import {
 } from '../../hooks/deal.hooks';
 import Toast from 'react-native-toast-message';
 import { useQueryClient } from '@tanstack/react-query';
+import * as FileSystem from 'expo-file-system';
+import * as Sharing from 'expo-sharing';
 
 const FileOptions = ({ visible, onSubmit, onClose, dealId, hash }) => {
   const { mutateAsync: deleteFile, isLoading: deletingFile } =
@@ -42,7 +44,35 @@ const FileOptions = ({ visible, onSubmit, onClose, dealId, hash }) => {
       onClose();
     }
   };
-  const handleFileDownload = () => {};
+  const handleFileDownload = async () => {
+    try {
+      const data = {
+        deal_id: dealId,
+        file_transaction_hash: hash,
+      };
+      const blob = await downloadFile(data);
+      const fr = new FileReader();
+
+      fr.readAsDataURL(blob);
+      fr.onload = async () => {
+        const fileUri = `${FileSystem.documentDirectory}/${blob._data.name
+          .split(' ')
+          .join('_')}.pdf`;
+        await FileSystem.writeAsStringAsync(fileUri, fr.result.split(',')[1], {
+          encoding: FileSystem.EncodingType.Base64,
+        });
+        await Sharing.shareAsync(fileUri);
+        Toast.show({
+          type: 'success',
+          text1: 'File downloaded successfully',
+        });
+        onSubmit();
+      };
+    } catch (err) {
+      console.log(err);
+      onClose();
+    }
+  };
 
   return (
     <>

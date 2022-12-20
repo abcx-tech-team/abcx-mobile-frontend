@@ -43,9 +43,11 @@ export const uploadDataRoomFile = (data) =>
   http.post('/transaction/deal/data-room/file-upload/', data, {
     hasFiles: true,
   });
-//   TODO: Do something about the response type
+
 export const downloadDataRoomFile = (data) =>
-  http.post('/transaction/deal/data-room/file-download/', data);
+  http.post('/transaction/deal/data-room/file-download/', data, {
+    responseType: 'blob',
+  });
 export const deleteDataRoomFile = (data) =>
   http.post('/transaction/deal/data-room/file-delete/', data);
 export const dataRoomCost = (dealId) =>

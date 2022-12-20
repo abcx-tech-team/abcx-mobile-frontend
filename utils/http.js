@@ -111,7 +111,7 @@ const httpGet = async (url, option = { headers: {} }) => {
 const httpPost = async (
   url,
   body = {},
-  option = { headers: {}, hasFiles: false, isLogin: false }
+  option = { headers: {}, hasFiles: false, isLogin: false, responseType: '' }
 ) => {
   const headers = await getHeader(option.headers, option.hasFiles);
   const result = await fetch(generateURL(url, option), {
@@ -124,7 +124,13 @@ const httpPost = async (
   }
 
   let response;
-  if (result?.status !== 429) response = await result.json();
+  if (result?.status !== 429) {
+    if (option.responseType === 'blob') {
+      response = await result.blob();
+    } else {
+      response = await result.json();
+    }
+  }
 
   await handleError(result.status, response, option.isLogin);
   return response;

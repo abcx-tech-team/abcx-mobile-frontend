@@ -6,15 +6,15 @@ import {
   Text,
   ActivityIndicator,
   ScrollView,
+  RefreshControl,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import SearchBar from '../../components/explore/SearchBar';
 import BriefProfileCard from '../../components/explore/BlindProfileCard';
 import AuthContainer from '../../container/AuthContainer';
 import { useBlindProfiles } from '../../hooks/blindProfile.hooks';
-import { colors, sameObject, serialize } from '../../utils';
+import { colors, serialize } from '../../utils';
 import SearchTag from '../../components/common/SearchTag';
-import { useQueryClient } from '@tanstack/react-query';
 
 const tabs = [
   {
@@ -98,6 +98,8 @@ const Explore = ({ navigation }) => {
     }
   };
 
+  // TODO: Pull refresh activity indicator getting cut, have to do something about it
+
   const handlePullRefresh = () => {
     setPullRefresh(true);
     setQuery({ ...queryInitialValue, seed: Math.random() });
@@ -175,6 +177,12 @@ const Explore = ({ navigation }) => {
             }}
             refreshing={pullRefresh}
             onRefresh={handlePullRefresh}
+            refreshControl={
+              <RefreshControl
+                refreshing={pullRefresh}
+                onRefresh={handlePullRefresh}
+              />
+            }
           />
         </View>
       </View>

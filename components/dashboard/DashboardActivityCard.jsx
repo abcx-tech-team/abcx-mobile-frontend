@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import React from 'react';
 import { colors, sizes } from '../../utils';
+import { useConfirmation } from '../../context/ModalContext';
+import DashboardActivityModal from '../modals/DashboardActivityModal';
 
 const DashboardActivityCard = ({
   leftIcon,
@@ -8,7 +10,21 @@ const DashboardActivityCard = ({
   subHeading,
   ctaIcon,
   ctaText,
+  modalHeading,
+  modalText,
 }) => {
+  const confirmation = useConfirmation();
+  const handleActivity = async () => {
+    try {
+      await confirmation({
+        Component: DashboardActivityModal,
+        heading: modalHeading,
+        subHeading: modalText,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <View style={styles.activityCard}>
       <View style={styles.left}>
@@ -26,6 +42,7 @@ const DashboardActivityCard = ({
                 backgroundColor: pressed ? colors.text20 : colors.white,
               },
             ]}
+            onPress={handleActivity}
           >
             <Image style={styles.arrowIcon} source={ctaIcon} />
           </Pressable>

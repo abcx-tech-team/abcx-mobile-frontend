@@ -15,6 +15,10 @@ const activityCardData = [
     subHeading: 'Add the sectors, stages revenue number that you prefer',
     ctaText: 'Why should you do this?',
     ctaIcon: require('../../assets/icons/right-arrow.png'),
+    modalHeading: 'You get personalisation recommendations',
+    modalText: `We strive to provide a personalized experience on our platform by carefully matching your criteria with the companies we feature. We don't simply present a random selection of companies, but rather carefully curate the list to ensure that it meets your specific needs.
+      
+It takes less than 3 mins`,
   },
   {
     id: 2,
@@ -24,6 +28,10 @@ const activityCardData = [
       'Find a recommended list of companies that suits your investment style',
     ctaText: 'How do we curate this list?',
     ctaIcon: require('../../assets/icons/right-arrow.png'),
+    modalHeading: 'Our matching algorithm',
+    modalText: `Our machine learning-based matching algorithm helps us identify companies that meet your specific criteria.
+      
+We continuously update and improve the algorithm using real-time feedback from you to ensure that it remains relevant to your changing needs.`,
   },
   {
     id: 3,
@@ -33,6 +41,14 @@ const activityCardData = [
       'Find relevant institutional investors within 36 hours of listing. ',
     ctaText: 'Why should you list companies?',
     ctaIcon: require('../../assets/icons/right-arrow.png'),
+    modalHeading: 'Why invite portfolio companies',
+    modalText: `We have an extensive network of institutional venture capital firms that are actively seeking new investment opportunities. 
+
+By inviting your portfolio companies to our platform, they will have access to this network of potential investors.
+    
+Our platform is designed to streamline the process of connecting with investors, allowing companies to easily view and connect with potential investors in just a few clicks.
+    
+We understand that time is of the essence when it comes to raising capital, which is why we aim to connect companies with relevant investors in less than 36 hours.`,
   },
 ];
 

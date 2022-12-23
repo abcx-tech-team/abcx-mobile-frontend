@@ -7,6 +7,7 @@ import {
   sizes,
   dealStageCodes,
   dealStageCodeToScreenName,
+  ScreenNames,
 } from '../../utils';
 import DealRoomStep from '../../components/dealRoom/DealRoomStep';
 import { useDealNextSteps } from '../../hooks/deal.hooks';
@@ -68,7 +69,14 @@ const NextSteps = ({ navigation, route }) => {
       }
     } else {
       if (stageId === dealStageCodes.letterOfIntent) {
-        await confirmation({ Component: SignTermsheet, dealId });
+        try {
+          await confirmation({ Component: SignTermsheet, dealId });
+          await confirmation({ Component: ConfirmationAnimation });
+
+          navigation.navigate(ScreenNames.dealCompletion);
+        } catch (err) {
+          console.log(err);
+        }
       } else {
         navigation.navigate(dealStageCodeToScreenName[stageId], {
           dealId,

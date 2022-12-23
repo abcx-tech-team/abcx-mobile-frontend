@@ -18,7 +18,14 @@ import { useQueryClient } from '@tanstack/react-query';
 import * as FileSystem from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
 
-const FileOptions = ({ visible, onSubmit, onClose, dealId, hash }) => {
+const FileOptions = ({
+  visible,
+  onSubmit,
+  onClose,
+  dealId,
+  hash,
+  canDelete,
+}) => {
   const { mutateAsync: deleteFile, isLoading: deletingFile } =
     useDeleteDataRoomFile();
   const { mutateAsync: downloadFile, isLoading: downloadingFile } =
@@ -111,7 +118,7 @@ const FileOptions = ({ visible, onSubmit, onClose, dealId, hash }) => {
             <Pressable
               onPress={handleFileDelete}
               style={styles.optionRow}
-              disabled={downloadingFile || deletingFile}
+              disabled={downloadingFile || deletingFile || canDelete}
             >
               <AntDesign
                 name='delete'
@@ -154,10 +161,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: sizes.p4,
+    alignItems: 'center',
   },
   headingText: {
     fontSize: 20,
     fontWeight: '600',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   optionRow: {
     flexDirection: 'row',

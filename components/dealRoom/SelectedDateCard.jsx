@@ -8,6 +8,7 @@ import { useApproveMeetingRoomDates } from '../../hooks/deal.hooks';
 import { useConfirmation } from '../../context/ModalContext';
 import ConfirmationAnimation from '../modals/ConfirmationAnimation';
 import { useQueryClient } from '@tanstack/react-query';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const SelectedDateCard = ({ date, showApprove, showMine, dealId }) => {
   const { mutateAsync: approveDates, isLoading: approvingDates } =
@@ -31,46 +32,57 @@ const SelectedDateCard = ({ date, showApprove, showMine, dealId }) => {
   };
 
   return (
-    <View style={styles.dateCard}>
-      <AntDesign name='calendar' size={40} color={colors.lightRed} />
-      <Text style={styles.label}>Meeting Title</Text>
-      <Text style={styles.value}>Intro Call - Counterparty name</Text>
-      <Text style={styles.label}>Meeting Date</Text>
-      <Text style={styles.value}>{dayjs(date.date).format('D MMM YYYY')}</Text>
-      <Text style={styles.label}>Meeting Time</Text>
-      <Text style={styles.value}>
-        {dayjs(date.date).format('h:mm A')} -{' '}
-        {dayjs(date.date).add(1, 'hour').format('h:mm A')} (IST)
-      </Text>
-      <Text style={styles.label}>Meeting Venue</Text>
-      <View style={{ flexDirection: 'row', marginBottom: sizes.p2 }}>
-        <Text style={styles.value}>Google Meet</Text>
-        <Text style={[styles.label, { marginTop: 0, marginLeft: sizes.pHalf }]}>
-          (Sent upon Verification)
+    <LinearGradient
+      style={styles.gradient}
+      colors={['rgba(224, 106, 110, 0.1)', 'rgba(224, 106, 110, 0.0)']}
+    >
+      <View style={styles.dateCard}>
+        <AntDesign name='calendar' size={40} color={colors.lightRed} />
+        <Text style={styles.label}>Meeting Title</Text>
+        <Text style={styles.value}>Intro Call - Counterparty name</Text>
+        <Text style={styles.label}>Meeting Date</Text>
+        <Text style={styles.value}>
+          {dayjs(date.date).format('D MMM YYYY')}
         </Text>
+        <Text style={styles.label}>Meeting Time</Text>
+        <Text style={styles.value}>
+          {dayjs(date.date).format('h:mm A')} -{' '}
+          {dayjs(date.date).add(1, 'hour').format('h:mm A')} (IST)
+        </Text>
+        <Text style={styles.label}>Meeting Venue</Text>
+        <View style={{ flexDirection: 'row', marginBottom: sizes.p2 }}>
+          <Text style={styles.value}>Google Meet</Text>
+          <Text
+            style={[styles.label, { marginTop: 0, marginLeft: sizes.pHalf }]}
+          >
+            (Sent upon Verification)
+          </Text>
+        </View>
+        {showApprove ? (
+          <PrimaryButton
+            title='Approve Date'
+            onClick={handleApproveDate}
+            isLoading={approvingDates}
+            disabled={approvingDates}
+          />
+        ) : null}
+        {showMine ? (
+          <Text style={styles.mineText}>(This date is selected by you)</Text>
+        ) : null}
       </View>
-      {showApprove ? (
-        <PrimaryButton
-          title='Approve Date'
-          onClick={handleApproveDate}
-          isLoading={approvingDates}
-          disabled={approvingDates}
-        />
-      ) : null}
-      {showMine ? (
-        <Text style={styles.mineText}>(This date is selected by you)</Text>
-      ) : null}
-    </View>
+    </LinearGradient>
   );
 };
 
 export default SelectedDateCard;
 
 const styles = StyleSheet.create({
+  gradient: {
+    borderRadius: sizes.p2,
+  },
   dateCard: {
     padding: sizes.p2,
     borderRadius: sizes.p2,
-    backgroundColor: colors.lightRedBackground,
     marginBottom: sizes.p2,
   },
   label: {

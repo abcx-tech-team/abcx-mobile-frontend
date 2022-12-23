@@ -9,6 +9,7 @@ import MeetingInvitation from '../modals/MeetingInvitation';
 import ButtonPair from '../common/ButtonPair';
 import TimeSelectModal from '../modals/TimeSelectModal';
 import DateSelectModal from '../modals/DateSelectModal';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const CallSetUpForm = ({ navigation, dealId, showForm, setShowForm }) => {
   const confirmation = useConfirmation();
@@ -68,6 +69,10 @@ const CallSetUpForm = ({ navigation, dealId, showForm, setShowForm }) => {
     }
   };
 
+  const showGradients = (date) => {
+    return dayjs(date).isSame(selectedDate, 'date');
+  };
+
   return (
     <View style={styles.setUpForm}>
       <View style={styles.setUpFormContainer}>
@@ -105,21 +110,33 @@ const CallSetUpForm = ({ navigation, dealId, showForm, setShowForm }) => {
                             handleSelectDate(dayjs().add(index + 1, 'day'))
                           }
                         >
-                          <Text style={styles.dateMonth}>
-                            {dayjs()
-                              .add(index + 1, 'day')
-                              .format('D MMM')}
-                          </Text>
-                          <View style={styles.divider} />
-                          <Text style={styles.dateMonth}>
-                            {dayjs()
-                              .add(index + 1, 'day')
-                              .format('ddd')}
-                          </Text>
+                          <LinearGradient
+                            style={styles.gradient}
+                            colors={
+                              showGradients(dayjs().add(index + 1, 'day'))
+                                ? [
+                                    'rgba(224, 106, 110, 0.1)',
+                                    'rgba(224, 106, 110, 0.0)',
+                                  ]
+                                : []
+                            }
+                          >
+                            <Text style={styles.dateMonth}>
+                              {dayjs()
+                                .add(index + 1, 'day')
+                                .format('D MMM')}
+                            </Text>
+                            <View style={styles.divider} />
+                            <Text style={styles.dateMonth}>
+                              {dayjs()
+                                .add(index + 1, 'day')
+                                .format('ddd')}
+                            </Text>
+                          </LinearGradient>
                         </Pressable>
                       ))}
                     <Pressable
-                      style={styles.date}
+                      style={[styles.date, styles.dateOther]}
                       onPress={() => handleSelectDate(false, true)}
                     >
                       <Text style={styles.dataSelect}>Other</Text>
@@ -223,15 +240,24 @@ const styles = StyleSheet.create({
   dateContainer: {
     flexDirection: 'row',
   },
-  date: {
+  gradient: {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    padding: sizes.p2,
+    borderRadius: sizes.p2,
+  },
+  dateOther: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: sizes.p2,
+  },
+  date: {
     borderWidth: 1,
     borderColor: colors.primary,
-    borderRadius: sizes.p2,
     marginRight: sizes.p2,
-    padding: sizes.p2,
+    borderRadius: sizes.p2,
     width: sizes.p9,
   },
   divider: {

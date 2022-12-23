@@ -16,6 +16,7 @@ const FileList = ({ files, setUploadFile, dealId }) => {
           key={index}
           hash={file.drTransactionHash}
           dealId={dealId}
+          canDelete={file?.isAllowDelete}
         />
       ))}
     </View>

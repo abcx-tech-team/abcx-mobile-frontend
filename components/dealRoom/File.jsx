@@ -4,12 +4,12 @@ import { Entypo } from '@expo/vector-icons';
 import { useConfirmation } from '../../context/ModalContext';
 import FileOptions from '../modals/FileOptions';
 
-const File = ({ name, icon, time, type, hash, dealId }) => {
+const File = ({ name, icon, time, type, hash, dealId, canDelete }) => {
   const confirmation = useConfirmation();
 
   const handleFileUpdate = async () => {
     try {
-      await confirmation({ Component: FileOptions, hash, dealId });
+      await confirmation({ Component: FileOptions, hash, dealId, canDelete });
     } catch (err) {
       console.log(err);
     }

@@ -129,7 +129,8 @@ export default LoginView;
 const styles = StyleSheet.create({
   innerContainer: {
     backgroundColor: colors.white,
-    borderRadius: sizes.p3,
+    borderTopEndRadius: sizes.p3,
+    borderTopStartRadius: sizes.p3,
     flexDirection: 'column',
     paddingHorizontal: sizes.p4,
     paddingVertical: sizes.p7,

@@ -7,7 +7,7 @@ const LoadingExploreCard = () => {
     <View style={styles.briefProfileCard}>
       <View style={styles.topBar}>
         <View>
-          <Text style={styles.fundingRound} />
+          <View style={styles.fundingRound} />
         </View>
         <View style={styles.bookMark}></View>
       </View>
@@ -27,22 +27,22 @@ const LoadingExploreCard = () => {
       <View style={styles.companyFunding}>
         <View style={styles.fundingRow}>
           <View style={styles.fundingInfo}>
-            <Text style={styles.label} />
-            <Text style={styles.value} />
+            <View style={styles.text} />
+            <View style={[styles.text, styles.textValue]} />
           </View>
           <View style={styles.fundingInfo}>
-            <Text style={styles.label} />
-            <Text style={styles.value} />
+            <View style={styles.text} />
+            <View style={[styles.text, styles.textValue]} />
           </View>
         </View>
         <View style={styles.fundingRow}>
           <View style={styles.fundingInfo}>
-            <Text style={styles.label} />
-            <Text style={styles.value} />
+            <View style={styles.text} />
+            <View style={[styles.text, styles.textValue]} />
           </View>
           <View style={styles.fundingInfo}>
-            <Text style={styles.label} />
-            <Text style={styles.value} />
+            <View style={styles.text} />
+            <View style={[styles.text, styles.textValue]} />
           </View>
         </View>
       </View>
@@ -80,9 +80,10 @@ const styles = StyleSheet.create({
     color: colors.primary,
     fontSize: 20,
     fontWeight: '700',
-    paddingVertical: 10,
+    paddingVertical: 18,
     backgroundColor: colors.grayBackground,
     width: 160,
+    borderRadius: 16,
   },
   aboutCompany: {
     backgroundColor: colors.grayBackground,
@@ -92,6 +93,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    borderRadius: sizes.p2,
   },
   companyFunding: {
     paddingHorizontal: sizes.p2,
@@ -105,6 +107,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     width: '100%',
     backgroundColor: colors.grayBackground,
+    borderRadius: sizes.p2,
   },
   value: {
     fontSize: 18,
@@ -113,6 +116,16 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     width: '60%',
     backgroundColor: colors.grayBackground,
+    borderRadius: sizes.p3,
+  },
+  text: {
+    backgroundColor: colors.grayBackground,
+    borderRadius: sizes.p3,
+    paddingVertical: 15,
+    marginBottom: sizes.p2,
+  },
+  textValue: {
+    width: '70%',
   },
   fundingRow: {
     flexDirection: 'row',
@@ -130,10 +143,12 @@ const styles = StyleSheet.create({
     marginHorizontal: sizes.p2,
     paddingVertical: 20,
     backgroundColor: colors.grayBackground,
+    borderRadius: sizes.p2,
   },
   bookMark: {
     paddingVertical: 10,
     width: 60,
     backgroundColor: colors.grayBackground,
+    borderRadius: sizes.p2,
   },
 });

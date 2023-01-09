@@ -71,7 +71,7 @@ const DealRoom = ({ navigation }) => {
       ) : buyerListLoading && sellerListLoading ? (
         <ActivityIndicator size='large' />
       ) : (
-        <NoDealCard />
+        <NoDealCard navigation={navigation} />
       )}
     </View>
   );

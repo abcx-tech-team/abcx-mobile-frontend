@@ -7,7 +7,6 @@ import DashboardBookCall from '../../components/dashboard/DashboardBookCall';
 import DashboardNumbers from '../../components/dashboard/DashboardNumbers';
 import DashboardAccordionContainer from '../../components/dashboard/DashboardAccordionContainer';
 import { colors, sizes } from '../../utils';
-import ModalFilter from '../../components/common/ModalFilter';
 
 const Dashboard = ({ navigation }) => {
   return (

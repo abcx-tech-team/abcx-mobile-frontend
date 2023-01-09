@@ -5,6 +5,7 @@ import PrimaryButton from '../common/PrimaryButton';
 import { useCreditBalance } from '../../hooks/user.hooks';
 import { currencyMapper, redeemType, sizes } from '../../utils';
 import { useRequestBlindProfile } from '../../hooks/blindProfile.hooks';
+import ModalFilter from '../common/ModalFilter';
 
 const Shield = require('../../assets/icons/shield.png');
 const Card = require('../../assets/icons/card.png');
@@ -40,7 +41,7 @@ const RequestBlindProfileModal = ({
 
   return (
     <>
-      {visible ? <View style={styles.filter} /> : null}
+      <ModalFilter />
       <Modal visible={visible} animationType='slide' transparent={true}>
         <View style={styles.main}>
           <View style={styles.content}>

@@ -1,10 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { colors, sizes } from '../../utils';
+import { colors, ScreenNames, sizes } from '../../utils';
 import PrimaryButton from '../common/PrimaryButton';
 import SecondaryButton from '../common/SecondaryButton';
 
-const NoDealCard = () => {
+const NoDealCard = ({ navigation }) => {
+  const handleExplore = () => {
+    navigation.navigate(ScreenNames.explore);
+  };
   return (
     <View style={styles.noDealContainer}>
       <View style={styles.noDealCard}>
@@ -14,7 +17,11 @@ const NoDealCard = () => {
           or list a few of your own portfolio companies{' '}
         </Text>
         <View style={styles.buttonContainer}>
-          <PrimaryButton title='Explore Opportunities' noLoader />
+          <PrimaryButton
+            title='Explore Opportunities'
+            onClick={handleExplore}
+            noLoader
+          />
           <SecondaryButton title='List Companies' noLoader />
         </View>
       </View>

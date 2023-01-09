@@ -18,10 +18,10 @@
 
 - [x] change the cost api call location to the modals
 
-- [ ] activity loader cutting on pull refresh
+- [x] activity loader cutting on pull refresh
 
-- [ ] Disable Screen Capture
+- [x] Disable Screen Capture
 
 - [ ] Recommendation card
 
-- [ ] create a common modal layout
+- [x] create a common modal layout

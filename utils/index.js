@@ -37,7 +37,7 @@ export const colors = {
   lightBlueBackground: 'rgba(215, 218, 250, 0.4)',
   lightBlue: '#D7DAFA',
   primaryBackground: 'rgba(171, 0, 133, 0.16)',
-  grayBackground: '#FBFBFB',
+  grayBackground: '#F5F5F5',
   borderColor: 'rgba(0,0,0,0.1)',
   white: '#fff',
   lightRed: 'rgba(224, 106, 110, 0.6)',

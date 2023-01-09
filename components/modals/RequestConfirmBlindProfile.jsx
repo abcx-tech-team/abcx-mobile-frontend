@@ -4,6 +4,7 @@ import SecondaryButton from '../common/SecondaryButton';
 import PrimaryButton from '../common/PrimaryButton';
 import * as RootNavigation from '../../utils/RootNavigation';
 import { ScreenNames } from '../../utils';
+import ModalFilter from '../common/ModalFilter';
 
 const Tick = require('../../assets/icons/circle_tick_green.png');
 
@@ -18,7 +19,7 @@ const RequestConfirmBlindProfile = ({ visible, onSubmit, onClose }) => {
   };
   return (
     <>
-      {visible ? <View style={styles.filter} /> : null}
+      <ModalFilter />
       <Modal visible={visible} animationType='slide' transparent={true}>
         <View style={styles.main}>
           <View style={styles.content}>

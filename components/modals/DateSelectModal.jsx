@@ -3,13 +3,14 @@ import React, { useState } from 'react';
 import PrimaryButton from '../common/PrimaryButton';
 import { colors, sizes } from '../../utils';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import ModalFilter from '../common/ModalFilter';
 
 const DateSelectModal = ({ visible, onSubmit, date }) => {
   const [time, setTime] = useState(date ? new Date(date) : new Date());
 
   return (
     <>
-      {visible ? <View style={styles.filter} /> : null}
+      <ModalFilter />
       <Modal visible={visible} animationType='slide' transparent={true}>
         <View style={styles.main}>
           <View style={styles.content}>
@@ -41,12 +42,6 @@ export default DateSelectModal;
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-  },
-  filter: {
-    backgroundColor: 'rgba(32,32,32,0.6)',
-    position: 'absolute',
-    height: '110%',
-    width: '100%',
   },
   content: {
     paddingHorizontal: 32,

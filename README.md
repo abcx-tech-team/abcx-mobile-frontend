@@ -25,3 +25,7 @@
 - [ ] Recommendation card
 
 - [x] create a common modal layout
+
+-[x] splash screen animation done
+
+- [x] push notification done

@@ -8,6 +8,7 @@ import dayjs from 'dayjs';
 import { useSetMeetingRoomDates } from '../../hooks/deal.hooks';
 import Toast from 'react-native-toast-message';
 import { useQueryClient } from '@tanstack/react-query';
+import ModalFilter from '../common/ModalFilter';
 
 const MeetingInvitation = ({
   visible,
@@ -54,7 +55,7 @@ const MeetingInvitation = ({
 
   return (
     <>
-      {visible ? <View style={styles.filter} /> : null}
+      <ModalFilter />
       <Modal visible={visible} animationType='slide' transparent={true}>
         <View style={styles.main}>
           <View style={styles.content}>
@@ -103,12 +104,6 @@ export default MeetingInvitation;
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-  },
-  filter: {
-    backgroundColor: 'rgba(32,32,32,0.6)',
-    position: 'absolute',
-    height: '110%',
-    width: '100%',
   },
   content: {
     paddingHorizontal: 32,

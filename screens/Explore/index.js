@@ -13,8 +13,9 @@ import SearchBar from '../../components/explore/SearchBar';
 import BriefProfileCard from '../../components/explore/BlindProfileCard';
 import AuthContainer from '../../container/AuthContainer';
 import { useBlindProfiles } from '../../hooks/blindProfile.hooks';
-import { colors, serialize } from '../../utils';
+import { colors, serialize, sizes } from '../../utils';
 import SearchTag from '../../components/common/SearchTag';
+import LoadingExploreCard from '../../components/common/LoadingExploreCard';
 
 const tabs = [
   {
@@ -98,12 +99,10 @@ const Explore = ({ navigation }) => {
     }
   };
 
-  // TODO: Pull refresh activity indicator getting cut, have to do something about it
-
   const handlePullRefresh = () => {
     setPullRefresh(true);
     setQuery({ ...queryInitialValue, seed: Math.random() });
-    setBlindProfiles({ hasMore: true, data: [] });
+    setBlindProfiles((prev) => ({ ...prev, hasMore: true }));
   };
 
   useEffect(() => {
@@ -125,68 +124,69 @@ const Explore = ({ navigation }) => {
   }, [blindProfileData]);
 
   return (
-    <AuthContainer navigation={navigation}>
-      <View style={styles.container}>
-        <View style={styles.searchBar}>
-          <SearchBar
-            query={query}
-            setQuery={setQuery}
-            setBlindProfiles={setBlindProfiles}
-          />
-        </View>
-        <View>
-          <ScrollView
-            style={styles.scroll}
-            contentContainerStyle={styles.tabsContainer}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-          >
-            {tabs.map((item, index) => (
-              <SearchTag
-                {...item}
-                key={item.name}
-                tabStyle={index !== tabs.length - 1 ? styles.tabStyle : null}
-                onPress={() => setActiveTab(item.name)}
-                activeTab={activeTab}
-              />
-            ))}
-          </ScrollView>
-        </View>
-        <View style={styles.dashboard}>
-          <FlatList
-            bounces={true}
-            data={blindProfiles.data}
-            renderItem={({ item }) => (
-              <BriefProfileCard briefProfile={item} navigation={navigation} />
-            )}
-            keyExtractor={(item) => item.companyUUID}
-            style={styles.scrollView}
-            contentContainerStyle={{ paddingHorizontal: 24 }}
-            onEndReachedThreshold={0.01}
-            onEndReached={fetchMoreData}
-            ListFooterComponent={
-              <FooterComponent
-                isLoading={isLoading}
-                data={blindProfiles.data}
-              />
-            }
-            ListFooterComponentStyle={{
-              height: 36,
-              width: '100%',
-              marginBottom: 16,
-            }}
-            refreshing={pullRefresh}
-            onRefresh={handlePullRefresh}
-            refreshControl={
-              <RefreshControl
-                refreshing={pullRefresh}
-                onRefresh={handlePullRefresh}
-              />
-            }
-          />
-        </View>
+    <View style={styles.container}>
+      <View style={styles.searchBar}>
+        <SearchBar
+          query={query}
+          setQuery={setQuery}
+          setBlindProfiles={setBlindProfiles}
+        />
       </View>
-    </AuthContainer>
+      <View>
+        <ScrollView
+          style={styles.scroll}
+          contentContainerStyle={styles.tabsContainer}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+        >
+          {tabs.map((item, index) => (
+            <SearchTag
+              {...item}
+              key={item.name}
+              tabStyle={index !== tabs.length - 1 ? styles.tabStyle : null}
+              onPress={() => setActiveTab(item.name)}
+              activeTab={activeTab}
+            />
+          ))}
+        </ScrollView>
+      </View>
+      <View style={styles.dashboard}>
+        <FlatList
+          bounces={true}
+          data={blindProfiles.data}
+          renderItem={({ item }) => (
+            <BriefProfileCard briefProfile={item} navigation={navigation} />
+          )}
+          keyExtractor={(item) => item.companyUUID}
+          style={styles.scrollView}
+          contentContainerStyle={{ paddingHorizontal: sizes.p2 }}
+          onEndReachedThreshold={0.01}
+          onEndReached={fetchMoreData}
+          ListFooterComponent={
+            <FooterComponent isLoading={isLoading} data={blindProfiles.data} />
+          }
+          ListFooterComponentStyle={{
+            height: 36,
+            width: '100%',
+            marginBottom: 16,
+          }}
+          refreshing={pullRefresh}
+          onRefresh={handlePullRefresh}
+          refreshControl={
+            <RefreshControl
+              refreshing={pullRefresh}
+              onRefresh={handlePullRefresh}
+            />
+          }
+        />
+        {!blindProfiles.data.length ? (
+          <ScrollView contentContainerStyle={{ paddingHorizontal: 24 }}>
+            <LoadingExploreCard />
+            <LoadingExploreCard />
+          </ScrollView>
+        ) : null}
+      </View>
+    </View>
   );
 };
 

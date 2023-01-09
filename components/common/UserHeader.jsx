@@ -46,7 +46,7 @@ export default UserHeader;
 
 const styles = StyleSheet.create({
   header: {
-    paddingHorizontal: sizes.p4,
+    paddingHorizontal: sizes.p2,
     height: 115,
     justifyContent: 'space-between',
     paddingBottom: sizes.p3,

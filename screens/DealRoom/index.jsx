@@ -9,7 +9,6 @@ import {
 import DealCard from '../../components/dealRoom/DealCard';
 import NoDealCard from '../../components/dealRoom/NoDealCard';
 import SearchTag from '../../components/common/SearchTag';
-import AuthContainer from '../../container/AuthContainer';
 import { useBuyerList, useSellerList } from '../../hooks/user.hooks';
 import { colors, sizes } from '../../utils';
 
@@ -48,35 +47,33 @@ const DealRoom = ({ navigation }) => {
   }, [activeTab, sellerList, buyerList]);
 
   return (
-    <AuthContainer navigation={navigation}>
-      <View style={styles.container}>
-        <Text style={styles.screenName}>Deal Room</Text>
-        <View style={styles.tabsContainer}>
-          {tabs.map((item) => (
-            <SearchTag
-              key={item.name}
-              {...item}
-              activeTab={activeTab}
-              onPress={() => setActiveTab(item.name)}
-            />
-          ))}
-        </View>
-        {dealList.length ? (
-          <ScrollView
-            bounces={false}
-            contentContainerStyle={styles.cardContainer}
-          >
-            {dealList.map((item, index) => (
-              <DealCard key={index} dealData={item} navigation={navigation} />
-            ))}
-          </ScrollView>
-        ) : buyerListLoading && sellerListLoading ? (
-          <ActivityIndicator size='large' />
-        ) : (
-          <NoDealCard />
-        )}
+    <View style={styles.container}>
+      <Text style={styles.screenName}>Deal Room</Text>
+      <View style={styles.tabsContainer}>
+        {tabs.map((item) => (
+          <SearchTag
+            key={item.name}
+            {...item}
+            activeTab={activeTab}
+            onPress={() => setActiveTab(item.name)}
+          />
+        ))}
       </View>
-    </AuthContainer>
+      {dealList.length ? (
+        <ScrollView
+          bounces={false}
+          contentContainerStyle={styles.cardContainer}
+        >
+          {dealList.map((item, index) => (
+            <DealCard key={index} dealData={item} navigation={navigation} />
+          ))}
+        </ScrollView>
+      ) : buyerListLoading && sellerListLoading ? (
+        <ActivityIndicator size='large' />
+      ) : (
+        <NoDealCard />
+      )}
+    </View>
   );
 };
 

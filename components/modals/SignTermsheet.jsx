@@ -5,6 +5,7 @@ import SecondaryButton from '../common/SecondaryButton';
 import { useSIgnLOI } from '../../hooks/deal.hooks';
 import { useConfirmation } from '../../context/ModalContext';
 import ConfirmationAnimation from './ConfirmationAnimation';
+import ModalFilter from '../common/ModalFilter';
 
 const Card = require('../../assets/icons/card.png');
 
@@ -25,7 +26,7 @@ const SignTermsheet = ({ visible, onSubmit, onClose, dealId }) => {
   };
   return (
     <>
-      {visible ? <View style={styles.filter} /> : null}
+      <ModalFilter />
       <Modal visible={visible} animationType='slide' transparent={true}>
         <View style={styles.main}>
           <View style={styles.content}>

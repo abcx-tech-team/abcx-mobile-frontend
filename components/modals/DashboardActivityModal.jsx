@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, StyleSheet, Text, View } from 'react-native';
 import { sizes } from '../../utils';
+import ModalFilter from '../common/ModalFilter';
 import PrimaryButton from '../common/PrimaryButton';
 import SecondaryButton from '../common/SecondaryButton';
 
@@ -13,7 +14,7 @@ function DashboardActivityModal({
 }) {
   return (
     <>
-      {visible ? <View style={styles.filter} /> : null}
+      <ModalFilter />
       <Modal visible={visible} animationType='slide' transparent={true}>
         <View style={styles.main}>
           <View style={styles.content}>
@@ -37,12 +38,6 @@ function DashboardActivityModal({
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-  },
-  filter: {
-    backgroundColor: 'rgba(32,32,32,0.6)',
-    position: 'absolute',
-    height: '110%',
-    width: '100%',
   },
   content: {
     paddingHorizontal: sizes.p4,

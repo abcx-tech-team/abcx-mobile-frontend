@@ -17,6 +17,7 @@ import Toast from 'react-native-toast-message';
 import { useQueryClient } from '@tanstack/react-query';
 import * as FileSystem from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
+import ModalFilter from '../common/ModalFilter';
 
 const FileOptions = ({
   visible,
@@ -83,7 +84,7 @@ const FileOptions = ({
 
   return (
     <>
-      {visible ? <View style={styles.filter} /> : null}
+      <ModalFilter />
       <Modal transparent animationType='slide'>
         <View style={styles.main}>
           <View style={styles.content}>
@@ -143,12 +144,6 @@ export default FileOptions;
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-  },
-  filter: {
-    backgroundColor: 'rgba(32,32,32,0.6)',
-    position: 'absolute',
-    height: '110%',
-    width: '100%',
   },
   content: {
     padding: sizes.p4,

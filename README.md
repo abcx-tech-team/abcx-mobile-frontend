@@ -26,6 +26,8 @@
 
 - [x] create a common modal layout
 
--[x] splash screen animation done
+- [x] splash screen animation done
 
 - [x] push notification done
+
+- [ ] have to fix loading button

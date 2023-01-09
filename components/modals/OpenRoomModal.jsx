@@ -1,4 +1,4 @@
-import { Image, Modal, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import SecondaryButton from '../common/SecondaryButton';
 import PrimaryButton from '../common/PrimaryButton';
@@ -14,8 +14,8 @@ import {
   useOpenLOI,
 } from '../../hooks/deal.hooks';
 import Toast from 'react-native-toast-message';
-import { QueryClient, useQueryClient } from '@tanstack/react-query';
-import ModalFilter from '../common/ModalFilter';
+import { useQueryClient } from '@tanstack/react-query';
+import ModalLayout from './ModalLayout';
 
 const Card = require('../../assets/icons/card.png');
 
@@ -176,63 +176,58 @@ const RequestBlindProfileModal = ({
 
   return (
     <>
-      <ModalFilter />
-      <Modal visible={visible} animationType='slide' transparent={true}>
-        <View style={styles.main}>
-          <View style={styles.content}>
-            <Text style={styles.mainHeading}>{heading}</Text>
-            <Text style={styles.subHeading}>{subHeading}</Text>
-            <View style={styles.pointSection}>
-              <View style={styles.card}>
-                <Image source={Card} />
-              </View>
-              <View>
-                <Text style={styles.pay}>
-                  You Pay: {currencyMapper(getCurrency())}
-                  {price || 0} &nbsp;&nbsp;
-                  <Text style={styles.notPay}>
-                    {currencyMapper(getCurrency())}
-                    {getPrice() || 0}
-                  </Text>
-                </Text>
-                <Text style={styles.credit}>{contextData}</Text>
-              </View>
-            </View>
-            <View style={styles.actionButtons}>
-              <View style={styles.rightButton}>
-                <PrimaryButton
-                  title='Confirm Request'
-                  onClick={handleOpenRoom}
-                  isLoading={
-                    accessingCounterParty ||
-                    openingDataRoom ||
-                    openingMeetingRoom ||
-                    openingLOI
-                  }
-                  disabled={
-                    accessingCounterParty ||
-                    openingDataRoom ||
-                    openingMeetingRoom ||
-                    openingLOI
-                  }
-                />
-              </View>
-              <View style={styles.leftButton}>
-                <SecondaryButton
-                  title='Cancel Request'
-                  onClick={onClose}
-                  disabled={
-                    accessingCounterParty ||
-                    openingDataRoom ||
-                    openingMeetingRoom ||
-                    openingLOI
-                  }
-                />
-              </View>
-            </View>
+      <ModalLayout onClose={onClose} visible={visible}>
+        <Text style={styles.mainHeading}>{heading}</Text>
+        <Text style={styles.subHeading}>{subHeading}</Text>
+        <View style={styles.pointSection}>
+          <View style={styles.card}>
+            <Image source={Card} />
+          </View>
+          <View>
+            <Text style={styles.pay}>
+              You Pay: {currencyMapper(getCurrency())}
+              {price || 0} &nbsp;&nbsp;
+              <Text style={styles.notPay}>
+                {currencyMapper(getCurrency())}
+                {getPrice() || 0}
+              </Text>
+            </Text>
+            <Text style={styles.credit}>{contextData}</Text>
           </View>
         </View>
-      </Modal>
+        <View style={styles.actionButtons}>
+          <View style={styles.rightButton}>
+            <PrimaryButton
+              title='Confirm Request'
+              onClick={handleOpenRoom}
+              isLoading={
+                accessingCounterParty ||
+                openingDataRoom ||
+                openingMeetingRoom ||
+                openingLOI
+              }
+              disabled={
+                accessingCounterParty ||
+                openingDataRoom ||
+                openingMeetingRoom ||
+                openingLOI
+              }
+            />
+          </View>
+          <View style={styles.leftButton}>
+            <SecondaryButton
+              title='Cancel Request'
+              onClick={onClose}
+              disabled={
+                accessingCounterParty ||
+                openingDataRoom ||
+                openingMeetingRoom ||
+                openingLOI
+              }
+            />
+          </View>
+        </View>
+      </ModalLayout>
     </>
   );
 };
@@ -240,16 +235,6 @@ const RequestBlindProfileModal = ({
 export default RequestBlindProfileModal;
 
 const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-  },
-  content: {
-    paddingHorizontal: 32,
-    backgroundColor: '#fff',
-    marginTop: 'auto',
-    paddingTop: 40,
-    borderRadius: 16,
-  },
   mainHeading: {
     fontSize: 24,
     fontWeight: '700',

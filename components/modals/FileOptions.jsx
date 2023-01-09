@@ -17,7 +17,7 @@ import Toast from 'react-native-toast-message';
 import { useQueryClient } from '@tanstack/react-query';
 import * as FileSystem from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
-import ModalFilter from '../common/ModalFilter';
+import ModalLayout from './ModalLayout';
 
 const FileOptions = ({
   visible,
@@ -83,75 +83,56 @@ const FileOptions = ({
   };
 
   return (
-    <>
-      <ModalFilter />
-      <Modal transparent animationType='slide'>
-        <View style={styles.main}>
-          <View style={styles.content}>
-            <View style={styles.heading}>
-              <Text style={styles.headingText}>File Action</Text>
-              <Pressable
-                onPress={onClose}
-                style={({ pressed }) => [
-                  styles.close,
-                  pressed ? { backgroundColor: colors.text20 } : null,
-                ]}
-              >
-                <Entypo name='cross' size={30} color='black' />
-              </Pressable>
-            </View>
-            <Pressable
-              onPress={handleFileDownload}
-              style={styles.optionRow}
-              disabled={downloadingFile || deletingFile}
-            >
-              <AntDesign
-                name='download'
-                size={24}
-                color={colors.textFull}
-                style={styles.optionIcon}
-              />
-              <Text style={styles.optionText}>Download</Text>
-              {downloadingFile ? (
-                <ActivityIndicator size='small' color='black' />
-              ) : null}
-            </Pressable>
-            <Pressable
-              onPress={handleFileDelete}
-              style={styles.optionRow}
-              disabled={downloadingFile || deletingFile || canDelete}
-            >
-              <AntDesign
-                name='delete'
-                size={24}
-                color={colors.textFull}
-                style={styles.optionIcon}
-              />
-              <Text style={styles.optionText}>Delete File</Text>
-              {deletingFile ? (
-                <ActivityIndicator size='small' color='black' />
-              ) : null}
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
-    </>
+    <ModalLayout onClose={onClose} visible={visible}>
+      <View style={styles.heading}>
+        <Text style={styles.headingText}>File Action</Text>
+        <Pressable
+          onPress={onClose}
+          style={({ pressed }) => [
+            styles.close,
+            pressed ? { backgroundColor: colors.text20 } : null,
+          ]}
+        >
+          <Entypo name='cross' size={30} color='black' />
+        </Pressable>
+      </View>
+      <Pressable
+        onPress={handleFileDownload}
+        style={styles.optionRow}
+        disabled={downloadingFile || deletingFile}
+      >
+        <AntDesign
+          name='download'
+          size={24}
+          color={colors.textFull}
+          style={styles.optionIcon}
+        />
+        <Text style={styles.optionText}>Download</Text>
+        {downloadingFile ? (
+          <ActivityIndicator size='small' color='black' />
+        ) : null}
+      </Pressable>
+      <Pressable
+        onPress={handleFileDelete}
+        style={styles.optionRow}
+        disabled={downloadingFile || deletingFile || canDelete}
+      >
+        <AntDesign
+          name='delete'
+          size={24}
+          color={colors.textFull}
+          style={styles.optionIcon}
+        />
+        <Text style={styles.optionText}>Delete File</Text>
+        {deletingFile ? <ActivityIndicator size='small' color='black' /> : null}
+      </Pressable>
+    </ModalLayout>
   );
 };
 
 export default FileOptions;
 
 const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-  },
-  content: {
-    padding: sizes.p4,
-    backgroundColor: '#fff',
-    marginTop: 'auto',
-    borderRadius: sizes.p2,
-    paddingBottom: sizes.p10,
-  },
   heading: {
     flexDirection: 'row',
     justifyContent: 'space-between',

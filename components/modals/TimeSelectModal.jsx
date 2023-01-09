@@ -4,59 +4,37 @@ import PrimaryButton from '../common/PrimaryButton';
 import { colors, sizes } from '../../utils';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import ModalFilter from '../common/ModalFilter';
+import ModalLayout from './ModalLayout';
 
 const TimeSelectModal = ({ visible, onSubmit, selectedTime }) => {
   const [time, setTime] = useState(new Date(selectedTime));
 
   return (
-    <>
-      <ModalFilter />
-      <Modal visible={visible} animationType='slide' transparent={true}>
-        <View style={styles.main}>
-          <View style={styles.content}>
-            <DateTimePicker
-              style={styles.timePicker}
-              value={time}
-              display='spinner'
-              mode='time'
-              onChange={(_, time) => setTime(time)}
-            />
+    <ModalLayout onClose={onclose} visible={visible}>
+      <DateTimePicker
+        style={styles.timePicker}
+        value={time}
+        display='spinner'
+        mode='time'
+        onChange={(_, time) => setTime(time)}
+      />
 
-            <View style={styles.actionButtons}>
-              <View style={styles.rightButton}>
-                <PrimaryButton
-                  title='Submit'
-                  onClick={() => onSubmit(time)}
-                  noLoader
-                />
-              </View>
-            </View>
-          </View>
+      <View style={styles.actionButtons}>
+        <View style={styles.rightButton}>
+          <PrimaryButton
+            title='Submit'
+            onClick={() => onSubmit(time)}
+            noLoader
+          />
         </View>
-      </Modal>
-    </>
+      </View>
+    </ModalLayout>
   );
 };
 
 export default TimeSelectModal;
 
 const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-  },
-  filter: {
-    backgroundColor: 'rgba(32,32,32,0.6)',
-    position: 'absolute',
-    height: '110%',
-    width: '100%',
-  },
-  content: {
-    paddingHorizontal: 32,
-    backgroundColor: '#fff',
-    marginTop: 'auto',
-    paddingTop: 40,
-    borderRadius: 16,
-  },
   actionButtons: {
     marginBottom: 24,
   },

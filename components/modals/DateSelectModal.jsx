@@ -1,55 +1,38 @@
-import { Modal, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import React, { useState } from 'react';
 import PrimaryButton from '../common/PrimaryButton';
 import { colors, sizes } from '../../utils';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import ModalFilter from '../common/ModalFilter';
+import ModalLayout from './ModalLayout';
 
-const DateSelectModal = ({ visible, onSubmit, date }) => {
+const DateSelectModal = ({ visible, onSubmit, date, onClose }) => {
   const [time, setTime] = useState(date ? new Date(date) : new Date());
 
   return (
-    <>
-      <ModalFilter />
-      <Modal visible={visible} animationType='slide' transparent={true}>
-        <View style={styles.main}>
-          <View style={styles.content}>
-            <DateTimePicker
-              style={styles.timePicker}
-              value={time || new Date()}
-              display='spinner'
-              onChange={(_, time) => setTime(time)}
-            />
+    <ModalLayout onClose={onClose} visible={visible}>
+      <DateTimePicker
+        style={styles.timePicker}
+        value={time || new Date()}
+        display='spinner'
+        onChange={(_, time) => setTime(time)}
+      />
 
-            <View style={styles.actionButtons}>
-              <View style={styles.rightButton}>
-                <PrimaryButton
-                  title='Submit'
-                  onClick={() => onSubmit(time)}
-                  noLoader
-                />
-              </View>
-            </View>
-          </View>
+      <View style={styles.actionButtons}>
+        <View style={styles.rightButton}>
+          <PrimaryButton
+            title='Submit'
+            onClick={() => onSubmit(time)}
+            noLoader
+          />
         </View>
-      </Modal>
-    </>
+      </View>
+    </ModalLayout>
   );
 };
 
 export default DateSelectModal;
 
 const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-  },
-  content: {
-    paddingHorizontal: 32,
-    backgroundColor: '#fff',
-    marginTop: 'auto',
-    paddingTop: 40,
-    borderRadius: 16,
-  },
   actionButtons: {
     marginBottom: 24,
   },

@@ -5,6 +5,7 @@ import PrimaryButton from '../common/PrimaryButton';
 import * as RootNavigation from '../../utils/RootNavigation';
 import { ScreenNames } from '../../utils';
 import ModalFilter from '../common/ModalFilter';
+import ModalLayout from './ModalLayout';
 
 const Tick = require('../../assets/icons/circle_tick_green.png');
 
@@ -18,61 +19,30 @@ const RequestConfirmBlindProfile = ({ visible, onSubmit, onClose }) => {
     RootNavigation.navigate(ScreenNames.explore);
   };
   return (
-    <>
-      <ModalFilter />
-      <Modal visible={visible} animationType='slide' transparent={true}>
-        <View style={styles.main}>
-          <View style={styles.content}>
-            <View>
-              <Image source={Tick} style={styles.greenTick} />
-            </View>
-            <Text style={styles.mainHeading}>Request Confirmed</Text>
-            <Text style={styles.subHeading}>
-              Thank you for showing interest. We have intimated the
-              counterparty. You’ll be notified once the request is approved.
-            </Text>
-            <View style={styles.actionButtons}>
-              <View style={styles.rightButton}>
-                <PrimaryButton
-                  title='View Deal'
-                  onClick={handleDealRom}
-                  noLoader
-                />
-              </View>
-              <View style={styles.leftButton}>
-                <SecondaryButton
-                  title='Go Back'
-                  onClick={handleBack}
-                  noLoader
-                />
-              </View>
-            </View>
-          </View>
+    <ModalLayout onClose={onClose} visible={visible}>
+      <View>
+        <Image source={Tick} style={styles.greenTick} />
+      </View>
+      <Text style={styles.mainHeading}>Request Confirmed</Text>
+      <Text style={styles.subHeading}>
+        Thank you for showing interest. We have intimated the counterparty.
+        You’ll be notified once the request is approved.
+      </Text>
+      <View style={styles.actionButtons}>
+        <View style={styles.rightButton}>
+          <PrimaryButton title='View Deal' onClick={handleDealRom} noLoader />
         </View>
-      </Modal>
-    </>
+        <View style={styles.leftButton}>
+          <SecondaryButton title='Go Back' onClick={handleBack} noLoader />
+        </View>
+      </View>
+    </ModalLayout>
   );
 };
 
 export default RequestConfirmBlindProfile;
 
 const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-  },
-  filter: {
-    backgroundColor: 'rgba(32,32,32,0.6)',
-    position: 'absolute',
-    height: '110%',
-    width: '100%',
-  },
-  content: {
-    paddingHorizontal: 32,
-    backgroundColor: '#fff',
-    marginTop: 'auto',
-    paddingTop: 40,
-    borderRadius: 16,
-  },
   mainHeading: {
     fontSize: 24,
     fontWeight: '700',

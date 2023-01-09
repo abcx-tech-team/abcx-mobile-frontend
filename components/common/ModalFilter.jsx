@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Animated, Button, StyleSheet } from 'react-native';
+import { Animated, StyleSheet } from 'react-native';
 
 const ModalFilter = () => {
   const [animation] = useState(new Animated.Value(0));
@@ -18,6 +18,11 @@ const ModalFilter = () => {
     ...styles.filter,
     opacity: animation,
   };
+
+  const pressedOnBackdrop = () => {
+    console.log('Pressed');
+  };
+
   return <Animated.View style={animatedStyle}></Animated.View>;
 };
 

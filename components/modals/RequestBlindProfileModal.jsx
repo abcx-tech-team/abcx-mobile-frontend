@@ -6,6 +6,7 @@ import { useCreditBalance } from '../../hooks/user.hooks';
 import { currencyMapper, redeemType, sizes } from '../../utils';
 import { useRequestBlindProfile } from '../../hooks/blindProfile.hooks';
 import ModalFilter from '../common/ModalFilter';
+import ModalLayout from './ModalLayout';
 
 const Shield = require('../../assets/icons/shield.png');
 const Card = require('../../assets/icons/card.png');
@@ -41,72 +42,65 @@ const RequestBlindProfileModal = ({
 
   return (
     <>
-      <ModalFilter />
-      <Modal visible={visible} animationType='slide' transparent={true}>
-        <View style={styles.main}>
-          <View style={styles.content}>
-            <Text style={styles.mainHeading}>Request Confirmation</Text>
-            <Text style={styles.subHeading}>
-              You get access to company’s name, managament info, pitchdeck and
-              more.{' '}
-            </Text>
-            <View style={styles.pointSection}>
-              <View style={styles.card}>
-                <Image source={Card} />
-              </View>
-              <View>
-                {data?.creditViews ? (
-                  <Text style={styles.pay}>
-                    You Pay: {currencyMapper(data?.amount.currency)}0
-                    &nbsp;&nbsp;
-                    <Text style={styles.notPay}>
-                      {currencyMapper(data?.amount.currency)}
-                      {data?.amount.value}
-                    </Text>
-                  </Text>
-                ) : (
-                  <Text style={styles.pay}>
-                    You Pay: {currencyMapper(data?.amount.currency)}
-                    {data?.amount.value}
-                  </Text>
-                )}
-                <View style={styles.creditRow}>
-                  {data?.creditViews ? (
-                    <Text style={styles.credit}>By using 1 Credit</Text>
-                  ) : null}
-                  <Text style={styles.creditBalance}>
-                    Your Credit Point Balance: {data?.creditViews}
-                  </Text>
-                </View>
-              </View>
-            </View>
-            <View style={styles.terms}>
-              <Image source={Shield} style={styles.termImage} />
-              <Text style={styles.termText}>
-                By continuing you agree with our{' '}
-                <Text style={styles.termTextBlue}>terms & conditions</Text>.
+      <ModalLayout>
+        <Text style={styles.mainHeading}>Request Confirmation</Text>
+        <Text style={styles.subHeading}>
+          You get access to company’s name, managament info, pitchdeck and more.{' '}
+        </Text>
+        <View style={styles.pointSection}>
+          <View style={styles.card}>
+            <Image source={Card} />
+          </View>
+          <View>
+            {data?.creditViews ? (
+              <Text style={styles.pay}>
+                You Pay: {currencyMapper(data?.amount.currency)}0 &nbsp;&nbsp;
+                <Text style={styles.notPay}>
+                  {currencyMapper(data?.amount.currency)}
+                  {data?.amount.value}
+                </Text>
               </Text>
-            </View>
-            <View style={styles.actionButtons}>
-              <View style={styles.rightButton}>
-                <PrimaryButton
-                  title='Confirm Request'
-                  onClick={handleSubmit}
-                  isLoading={requestingBriefProfile || loadingCredit}
-                  disabled={requestingBriefProfile || loadingCredit}
-                />
-              </View>
-              <View style={styles.leftButton}>
-                <SecondaryButton
-                  title='Cancel Request'
-                  onClick={onClose}
-                  disabled={requestingBriefProfile}
-                />
-              </View>
+            ) : (
+              <Text style={styles.pay}>
+                You Pay: {currencyMapper(data?.amount.currency)}
+                {data?.amount.value}
+              </Text>
+            )}
+            <View style={styles.creditRow}>
+              {data?.creditViews ? (
+                <Text style={styles.credit}>By using 1 Credit</Text>
+              ) : null}
+              <Text style={styles.creditBalance}>
+                Your Credit Point Balance: {data?.creditViews}
+              </Text>
             </View>
           </View>
         </View>
-      </Modal>
+        <View style={styles.terms}>
+          <Image source={Shield} style={styles.termImage} />
+          <Text style={styles.termText}>
+            By continuing you agree with our{' '}
+            <Text style={styles.termTextBlue}>terms & conditions</Text>.
+          </Text>
+        </View>
+        <View style={styles.actionButtons}>
+          <View style={styles.rightButton}>
+            <PrimaryButton
+              title='Confirm Request'
+              onClick={handleSubmit}
+              isLoading={requestingBriefProfile || loadingCredit}
+              disabled={requestingBriefProfile || loadingCredit}
+            />
+          </View>
+          <View style={styles.leftButton}>
+            <SecondaryButton
+              title='Cancel Request'
+              onClick={onClose}
+              disabled={requestingBriefProfile}
+            />
+          </View>
+        </View>
+      </ModalLayout>
     </>
   );
 };
@@ -114,22 +108,6 @@ const RequestBlindProfileModal = ({
 export default RequestBlindProfileModal;
 
 const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-  },
-  filter: {
-    backgroundColor: 'rgba(32,32,32,0.6)',
-    position: 'absolute',
-    height: '110%',
-    width: '100%',
-  },
-  content: {
-    paddingHorizontal: 32,
-    backgroundColor: '#fff',
-    marginTop: 'auto',
-    paddingTop: 40,
-    borderRadius: 16,
-  },
   mainHeading: {
     fontSize: 24,
     fontWeight: '700',

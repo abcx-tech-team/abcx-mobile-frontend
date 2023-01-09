@@ -9,6 +9,7 @@ import { useSetMeetingRoomDates } from '../../hooks/deal.hooks';
 import Toast from 'react-native-toast-message';
 import { useQueryClient } from '@tanstack/react-query';
 import ModalFilter from '../common/ModalFilter';
+import ModalLayout from './ModalLayout';
 
 const MeetingInvitation = ({
   visible,
@@ -55,46 +56,39 @@ const MeetingInvitation = ({
 
   return (
     <>
-      <ModalFilter />
-      <Modal visible={visible} animationType='slide' transparent={true}>
-        <View style={styles.main}>
-          <View style={styles.content}>
-            <Text style={styles.modalHeading}>Invitation Confirmation</Text>
-            <View style={styles.meetingDetails}>
-              <AntDesign name='calendar' size={24} color='black' />
-              <Text style={styles.label}>Meeting Title</Text>
-              <Text style={styles.value}>Intro Call - Counterparty name</Text>
-              <Text style={styles.label}>Meeting Date</Text>
-              <Text style={styles.value}>
-                {dayjs(date).format('D MMMM YYYY')}
-              </Text>
-              <Text style={styles.label}>Meeting Time</Text>
-              <Text style={styles.value}>
-                {dayjs(time).format('h:mm A')} -
-                {dayjs(time).add(1, 'hour').format('h:mm A')} (IST)
-              </Text>
-            </View>
+      <ModalLayout visible={visible} onClose={onClose}>
+        <Text style={styles.modalHeading}>Invitation Confirmation</Text>
+        <View style={styles.meetingDetails}>
+          <AntDesign name='calendar' size={24} color='black' />
+          <Text style={styles.label}>Meeting Title</Text>
+          <Text style={styles.value}>Intro Call - Counterparty name</Text>
+          <Text style={styles.label}>Meeting Date</Text>
+          <Text style={styles.value}>{dayjs(date).format('D MMMM YYYY')}</Text>
+          <Text style={styles.label}>Meeting Time</Text>
+          <Text style={styles.value}>
+            {dayjs(time).format('h:mm A')} -
+            {dayjs(time).add(1, 'hour').format('h:mm A')} (IST)
+          </Text>
+        </View>
 
-            <View style={styles.actionButtons}>
-              <View style={styles.rightButton}>
-                <PrimaryButton
-                  title='Send Invitation'
-                  onClick={() => handleSetDate()}
-                  isLoading={settingMeetingRoomDates}
-                  disabled={settingMeetingRoomDates}
-                />
-              </View>
-              <View style={styles.leftButton}>
-                <SecondaryButton
-                  title='Cancel Request'
-                  onClick={onClose}
-                  disabled={settingMeetingRoomDates}
-                />
-              </View>
-            </View>
+        <View style={styles.actionButtons}>
+          <View style={styles.rightButton}>
+            <PrimaryButton
+              title='Send Invitation'
+              onClick={() => handleSetDate()}
+              isLoading={settingMeetingRoomDates}
+              disabled={settingMeetingRoomDates}
+            />
+          </View>
+          <View style={styles.leftButton}>
+            <SecondaryButton
+              title='Cancel Request'
+              onClick={onClose}
+              disabled={settingMeetingRoomDates}
+            />
           </View>
         </View>
-      </Modal>
+      </ModalLayout>
     </>
   );
 };
@@ -102,16 +96,6 @@ const MeetingInvitation = ({
 export default MeetingInvitation;
 
 const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-  },
-  content: {
-    paddingHorizontal: 32,
-    backgroundColor: '#fff',
-    marginTop: 'auto',
-    paddingTop: 40,
-    borderRadius: 16,
-  },
   actionButtons: {
     marginBottom: 24,
   },
